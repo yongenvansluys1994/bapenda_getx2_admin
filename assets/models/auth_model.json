@@ -1,0 +1,408 @@
+[
+  {
+    "id_rekening": "211",
+    "kode_rekening": "4.1.1.02.01",
+    "nama_rekening": "Restoran",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "213",
+    "kode_rekening": "4.1.1.03.01",
+    "nama_rekening": "Tontonan Film\/Bioskop",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "215",
+    "kode_rekening": "4.1.1.04.01",
+    "nama_rekening": "Reklame Papan\/Billboard\/Videotron\/Megatron",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "218",
+    "kode_rekening": "4.1.1.11",
+    "nama_rekening": "Pajak Mineral Bukan Logam dan Batuan",
+    "rumus": "25",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "220",
+    "kode_rekening": "4.1.1.07",
+    "nama_rekening": "Pajak Parkir",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1194",
+    "kode_rekening": "4.1.1.01.02",
+    "nama_rekening": "Hotel Bintang Lima",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1239",
+    "kode_rekening": "4.1.1.01.03",
+    "nama_rekening": "Hotel Bintang Empat",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1240",
+    "kode_rekening": "4.1.1.01.04",
+    "nama_rekening": "Hotel Bintang Tiga",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1241",
+    "kode_rekening": "4.1.1.01.05",
+    "nama_rekening": "Hotel Bintang Dua",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1242",
+    "kode_rekening": "4.1.1.01.06",
+    "nama_rekening": "Hotel Bintang Satu",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1243",
+    "kode_rekening": "4.1.1.01.07",
+    "nama_rekening": "Hotel Melati Tiga",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1244",
+    "kode_rekening": "4.1.1.01.08",
+    "nama_rekening": "Hotel Melati Dua",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1246",
+    "kode_rekening": "4.1.1.01.09",
+    "nama_rekening": "Hotel Melati Satu",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1247",
+    "kode_rekening": "4.1.1.01.10",
+    "nama_rekening": "Motel",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1248",
+    "kode_rekening": "4.1.1.01.11",
+    "nama_rekening": "Cottage",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1249",
+    "kode_rekening": "4.1.1.02.02",
+    "nama_rekening": "Rumah Makan",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1250",
+    "kode_rekening": "4.1.1.02.03",
+    "nama_rekening": "Kafetaria",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1251",
+    "kode_rekening": "4.1.1.02.04",
+    "nama_rekening": "Kantin",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1255",
+    "kode_rekening": "4.1.1.02.05",
+    "nama_rekening": "Katering",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1256",
+    "kode_rekening": "4.1.1.03.02",
+    "nama_rekening": "Pagelaran Kesenian\/Musik\/Tari\/Busana",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1257",
+    "kode_rekening": "4.1.1.03.03",
+    "nama_rekening": "Kontes Kecantikan",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1258",
+    "kode_rekening": "4.1.1.03.04",
+    "nama_rekening": "Kontes Binaraga",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1259",
+    "kode_rekening": "4.1.1.03.05",
+    "nama_rekening": "Pameran",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1260",
+    "kode_rekening": "4.1.1.03.06",
+    "nama_rekening": "Diskotik",
+    "rumus": "40",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1261",
+    "kode_rekening": "4.1.1.03.07",
+    "nama_rekening": "Karaoke",
+    "rumus": "40",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1262",
+    "kode_rekening": "4.1.1.03.08",
+    "nama_rekening": "Klab Malam",
+    "rumus": "40",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1263",
+    "kode_rekening": "4.1.1.03.09",
+    "nama_rekening": "Sirkus\/Akrobatik\/Sulap",
+    "rumus": "15",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1264",
+    "kode_rekening": "4.1.1.03.10",
+    "nama_rekening": "Permainan Bilyar",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1267",
+    "kode_rekening": "4.1.1.03.13",
+    "nama_rekening": "Pacuan Kuda",
+    "rumus": "20",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1269",
+    "kode_rekening": "4.1.1.03.15",
+    "nama_rekening": "Permainan Ketangkasan",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1270",
+    "kode_rekening": "4.1.1.03.16",
+    "nama_rekening": "Panti Pijat, Refleksi dan Pusat Kebugaran",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1273",
+    "kode_rekening": "4.1.1.03.19",
+    "nama_rekening": "Pertandingan Olahraga",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1274",
+    "kode_rekening": "4.1.1.04.02",
+    "nama_rekening": "Reklame Kain",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1275",
+    "kode_rekening": "4.1.1.04.03",
+    "nama_rekening": "Reklame Melekat\/stiker",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1276",
+    "kode_rekening": "4.1.1.04.04",
+    "nama_rekening": "Reklame Selebaran",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1277",
+    "kode_rekening": "4.1.1.04.05",
+    "nama_rekening": "Reklame Berjalan",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1278",
+    "kode_rekening": "4.1.1.04.06",
+    "nama_rekening": "Reklame Udara",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1279",
+    "kode_rekening": "4.1.1.04.07",
+    "nama_rekening": "Reklame Apung",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1280",
+    "kode_rekening": "4.1.1.04.08",
+    "nama_rekening": "Reklame Suara",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1281",
+    "kode_rekening": "4.1.1.04.09",
+    "nama_rekening": "Reklame Film\/Slide",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1282",
+    "kode_rekening": "4.1.1.04.10",
+    "nama_rekening": "Reklame Peragaan",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1287",
+    "kode_rekening": "4.1.1.08",
+    "nama_rekening": "Pajak Air Tanah",
+    "rumus": "20",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1289",
+    "kode_rekening": "4.1.1.09",
+    "nama_rekening": "Pajak Sarang Burung Walet",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1298",
+    "kode_rekening": "4.1.1.01.12",
+    "nama_rekening": "Losmen\/Rumah Penginapan\/Pesangggahan\/Rumah Kos",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1299",
+    "kode_rekening": "4.1.1.01.13",
+    "nama_rekening": "Wisma Pariwisata",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1301",
+    "kode_rekening": "4.1.1.02.09",
+    "nama_rekening": "Pajak Restoran",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1306",
+    "kode_rekening": "4.1.1.03.20",
+    "nama_rekening": "Pajak Hiburan",
+    "rumus": "5",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "1307",
+    "kode_rekening": "4.1.1.04.11",
+    "nama_rekening": "Pajak Reklame",
+    "rumus": "",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "2925",
+    "kode_rekening": "4.1.1.01.14",
+    "nama_rekening": "Gubuk Pariwisata",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "2926",
+    "kode_rekening": "4.1.1.02.06",
+    "nama_rekening": "Warung",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "2927",
+    "kode_rekening": "4.1.1.02.07",
+    "nama_rekening": "Bar",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "2928",
+    "kode_rekening": "4.1.1.02.08",
+    "nama_rekening": "Jasa Boga",
+    "rumus": "10",
+    "tarif": "0"
+  },
+  {
+    "id_rekening": "4278",
+    "kode_rekening": "4.1.1.05.02.01",
+    "nama_rekening": "PPJU NON PLN (DIHASILKAN SENDIRI)",
+    "rumus": "1.5",
+    "tarif": "928"
+  },
+  {
+    "id_rekening": "4279",
+    "kode_rekening": "4.1.1.05.02.02",
+    "nama_rekening": "PPJU NON PLN 605 (DIHASILKAN SENDIRI)",
+    "rumus": "1.5",
+    "tarif": "605"
+  },
+  {
+    "id_rekening": "4281",
+    "kode_rekening": "4.1.1.05.02.05",
+    "nama_rekening": "PPJU (DARI SUMBER LAIN)",
+    "rumus": "3",
+    "tarif": "1"
+  },
+  {
+    "id_rekening": "4285",
+    "kode_rekening": "4.1.1.05.02.09",
+    "nama_rekening": "PPJU NON PLN >30.000KVA (DIHASILKAN SENDIRI)",
+    "rumus": "1.5",
+    "tarif": "605"
+  },
+  {
+    "id_rekening": "4287",
+    "kode_rekening": "4.1.1.05.01.00",
+    "nama_rekening": "PPJU PLN",
+    "rumus": "100",
+    "tarif": "1"
+  },
+  {
+    "id_rekening": "4288",
+    "kode_rekening": "4.1.1.05.02.15",
+    "nama_rekening": "PPJU NON PLN < 30.000KVA (DIHASILKAN SENDIRI)",
+    "rumus": "1.5",
+    "tarif": "803"
+  }
+]
