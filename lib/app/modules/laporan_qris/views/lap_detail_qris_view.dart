@@ -1,5 +1,6 @@
 import 'package:bapenda_getx2_admin/widgets/custom_appbar.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
+import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -51,6 +52,75 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                   child: Texts.body1("Riwayat 30 Transaksi QRIS Terakhir "),
                 ),
                 Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: gradientColor),
+                  ),
+                  height: 40.h,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 100.w,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Texts.captionXs(
+                                maxLines: 1,
+                                "Nama Usaha",
+                                color: Colors.white,
+                                isBold: true),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 55.w,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Texts.captionXs("Jenis",
+                                color: Colors.white, isBold: true),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 35.w,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Texts.captionXs("Nominal",
+                                color: Colors.white, isBold: true),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 46.w,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Texts.captionXs("Tanggal",
+                                color: Colors.white, isBold: true),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 75.w,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Texts.captionXs("Tanggal",
+                                color: Colors.white, isBold: true),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
                     width: double.infinity,
                     constraints: BoxConstraints(
                       maxWidth: 500,
@@ -69,11 +139,6 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                           blurRadius: 10,
                           offset: const Offset(2, 2),
                         ),
-                        const BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-2, -2),
-                            blurRadius: 10,
-                            spreadRadius: 1),
                       ],
                     ),
                     child: ListView.builder(
@@ -127,7 +192,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                       width: 55.w,
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -146,7 +211,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                       width: 35.w,
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -165,7 +230,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                       width: 46.w,
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -184,7 +249,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                       width: 75.w,
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [

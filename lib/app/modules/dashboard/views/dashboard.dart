@@ -1,3 +1,4 @@
+import 'package:bapenda_getx2_admin/app/modules/dashboard/models/grafik1.dart';
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 
 import 'package:bapenda_getx2_admin/widgets/custtombottombar.dart';
@@ -198,60 +199,100 @@ class Dashboard extends StatelessWidget {
                             isVisible: true, position: LegendPosition.bottom),
                         // Enable tooltip
                         tooltipBehavior: TooltipBehavior(enable: true),
-                        series: <ChartSeries<_SalesData, String>>[
-                          ColumnSeries<_SalesData, String>(
-                              dataSource: dataHotel,
-                              xValueMapper: (_SalesData sales, _) => sales.year,
-                              yValueMapper: (_SalesData sales, _) =>
-                                  sales.sales,
+                        series: <ChartSeries<SalesData, String>>[
+                          ColumnSeries<SalesData, String>(
+                              dataSource: controller.dataHotel,
+                              xValueMapper: (SalesData sales, _) => sales.month,
+                              yValueMapper: (SalesData sales, _) => sales.sales,
                               name: 'Hotel',
                               // Enable data label
                               dataLabelSettings:
                                   DataLabelSettings(isVisible: false)),
-                          ColumnSeries<_SalesData, String>(
-                              dataSource: dataRestoran,
-                              xValueMapper: (_SalesData sales, _) => sales.year,
-                              yValueMapper: (_SalesData sales, _) =>
-                                  sales.sales,
+                          ColumnSeries<SalesData, String>(
+                              dataSource: controller.dataRestoran,
+                              xValueMapper: (SalesData sales, _) => sales.month,
+                              yValueMapper: (SalesData sales, _) => sales.sales,
                               name: 'Restoran',
                               // Enable data label
                               dataLabelSettings:
                                   DataLabelSettings(isVisible: false)),
-                          ColumnSeries<_SalesData, String>(
-                              dataSource: dataKatering,
-                              xValueMapper: (_SalesData sales, _) => sales.year,
-                              yValueMapper: (_SalesData sales, _) =>
-                                  sales.sales,
-                              name: 'Katering',
-                              // Enable data label
-                              dataLabelSettings:
-                                  DataLabelSettings(isVisible: false)),
-                          ColumnSeries<_SalesData, String>(
-                              dataSource: dataHiburan,
-                              xValueMapper: (_SalesData sales, _) => sales.year,
-                              yValueMapper: (_SalesData sales, _) =>
-                                  sales.sales,
+                          ColumnSeries<SalesData, String>(
+                              dataSource: controller.dataHiburan,
+                              xValueMapper: (SalesData sales, _) => sales.month,
+                              yValueMapper: (SalesData sales, _) => sales.sales,
                               name: 'Hiburan',
                               // Enable data label
                               dataLabelSettings:
                                   DataLabelSettings(isVisible: false)),
-                          ColumnSeries<_SalesData, String>(
-                              dataSource: dataParkir,
-                              xValueMapper: (_SalesData sales, _) => sales.year,
-                              yValueMapper: (_SalesData sales, _) =>
-                                  sales.sales,
+                          ColumnSeries<SalesData, String>(
+                              dataSource: controller.dataParkir,
+                              xValueMapper: (SalesData sales, _) => sales.month,
+                              yValueMapper: (SalesData sales, _) => sales.sales,
                               name: 'Parkir',
                               // Enable data label
                               dataLabelSettings:
-                                  DataLabelSettings(isVisible: false))
+                                  DataLabelSettings(isVisible: false)),
                         ]),
+                  ),
+                ),
+                GestureDetector(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.r),
+                    child: Container(
+                      height: 150.h,
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(0, 1),
+                              blurRadius: 2.0)
+                        ],
+                        borderRadius: BorderRadius.circular(12.0),
+                        color: Colors.white,
+                      ),
+                      child: SfCircularChart(
+                        tooltipBehavior: TooltipBehavior(enable: true),
+                        title: ChartTitle(
+                            text:
+                                "Wajib Pajak yang telah menggunakan \nBapenda Etam",
+                            textStyle: TextStyle(
+                              fontSize: 12.sp,
+                            )),
+                        legend: Legend(
+                          isVisible: true,
+                          position: LegendPosition.left,
+                        ),
+                        series: <DoughnutSeries<_DaftarWP, String>>[
+                          DoughnutSeries<_DaftarWP, String>(
+                            dataSource: <_DaftarWP>[
+                              _DaftarWP('WP Terdaftar', controller.wp_daftar,
+                                  Color.fromARGB(255, 125, 225, 212)),
+                              _DaftarWP(
+                                  'WP Belum Terdaftar',
+                                  controller.wp_bdaftar,
+                                  Color.fromARGB(255, 133, 175, 223)),
+                            ],
+                            // Enable data label
+                            dataLabelSettings: DataLabelSettings(
+                              isVisible: true,
+                            ),
+                            dataLabelMapper: (_DaftarWP data, _) =>
+                                '${data.jumlah} WP',
+                            xValueMapper: (_DaftarWP data, _) => data.data,
+                            yValueMapper: (_DaftarWP data, _) => data.jumlah,
+                            radius: "47",
+                          ),
+                        ],
+                        margin: EdgeInsets.zero,
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
                   child: Padding(
                     padding: EdgeInsets.all(15.r),
                     child: Container(
-                      height: 300.h,
+                      height: 190.h,
                       child: GridView(
                         physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -337,12 +378,14 @@ class Dashboard extends StatelessWidget {
                               ],
                               margin: EdgeInsets.zero,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
                   ),
-                )
+                ),
+
+                //SizedBox(height: 200.h)
               ],
             ),
           ),
@@ -381,5 +424,13 @@ class _MetodePembayaran {
 
   final String year;
   final double sales;
+  final Color color;
+}
+
+class _DaftarWP {
+  _DaftarWP(this.data, this.jumlah, this.color);
+
+  final String data;
+  final int jumlah;
   final Color color;
 }

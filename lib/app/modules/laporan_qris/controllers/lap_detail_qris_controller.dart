@@ -130,6 +130,7 @@ class LapDetailQrisController extends GetxController {
           var response =
               await http.post(url, headers: headers, body: jsonEncode(body));
           var data_QRIS = json.decode(response.body);
+          print(jsonEncode(data_QRIS));
           if (data_QRIS['message'] == "success") {
             //jika berhasil GET REPORT STATUS PEMBAYARAN QRIS BPD SUDAH LUNAS
             responsePembayaran = json.decode(response.body);

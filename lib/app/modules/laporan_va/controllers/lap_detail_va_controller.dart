@@ -50,6 +50,7 @@ class LapDetailVaController extends GetxController {
         "https://yongen-bisa.com/bapenda_app/api_ver2/vaqris/check_auth.php?kategori=va");
     var response_auth = await http.get(url_auth);
     List data_auth = json.decode(response_auth.body);
+    print(data_auth[0]["token"]);
     DateTime waktu1 = DateTime.parse(data_auth[0]["created_at"]);
     DateTime waktu2 = DateTime.now();
     print(

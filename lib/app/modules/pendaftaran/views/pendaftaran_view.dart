@@ -37,6 +37,22 @@ class PendaftaranView extends GetView<PendaftaranController> {
                 itemBuilder: (context, index) {
                   if (index < controller.datalist.length) {
                     var dataitem = controller.datalist[index];
+                    String? assetpajak;
+                    if (dataitem.jenispajak == "HOTEL") {
+                      assetpajak = "hotel";
+                    } else if (dataitem.jenispajak == "HIBURAN") {
+                      assetpajak = "hiburan";
+                    } else if (dataitem.jenispajak == "RESTORAN" ||
+                        dataitem.jenispajak == "CAFETARIA" ||
+                        dataitem.jenispajak == "WARUNG") {
+                      assetpajak = "restaurant";
+                    } else if (dataitem.jenispajak == "Parkir") {
+                      assetpajak = "parkir";
+                    } else if (dataitem.jenispajak == "CATERING") {
+                      assetpajak = "catering";
+                    } else {
+                      assetpajak = "hotel";
+                    }
                     return InkWell(
                       onTap: () {
                         Get.toNamed(Routes.PENDAFTARAN_DETAIL,
@@ -126,7 +142,7 @@ class PendaftaranView extends GetView<PendaftaranController> {
                                   child: Padding(
                                     padding: EdgeInsets.all(8.r),
                                     child: Image.asset(
-                                      "assets/icon/icon-hotel.png",
+                                      "assets/icon/icon-${assetpajak}.png",
                                       height: 20.h,
                                       width: 20.w,
                                     ),

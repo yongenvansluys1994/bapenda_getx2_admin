@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/auth/service/auth_cache_service.dart';
 import 'package:bapenda_getx2_admin/app/modules/dashboard/models/auth_model_model.dart';
+import 'package:bapenda_getx2_admin/app/modules/dashboard/models/grafik1.dart';
 import 'dart:ui' as ui;
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_single.dart';
 import 'package:bapenda_getx2_admin/utils/app_const.dart';
@@ -29,6 +30,13 @@ class DashboardController extends GetxController with AuthCacheService {
   RxInt value_adminpelaporan = 0.obs;
   Set<Marker> markers = <Marker>{};
   bool readBy = false;
+  int wp_daftar = 0;
+  int wp_bdaftar = 0;
+  List<SalesData> dataHotel = [];
+  List<SalesData> dataRestoran = [];
+  List<SalesData> dataKatering = [];
+  List<SalesData> dataHiburan = [];
+  List<SalesData> dataParkir = [];
 
   late AndroidNotificationChannel channel;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -47,6 +55,13 @@ class DashboardController extends GetxController with AuthCacheService {
 
     authModel = AuthModel.fromJson(user);
     super.onInit();
+    grafik_hotel();
+    grafik_restoran();
+    //grafik_katering();
+    grafik_hiburan();
+    grafik_parkir();
+    row_wpterdaftar();
+    row_wpbterdaftar();
     requestPermission();
     loadFCM();
     listenFCM();
@@ -87,6 +102,115 @@ class DashboardController extends GetxController with AuthCacheService {
         update();
       });
     });
+  }
+
+  void grafik_hotel() async {
+    var response =
+        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_hotel.php"));
+    var data = json.decode(response.body);
+    String jsonStr = jsonEncode(data);
+    List<dynamic> jsonData = json.decode(jsonStr);
+
+    // Iterate over each JSON object and populate the list
+    for (var item in jsonData) {
+      String month = item.keys.first; // Extract month
+      double sales = item.values.first.toDouble(); // Extract sales
+
+      // Create _SalesData object and add it to the list
+      dataHotel.add(SalesData(month, sales));
+    }
+    update();
+  }
+
+  void grafik_restoran() async {
+    var response =
+        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_restoran.php"));
+    var data = json.decode(response.body);
+    String jsonStr = jsonEncode(data);
+    List<dynamic> jsonData = json.decode(jsonStr);
+
+    // Iterate over each JSON object and populate the list
+    for (var item in jsonData) {
+      String month = item.keys.first; // Extract month
+      double sales = item.values.first.toDouble(); // Extract sales
+
+      // Create _SalesData object and add it to the list
+      dataRestoran.add(SalesData(month, sales));
+    }
+    update();
+  }
+
+  void grafik_katering() async {
+    var response =
+        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_katering.php"));
+    if (response.body != "0 results") {
+      var data = json.decode(response.body);
+      String jsonStr = jsonEncode(data);
+      List<dynamic> jsonData = json.decode(jsonStr);
+
+      // Iterate over each JSON object and populate the list
+      for (var item in jsonData) {
+        String month = item.keys.first; // Extract month
+        double sales = item.values.first.toDouble(); // Extract sales
+
+        // Create _SalesData object and add it to the list
+        dataKatering.add(SalesData(month, sales));
+      }
+    }
+
+    update();
+  }
+
+  void grafik_hiburan() async {
+    var response =
+        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_hiburan.php"));
+    var data = json.decode(response.body);
+    String jsonStr = jsonEncode(data);
+    List<dynamic> jsonData = json.decode(jsonStr);
+
+    // Iterate over each JSON object and populate the list
+    for (var item in jsonData) {
+      String month = item.keys.first; // Extract month
+      double sales = item.values.first.toDouble(); // Extract sales
+
+      // Create _SalesData object and add it to the list
+      dataHiburan.add(SalesData(month, sales));
+    }
+    update();
+  }
+
+  void grafik_parkir() async {
+    var response =
+        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_parkir.php"));
+    var data = json.decode(response.body);
+    String jsonStr = jsonEncode(data);
+    List<dynamic> jsonData = json.decode(jsonStr);
+
+    // Iterate over each JSON object and populate the list
+    for (var item in jsonData) {
+      String month = item.keys.first; // Extract month
+      double sales = item.values.first.toDouble(); // Extract sales
+
+      // Create _SalesData object and add it to the list
+      dataParkir.add(SalesData(month, sales));
+    }
+    update();
+  }
+
+  void row_wpterdaftar() async {
+    var response =
+        await http.get(Uri.parse("${URL_APP_API}/admin/wp_terdaftar.php"));
+    var data = json.decode(response.body);
+    wp_daftar = int.parse(data["total_terdaftar"]);
+    update();
+  }
+
+  void row_wpbterdaftar() async {
+    var response =
+        await http.get(Uri.parse("${URL_APP_API}/admin/wp_totalsimpatda.php"));
+    var data1 = json.decode(response.body);
+    wp_bdaftar = data1["total_wp"] - wp_daftar;
+    update();
   }
 
   void row_admindaftar() async {
