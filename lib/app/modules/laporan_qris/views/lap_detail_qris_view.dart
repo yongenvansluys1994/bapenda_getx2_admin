@@ -147,125 +147,130 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                         itemCount: controller.datalist.length,
                         itemBuilder: (context, index) {
                           var datatitem = controller.datalist[index];
-                          Color backgroundColor = datatitem.trxDate == ""
+                          Color backgroundColor = datatitem.tanggalLunas == "0"
                               ? Colors.redAccent.withOpacity(0.8)
                               : index.isEven
                                   ? Color.fromARGB(255, 230, 230, 230)
                                   : Colors.white;
 
-                          return GestureDetector(
-                            onTap: () {
-                              controller.openDialog(datatitem.kdTagihan);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: backgroundColor,
+                          if (datatitem.tanggalLunas != "0" &&
+                              datatitem.uraian != "QRIS") {
+                            return SizedBox();
+                          } else {
+                            return GestureDetector(
+                              onTap: () {
+                                controller.openDialog(datatitem.kdTagihan);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: backgroundColor,
+                                ),
+                                height: 40.h,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(4.w),
+                                      child: Container(
+                                        width: 100.w,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Texts.captionXs(
+                                              maxLines: 2,
+                                              "${datatitem.namaUsaha}",
+                                              color: Color.fromARGB(
+                                                  255, 59, 59, 59),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(4.w),
+                                      child: Container(
+                                        width: 55.w,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Texts.captionXs(
+                                              "${datatitem.kdTagihan}",
+                                              color: Color.fromARGB(
+                                                  255, 59, 59, 59),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(4.w),
+                                      child: Container(
+                                        width: 35.w,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Texts.captionXs(
+                                              "${datatitem.jenispajak}",
+                                              color: Color.fromARGB(
+                                                  255, 59, 59, 59),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(4.w),
+                                      child: Container(
+                                        width: 46.w,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Texts.captionXs(
+                                              "${datatitem.tanggalLunas}",
+                                              color: Color.fromARGB(
+                                                  255, 59, 59, 59),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(4.w),
+                                      child: Container(
+                                        width: 75.w,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Texts.captionXs(
+                                              "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(int.parse(datatitem.amount))}",
+                                              color: Color.fromARGB(
+                                                  255, 59, 59, 59),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              height: 40.h,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(4.w),
-                                    child: Container(
-                                      width: 100.w,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Texts.captionXs(
-                                            maxLines: 2,
-                                            "${datatitem.namaUsaha}",
-                                            color:
-                                                Color.fromARGB(255, 59, 59, 59),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(4.w),
-                                    child: Container(
-                                      width: 55.w,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Texts.captionXs(
-                                            "${datatitem.kdTagihan}",
-                                            color:
-                                                Color.fromARGB(255, 59, 59, 59),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(4.w),
-                                    child: Container(
-                                      width: 35.w,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Texts.captionXs(
-                                            "${datatitem.jenispajak}",
-                                            color:
-                                                Color.fromARGB(255, 59, 59, 59),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(4.w),
-                                    child: Container(
-                                      width: 46.w,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Texts.captionXs(
-                                            "${datatitem.tanggalLunas}",
-                                            color:
-                                                Color.fromARGB(255, 59, 59, 59),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(4.w),
-                                    child: Container(
-                                      width: 75.w,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Texts.captionXs(
-                                            "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(int.parse(datatitem.amount))}",
-                                            color:
-                                                Color.fromARGB(255, 59, 59, 59),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
+                            );
+                          }
                         })),
                 Container(
                   decoration: BoxDecoration(

@@ -21,6 +21,7 @@ class ModelLaporanQris {
   String institusi;
   String trxDate;
   String rrn;
+  String uraian;
 
   ModelLaporanQris({
     required this.kdTagihan,
@@ -33,6 +34,7 @@ class ModelLaporanQris {
     required this.institusi,
     required this.trxDate,
     required this.rrn,
+    required this.uraian,
   });
 
   factory ModelLaporanQris.fromJson(Map<String, dynamic> json) =>
@@ -47,6 +49,7 @@ class ModelLaporanQris {
         institusi: json["institusi"],
         trxDate: json["trx_date"],
         rrn: json["rrn"],
+        uraian: json["uraian"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -60,5 +63,6 @@ class ModelLaporanQris {
         "institusi": institusi,
         "trx_date": trxDate,
         "rrn": rrn,
+        "uraian": uraian,
       };
 }

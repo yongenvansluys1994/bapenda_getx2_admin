@@ -59,6 +59,7 @@ class LapDetailQrisController extends GetxController {
           item.namaUsaha = matchingData["NAMA_USAHA"];
           item.jenispajak = matchingData["JENISPAJAK"];
           item.tanggalLunas = matchingData["TANGGAL_LUNAS"];
+          item.uraian = matchingData["URAIAN"];
           item.pajak = "";
         }
       }
