@@ -170,13 +170,19 @@ class LapDetailQrisController extends GetxController {
             update();
             print("Pembayaran QRIS Lunas 1");
           } else {
-            //jika GET REPORT STATUS PEMBAYARAN QRIS BPD BELUM LUNAS
             print("${data_QRIS}");
-            getDefaultDialog().onFixWithoutIcon(
-                title: "${"QRIS belum dibayarkan"}",
-                desc: "${"QRIS ini belum dibayarkan oleh WP"}");
+            //jika GET REPORT STATUS PEMBAYARAN QRIS BPD BELUM LUNAS
+            if (data_QRIS['code'] == 500) {
+              getDefaultDialog().onFixWithoutIcon(
+                  title: "${"Auth QRIS Expired Token"}", desc: "${""}");
+            } else {
+              getDefaultDialog().onFixWithoutIcon(
+                  title: "${"QRIS belum dibayarkan"}",
+                  desc: "${"QRIS ini belum dibayarkan oleh WP"}");
+              print("QRIS Tidak ada");
+            }
+
             update();
-            print("QRIS Tidak ada");
           }
         } else {
           print("Gagal Perbaharui Token ke API bapenda ETAM");
@@ -247,10 +253,16 @@ class LapDetailQrisController extends GetxController {
       } else {
         //jika GET REPORT STATUS PEMBAYARAN QRIS BPD BELUM LUNAS
         print("${data_QRIS}");
-        print("QRIS Tidak ada");
-        getDefaultDialog().onFixWithoutIcon(
-            title: "${"QRIS belum dibayarkan"}",
-            desc: "${"QRIS ini belum dibayarkan oleh WP"}");
+        if (data_QRIS['code'] == 500) {
+          getDefaultDialog().onFixWithoutIcon(
+              title: "${"Auth QRIS Expired Token"}", desc: "${""}");
+        } else {
+          getDefaultDialog().onFixWithoutIcon(
+              title: "${"QRIS belum dibayarkan"}",
+              desc: "${"QRIS ini belum dibayarkan oleh WP"}");
+          print("QRIS Tidak ada");
+        }
+
         update();
       }
     }

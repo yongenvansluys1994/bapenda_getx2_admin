@@ -374,22 +374,22 @@ class DashboardController extends GetxController with AuthCacheService {
     switch (markerType) {
       case "RESTORAN":
         return BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('assets/icon/restaurant.png', 80));
+            await getBytesFromAsset('assets/icon/restaurant.png', 60));
       case "HOTEL":
         return BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('assets/icon/hotel.png', 80));
+            await getBytesFromAsset('assets/icon/hotel.png', 60));
       case "CAFETARIA":
         return BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('assets/icon/restaurant.png', 80));
+            await getBytesFromAsset('assets/icon/restaurant.png', 60));
       case "HIBURAN":
         return BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('assets/icon/hiburan.png', 80));
+            await getBytesFromAsset('assets/icon/hiburan.png', 60));
       case "WARUNG":
         return BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('assets/icon/restaurant.png', 80));
+            await getBytesFromAsset('assets/icon/restaurant.png', 60));
       case "CATERING":
         return BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('assets/icon/catering.png', 80));
+            await getBytesFromAsset('assets/icon/catering.png', 60));
       case "TOKO":
         return BitmapDescriptor.defaultMarker;
       case "LAIN-LAIN":
