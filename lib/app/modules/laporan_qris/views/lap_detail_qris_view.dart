@@ -49,7 +49,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(8.r),
-                  child: Texts.body1("Riwayat 30 Transaksi QRIS Terakhir "),
+                  child: Texts.body1("Riwayat Transaksi QRIS Terakhir "),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -60,12 +60,12 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        width: 100.w,
+                        width: 90.w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Texts.captionXs(
+                            Texts.captionLap(
                                 maxLines: 1,
                                 "Nama Usaha",
                                 color: Colors.white,
@@ -79,29 +79,29 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Texts.captionXs("Jenis",
+                            Texts.captionLap("No Kohir",
                                 color: Colors.white, isBold: true),
                           ],
                         ),
                       ),
                       Container(
-                        width: 35.w,
+                        width: 41.w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Texts.captionXs("Nominal",
+                            Texts.captionLap("Jenis",
                                 color: Colors.white, isBold: true),
                           ],
                         ),
                       ),
                       Container(
-                        width: 46.w,
+                        width: 50.w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Texts.captionXs("Tanggal",
+                            Texts.captionLap("Tgl Lunas",
                                 color: Colors.white, isBold: true),
                           ],
                         ),
@@ -112,7 +112,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Texts.captionXs("Tanggal",
+                            Texts.captionLap("Nominal",
                                 color: Colors.white, isBold: true),
                           ],
                         ),
@@ -173,14 +173,14 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                     Padding(
                                       padding: EdgeInsets.all(4.w),
                                       child: Container(
-                                        width: 100.w,
+                                        width: 90.w,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Texts.captionXs(
+                                            Texts.captionLap(
                                               maxLines: 2,
                                               "${datatitem.namaUsaha}",
                                               color: Color.fromARGB(
@@ -200,7 +200,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Texts.captionXs(
+                                            Texts.captionLap(
                                               "${datatitem.kdTagihan}",
                                               color: Color.fromARGB(
                                                   255, 59, 59, 59),
@@ -212,15 +212,16 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                     Padding(
                                       padding: EdgeInsets.all(4.w),
                                       child: Container(
-                                        width: 35.w,
+                                        width: 41,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Texts.captionXs(
+                                            Texts.captionLap(
                                               "${datatitem.jenispajak}",
+                                              maxLines: 2,
                                               color: Color.fromARGB(
                                                   255, 59, 59, 59),
                                             ),
@@ -231,14 +232,14 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                     Padding(
                                       padding: EdgeInsets.all(4.w),
                                       child: Container(
-                                        width: 46.w,
+                                        width: 50.w,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Texts.captionXs(
+                                            Texts.captionLap(
                                               "${datatitem.tanggalLunas}",
                                               color: Color.fromARGB(
                                                   255, 59, 59, 59),
@@ -257,7 +258,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Texts.captionXs(
+                                            Texts.captionLap(
                                               "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(int.parse(datatitem.amount))}",
                                               color: Color.fromARGB(
                                                   255, 59, 59, 59),
@@ -288,7 +289,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Texts.captionXs(
+                              Texts.captionLap(
                                 "TOTAL",
                                 isBold: true,
                                 color: Color.fromARGB(255, 59, 59, 59),
@@ -306,7 +307,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Texts.captionXs(
+                              Texts.captionLap(
                                 "",
                                 color: Color.fromARGB(255, 59, 59, 59),
                               ),
@@ -323,7 +324,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Texts.captionXs(
+                              Texts.captionLap(
                                 "",
                                 color: Color.fromARGB(255, 59, 59, 59),
                               ),
@@ -340,7 +341,7 @@ class LapDetailQrisView extends GetView<LapDetailQrisController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Texts.captionXs(
+                              Texts.captionLap(
                                 "asd",
                                 isBold: true,
                                 color: Color.fromARGB(255, 59, 59, 59),

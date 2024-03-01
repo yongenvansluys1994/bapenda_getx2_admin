@@ -32,6 +32,7 @@ class DashboardController extends GetxController with AuthCacheService {
   bool readBy = false;
   int wp_daftar = 0;
   int wp_bdaftar = 0;
+  var countMap = {}.obs;
   List<SalesData> dataHotel = [];
   List<SalesData> dataRestoran = [];
   List<SalesData> dataKatering = [];
@@ -60,6 +61,7 @@ class DashboardController extends GetxController with AuthCacheService {
     //grafik_katering();
     grafik_hiburan();
     grafik_parkir();
+    grafik_vaqris();
     row_wpterdaftar();
     row_wpbterdaftar();
     requestPermission();
@@ -228,6 +230,28 @@ class DashboardController extends GetxController with AuthCacheService {
     List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
     value_adminpelaporan.value = data[0]["tot_data"];
     update();
+  }
+
+  void grafik_vaqris() async {
+    try {
+      // Make GET request to your PHP script
+      var response = await http.get(Uri.parse(
+          'https://yongen-bisa.com/bapenda_app/api_ver2/admin/grafik_vaqris.php'));
+
+      if (response.statusCode == 200) {
+        // Parse JSON response
+        Map<String, dynamic> data = json.decode(response.body);
+
+        // Update countMap with the fetched data
+        countMap.assignAll(data);
+      } else {
+        // Handle error
+        print('Failed to load data: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle exceptions
+      print('Exception occurred: $e');
+    }
   }
 
   void logout() {

@@ -264,6 +264,8 @@ class Dashboard extends StatelessWidget {
                         ),
                         series: <DoughnutSeries<_DaftarWP, String>>[
                           DoughnutSeries<_DaftarWP, String>(
+                            strokeColor: Colors.white,
+                            strokeWidth: 2,
                             dataSource: <_DaftarWP>[
                               _DaftarWP('WP Terdaftar', controller.wp_daftar,
                                   Color.fromARGB(255, 125, 225, 212)),
@@ -319,6 +321,8 @@ class Dashboard extends StatelessWidget {
                               series: <DoughnutSeries<_MetodePembayaran,
                                   String>>[
                                 DoughnutSeries<_MetodePembayaran, String>(
+                                  strokeColor: Colors.white,
+                                  strokeWidth: 2,
                                   dataSource: <_MetodePembayaran>[
                                     _MetodePembayaran('Target', 30,
                                         Color.fromARGB(255, 125, 225, 212)),
@@ -358,11 +362,17 @@ class Dashboard extends StatelessWidget {
                                   position: LegendPosition.bottom),
                               series: <PieSeries<_MetodePembayaran, String>>[
                                 PieSeries<_MetodePembayaran, String>(
+                                  strokeColor: Colors.white,
+                                  strokeWidth: 2,
                                   dataSource: <_MetodePembayaran>[
-                                    _MetodePembayaran('VA', 30,
-                                        Color.fromARGB(255, 125, 225, 212)),
-                                    _MetodePembayaran('QRIS', 20,
-                                        Color.fromARGB(255, 133, 175, 223)),
+                                    _MetodePembayaran(
+                                        'VA',
+                                        int.parse(controller.countMap['va']),
+                                        Color(0xFFffe68a)),
+                                    _MetodePembayaran(
+                                        'QRIS',
+                                        int.parse(controller.countMap['qris']),
+                                        Color(0xFF77bbf3)),
                                   ],
                                   // Enable data label
                                   dataLabelSettings:
@@ -423,7 +433,7 @@ class _MetodePembayaran {
   _MetodePembayaran(this.year, this.sales, this.color);
 
   final String year;
-  final double sales;
+  final int sales;
   final Color color;
 }
 
