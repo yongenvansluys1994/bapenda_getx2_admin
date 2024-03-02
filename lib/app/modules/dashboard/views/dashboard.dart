@@ -119,11 +119,19 @@ class Dashboard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 25),
+                  padding: EdgeInsets.only(left: 15.r),
                   child: Text(
-                    "Selamat Datang, ${controller.authModel.nama}",
+                    'Selamat Datang, ${controller.authModel.nama}',
                     style: TextStyle(
-                        fontWeight: FontWeight.w500, color: MainColor),
+                      foreground: Paint()
+                        ..shader = LinearGradient(
+                          colors: <Color>[Color(0xFF03045e), Color(0xFF1ed8a2)],
+                        ).createShader(
+                          Rect.fromLTWH(60.0, 0.0, 140.0, 0.0),
+                        ),
+                      fontSize: 12.7.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Column(
@@ -367,12 +375,18 @@ class Dashboard extends StatelessWidget {
                                   dataSource: <_MetodePembayaran>[
                                     _MetodePembayaran(
                                         'VA',
-                                        int.parse(controller.countMap['va']),
-                                        Color(0xFFffe68a)),
+                                        int.parse(
+                                            controller.countMap['va'] == null
+                                                ? "0"
+                                                : controller.countMap['va']),
+                                        Color.fromARGB(255, 125, 225, 212)),
                                     _MetodePembayaran(
                                         'QRIS',
-                                        int.parse(controller.countMap['qris']),
-                                        Color(0xFF77bbf3)),
+                                        int.parse(
+                                            controller.countMap['qris'] == null
+                                                ? "0"
+                                                : controller.countMap['qris']),
+                                        Color.fromARGB(255, 133, 175, 223)),
                                   ],
                                   // Enable data label
                                   dataLabelSettings:
