@@ -1,7 +1,6 @@
-import 'package:bapenda_getx2_admin/app/modules/pendataan/controllers/pendataan_controller_restoran.dart';
-import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
+import 'package:bapenda_getx2_admin/app/core/api/api.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/controllers/pelaporan_history_controller.dart';
 import 'package:bapenda_getx2_admin/widgets/nodata.dart';
-
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
@@ -10,52 +9,78 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class Pendataan_restoran extends StatelessWidget {
-  Pendataan_restoran({super.key});
+class HistoryPajak3 extends StatelessWidget {
+  HistoryPajak3({super.key, required String id_wajib_pajak});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PendataanController_restoran>(
-      init: PendataanController_restoran(),
+    return GetBuilder<PelaporanHistoryController>(
+      init: PelaporanHistoryController(Get.find<Api>()),
       builder: (controller) {
-        if (controller.datalist_all.isEmpty) {
-          return NoData(); //menampilkan lotties no data
+        if (controller.isEmpty3) {
+          return NoData();
         }
+
+        if (controller.isFailed) {
+          return SizedBox(height: 150.h, child: ShimmerWidget.Items1());
+        }
+
         if (controller.isLoading) {
-          return ShimmerWidget.Items1();
+          return SizedBox(height: 150.h, child: ShimmerWidget.Items1());
         }
         return ListView.builder(
-            controller: controller.controllerScroll,
-            itemCount: controller.datalist_all.length + 1,
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            itemCount: controller.datalist3.length,
             itemBuilder: (context, index) {
-              if (index < controller.datalist_all.length) {
-                var item = controller.datalist_all[index];
+              var item = controller.datalist3[index];
+              //start perhitungan denda
+              int? persenDenda;
+              int? denda_pajak;
+              int? totalPajak;
+              DateTime dateNow = DateTime.now();
+              DateTime dateBatasBayar = item.batasBayar;
+              Duration? interval;
+              interval = item.tanggalLunas == "0"
+                  ? dateNow.difference(dateBatasBayar)
+                  : DateTime.parse(item.tanggalLunas)
+                      .difference(dateBatasBayar);
+              int selisih = interval.inDays;
+              int daysPerStep = 30; // Number of days for each step
+              int maxDenda = 48; // Maximum denda value
+              int steps = (selisih / daysPerStep).floor();
 
-                return Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                  child: Container(
-                    height: 90.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 0,
-                          color: Color(0xFFE0E3E7),
-                          offset: Offset(0, 1),
-                        )
-                      ],
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        Get.toNamed(Routes.PENDATAAN_DETAIL,
-                            arguments: item,
-                            parameters: {
-                              "authModel_nik": controller.authModel.nik!,
-                              "jenis": "Restoran",
-                              "jenispajak": "Restoran",
-                              "nmassets": "restaurant"
-                            });
-                      },
+              int amount =
+                  int.parse(item.pajak); // Replace with the actual amount
+              persenDenda = (steps * 2).clamp(0, maxDenda);
+              denda_pajak = (amount * persenDenda / 100).toInt();
+              totalPajak = (denda_pajak + int.parse(item.pajak));
+              //end perhitungan denda
+              return InkWell(
+                onTap: () {
+                  //GetDialogContent(item, totalPajak, denda_pajak);
+                },
+                child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                    child: Container(
+                      height: 100.h,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(item.status == "0"
+                                ? "assets/images/putih_polos.png"
+                                : item.tanggalLunas != "0"
+                                    ? "assets/images/lunas.png"
+                                    : "assets/images/belum_bayar.png"),
+                            fit: BoxFit.cover),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 0,
+                            color: Color(0xFFE0E3E7),
+                            offset: Offset(0, 1),
+                          )
+                        ],
+                      ),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                         child: Row(
@@ -68,10 +93,10 @@ class Pendataan_restoran extends StatelessWidget {
                                 alignment: AlignmentDirectional(0, 0),
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0, -0.7),
+                                    alignment: AlignmentDirectional(0, -0.6),
                                     child: Container(
                                       width: 12.w,
-                                      height: 12.w,
+                                      height: 12.h,
                                       decoration: BoxDecoration(
                                         color: lightBlueColor,
                                         shape: BoxShape.circle,
@@ -107,7 +132,7 @@ class Pendataan_restoran extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(50),
                                     child: Image.asset(
-                                      'assets/icon/restaurant.png',
+                                      'assets/icon/${controller.nmassets}.png',
                                       width: 90.w,
                                       height: 90.h,
                                       fit: BoxFit.cover,
@@ -131,11 +156,11 @@ class Pendataan_restoran extends StatelessWidget {
                                       children: [
                                         Container(
                                           width: 300.w,
-                                          height: 20.h,
+                                          height: 30.h,
                                           child: Stack(
                                             children: [
                                               Texts.caption(
-                                                  "${item.namaUsaha}"),
+                                                  '${item.namaUsaha}'),
                                               Positioned(
                                                 right: 1,
                                                 child: Padding(
@@ -155,7 +180,7 @@ class Pendataan_restoran extends StatelessWidget {
                                                                 'Outfit',
                                                             color: Color(
                                                                 0xFF39D2C0),
-                                                            fontSize: 10.sp,
+                                                            fontSize: 8.sp,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             height: 0.5,
@@ -168,7 +193,7 @@ class Pendataan_restoran extends StatelessWidget {
                                                                 'Outfit',
                                                             color: Color(
                                                                 0xFF39D2C0),
-                                                            fontSize: 12.5.sp,
+                                                            fontSize: 12.sp,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             height: 1,
@@ -186,10 +211,10 @@ class Pendataan_restoran extends StatelessWidget {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 4, 0, 0),
+                                          0, 0, 0, 0),
                                       child: item.status == "0"
                                           ? Text(
-                                              'Belum di Verifikasi Petugas.',
+                                              'Data Laporan Pajak Sedang \ndi Verifikasi Petugas.',
                                               maxLines: 2,
                                               overflow: TextOverflow.clip,
                                               style: TextStyle(
@@ -200,86 +225,54 @@ class Pendataan_restoran extends StatelessWidget {
                                                 fontWeight: FontWeight.normal,
                                               ),
                                             )
-                                          : item.status == "1" &&
-                                                  item.nomorKohir == "0"
-                                              ? Texts.captionSm(
-                                                  "Segera Ditetapkan di Aplikasi Simpatda",
-                                                  color: Color.fromARGB(
-                                                      255, 192, 87, 87),
-                                                )
-                                              : item.tanggalLunas != "0"
-                                                  ? Icon(
-                                                      Icons.check_box,
-                                                      color: Color.fromARGB(
-                                                          255, 108, 226, 112),
-                                                      size: 18.6.w,
-                                                    )
-                                                  : Icon(
-                                                      Icons
-                                                          .check_box_outline_blank,
-                                                      color: Color.fromARGB(
-                                                          255, 108, 226, 112),
-                                                      size: 18.6.w,
-                                                    ),
+                                          : Text(
+                                              'Jenis Pajak : ${item.nmRekening} \n NPWPD : ${item.npwpd}',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.clip,
+                                              style: TextStyle(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF57636C),
+                                                fontSize: 11.sp,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
                                     ),
                                     Divider(height: 5.h),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Expanded(
-                                            child: item.status == "0"
-                                                ? Text(
-                                                    "Rp. xxx",
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.clip,
-                                                    style: TextStyle(
-                                                        fontFamily: 'Outfit',
-                                                        fontSize: 13.sp,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: MainColor),
-                                                  )
-                                                : Text(
-                                                    NumberFormat.currency(
-                                                            locale: 'id',
-                                                            symbol: 'Rp. ',
-                                                            decimalDigits: 0)
-                                                        .format(int.parse(item
-                                                            .pajak
-                                                            .toString())),
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.clip,
-                                                    style: TextStyle(
-                                                        fontFamily: 'Outfit',
-                                                        fontSize: 13.sp,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: MainColor),
-                                                  ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'Lihat Detail',
-                                                style: TextStyle(
-                                                  fontFamily: 'Outfit',
-                                                  color: textLink,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.bold,
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: item.status == "0"
+                                              ? Text(
+                                                  "Rp. xxx",
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.clip,
+                                                  style: TextStyle(
+                                                      fontFamily: 'Outfit',
+                                                      fontSize: 13.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: MainColor),
+                                                )
+                                              : Text(
+                                                  NumberFormat.currency(
+                                                          locale: 'id',
+                                                          symbol: 'Rp. ',
+                                                          decimalDigits: 0)
+                                                      .format(int.parse(item
+                                                          .pajak
+                                                          .toString())),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.clip,
+                                                  style: TextStyle(
+                                                      fontFamily: 'Outfit',
+                                                      fontSize: 13.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: MainColor),
                                                 ),
-                                              ),
-                                              Icon(
-                                                Icons.chevron_right_rounded,
-                                                color: Color(0xFF57636C),
-                                                size: 24,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -288,19 +281,8 @@ class Pendataan_restoran extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                );
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Center(
-                    child: controller.hasMore
-                        ? CircularProgressIndicator()
-                        : Text("Tidak ada data lagi"),
-                  ),
-                );
-              }
+                    )),
+              );
             });
       },
     );

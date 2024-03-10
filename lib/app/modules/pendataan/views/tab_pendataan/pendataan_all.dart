@@ -31,6 +31,7 @@ class Pendataan_all extends StatelessWidget {
               if (index < controller.datalist_all.length) {
                 var item = controller.datalist_all[index];
                 var itemjenispajak;
+                var jenispajak;
                 switch (item.idRekening) {
                   case "1194":
                   case "1239":
@@ -47,6 +48,7 @@ class Pendataan_all extends StatelessWidget {
                   case "1300":
                   case "2925":
                     itemjenispajak = "hotel";
+                    jenispajak = "Hotel";
                     break;
                   case "211":
                   case "1249":
@@ -57,6 +59,7 @@ class Pendataan_all extends StatelessWidget {
                   case "2927":
                   case "2928":
                     itemjenispajak = "restaurant";
+                    jenispajak = "Restoran";
                     break;
                   case "213":
                   case "1256":
@@ -74,12 +77,16 @@ class Pendataan_all extends StatelessWidget {
                   case "1273":
                   case "1306":
                     itemjenispajak = "hiburan";
+                    jenispajak = "Hiburan";
                     break;
                   case "1255":
                     itemjenispajak = "catering";
+                    jenispajak = "Katering";
                     break;
                   case "220":
+                  case "221":
                     itemjenispajak = "parkir";
+                    jenispajak = "Parkir";
                     break;
                   case "2964":
                   case "4278":
@@ -89,6 +96,7 @@ class Pendataan_all extends StatelessWidget {
                   case "4287":
                   case "4288":
                     itemjenispajak = "ppj";
+                    jenispajak = "PPJ";
                     break;
                   default:
                     // Handle other cases or set a default value for itemjenispajak
@@ -121,14 +129,18 @@ class Pendataan_all extends StatelessWidget {
                               arguments: item,
                               parameters: {
                                 "authModel_nik": controller.authModel.nik!,
-                                "jenis": "All"
+                                "jenis": "All",
+                                "jenispajak": "${jenispajak}",
+                                "nmassets": "${itemjenispajak}"
                               });
                         } else {
                           Get.toNamed(Routes.PENDATAAN_DETAIL,
                               arguments: item,
                               parameters: {
                                 "authModel_nik": controller.authModel.nik!,
-                                "jenis": "All"
+                                "jenis": "All",
+                                "jenispajak": "${jenispajak}",
+                                "nmassets": "${itemjenispajak}"
                               });
                         }
                       },

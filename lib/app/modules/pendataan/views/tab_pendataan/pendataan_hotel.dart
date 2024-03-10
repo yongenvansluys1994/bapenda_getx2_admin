@@ -51,7 +51,9 @@ class Pendataan_hotel extends StatelessWidget {
                             arguments: item,
                             parameters: {
                               "authModel_nik": controller.authModel.nik!,
-                              "jenis": "Hotel"
+                              "jenis": "Hotel",
+                              "jenispajak": "Hotel",
+                              "nmassets": "hotel"
                             });
                       },
                       child: Padding(

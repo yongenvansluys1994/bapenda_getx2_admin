@@ -168,6 +168,52 @@ class getDefaultDialog {
     );
   }
 
+  void onFixWithHandler({
+    required String title,
+    required String desc,
+    required String kategori,
+    required VoidCallback handler,
+  }) {
+    Get.defaultDialog(
+      barrierDismissible: false,
+      radius: 12.r,
+      titlePadding: EdgeInsets.zero,
+      content: Column(
+        children: [
+          Lottie.asset('assets/lottie/${kategori}.json',
+              width: 120.w, repeat: false),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 0.r, horizontal: 10.r),
+            child: Text(
+              "${title}",
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.sp),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.r),
+            child: Text(
+              "${desc}",
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16.sp),
+              textAlign: TextAlign.center,
+            ),
+          )
+        ],
+      ),
+      actions: [
+        SizedBox(
+          width: 80.w,
+          child: Buttons.gradientButton(
+            handler: handler,
+            widget: Texts.button("Ok"),
+            borderSide: false,
+            gradient: [Colors.cyan, Colors.indigo],
+          ),
+        ),
+      ],
+    );
+  }
+
   void onFixWithoutIcon({
     required String title,
     required String desc,

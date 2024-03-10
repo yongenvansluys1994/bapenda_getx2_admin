@@ -51,7 +51,9 @@ class Pendataan_katering extends StatelessWidget {
                             arguments: item,
                             parameters: {
                               "authModel_nik": controller.authModel.nik!,
-                              "jenis": "Katering"
+                              "jenis": "Katering",
+                              "jenispajak": "Katering",
+                              "nmassets": "catering"
                             });
                       },
                       child: Padding(

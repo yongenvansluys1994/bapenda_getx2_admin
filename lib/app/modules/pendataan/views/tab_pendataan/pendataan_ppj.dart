@@ -59,6 +59,8 @@ class Pendataan_ppj extends StatelessWidget {
                               parameters: {
                                 "authModel_nik": controller.authModel.nik!,
                                 "jenis": "PPJ",
+                                "jenispajak": "PPJ",
+                                "nmassets": "ppj"
                               });
                         } else {
                           Get.toNamed(Routes.PENDATAAN_DETAIL,
@@ -66,6 +68,8 @@ class Pendataan_ppj extends StatelessWidget {
                               parameters: {
                                 "authModel_nik": controller.authModel.nik!,
                                 "jenis": "PPJ",
+                                "jenispajak": "PPJ",
+                                "nmassets": "ppj"
                               });
                         }
                       },

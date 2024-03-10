@@ -37,20 +37,32 @@ class PendaftaranView extends GetView<PendaftaranController> {
                 itemBuilder: (context, index) {
                   if (index < controller.datalist.length) {
                     var dataitem = controller.datalist[index];
+                    String? jenispajak;
                     String? assetpajak;
                     if (dataitem.jenispajak == "HOTEL") {
+                      jenispajak = "Hotel";
                       assetpajak = "hotel";
                     } else if (dataitem.jenispajak == "HIBURAN") {
+                      jenispajak = "Hiburan";
                       assetpajak = "hiburan";
                     } else if (dataitem.jenispajak == "RESTORAN" ||
                         dataitem.jenispajak == "CAFETARIA" ||
                         dataitem.jenispajak == "WARUNG") {
+                      jenispajak = "Restoran";
                       assetpajak = "restaurant";
                     } else if (dataitem.jenispajak == "Parkir") {
+                      jenispajak = "Parkir";
                       assetpajak = "parkir";
                     } else if (dataitem.jenispajak == "CATERING") {
+                      jenispajak = "Katering";
                       assetpajak = "catering";
+                    } else if (dataitem.jenispajak ==
+                        "Pajak Penerangan Jalan") {
+                      jenispajak = "PPJ";
+                      assetpajak = "ppj";
                     } else {
+                      jenispajak =
+                          "${dataitem.jenispajak == "YAYASAN/KOPERASI" ? "Yayasan" : dataitem.jenispajak}";
                       assetpajak = "hotel";
                     }
                     return InkWell(
@@ -58,7 +70,9 @@ class PendaftaranView extends GetView<PendaftaranController> {
                         Get.toNamed(Routes.PENDAFTARAN_DETAIL,
                             arguments: dataitem,
                             parameters: {
-                              "authModel_nik": controller.authModel.nik!
+                              "authModel_nik": controller.authModel.nik!,
+                              "jenispajak": "${jenispajak}",
+                              "nmassets": "${assetpajak}"
                             });
                       },
                       child: Padding(

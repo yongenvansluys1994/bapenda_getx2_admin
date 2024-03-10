@@ -51,7 +51,9 @@ class Pendataan_parkir extends StatelessWidget {
                             arguments: item,
                             parameters: {
                               "authModel_nik": controller.authModel.nik!,
-                              "jenis": "Parkir"
+                              "jenis": "Parkir",
+                              "jenispajak": "Parkir",
+                              "nmassets": "parkir"
                             });
                       },
                       child: Padding(

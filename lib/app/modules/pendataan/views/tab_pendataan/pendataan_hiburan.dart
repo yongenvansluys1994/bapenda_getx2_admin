@@ -52,7 +52,9 @@ class Pendataan_hiburan extends StatelessWidget {
                             arguments: item,
                             parameters: {
                               "authModel_nik": controller.authModel.nik!,
-                              "jenis": "Hiburan"
+                              "jenis": "Hiburan",
+                              "jenispajak": "Hiburan",
+                              "nmassets": "hiburan"
                             });
                       },
                       child: Padding(

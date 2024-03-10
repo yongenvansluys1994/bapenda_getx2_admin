@@ -21,6 +21,9 @@ class PendaftaranDetailController extends GetxController {
   XFile? imageFileKTP = null;
   XFile? imageFileNPWP = null;
 
+  final PageController pageController = PageController();
+  int currentPage = 0;
+
   TextEditingController nama_usaha = TextEditingController();
   TextEditingController alamat_usaha = TextEditingController();
   TextEditingController rt_usaha = TextEditingController();
@@ -36,6 +39,8 @@ class PendaftaranDetailController extends GetxController {
   TextEditingController email_pemilik = TextEditingController();
   TextEditingController kel_pemilik = TextEditingController();
   TextEditingController kec_pemilik = TextEditingController();
+
+  bool isVisibleSwipe = false;
 
   Set<Marker> markers2 = <Marker>{};
 
@@ -98,6 +103,20 @@ class PendaftaranDetailController extends GetxController {
     ValueKecamatan = dataArgument.kecUsaha;
     lat = double.parse(dataArgument.lat);
     long = double.parse(dataArgument.lng);
+    visibleSwipe();
+    update();
+  }
+
+  void visibleSwipe() {
+    Future.delayed(Duration(milliseconds: 700), () {
+      //isVisibleSwipe = !isVisibleSwipe;
+      isVisibleSwipe = true;
+      update();
+    });
+  }
+
+  void swipePage() {
+    isVisibleSwipe = !isVisibleSwipe;
     update();
   }
 

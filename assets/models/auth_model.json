@@ -28,8 +28,8 @@
     "tarif": "0"
   },
   {
-    "id_rekening": "220",
-    "kode_rekening": "4.1.1.07",
+    "id_rekening": "221",
+    "kode_rekening": "4.1.1.07.01",
     "nama_rekening": "Pajak Parkir",
     "rumus": "10",
     "tarif": "0"

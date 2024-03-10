@@ -1,4 +1,10 @@
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/controllers/pelaporan_history_controller.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/views/histori_pajak.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/views/histori_pajak2.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/views/histori_pajak3.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/views/histori_pajak4.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/views/histori_pajak5.dart';
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:bapenda_getx2_admin/widgets/easythrottle.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
@@ -13,6 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lottie/lottie.dart';
 
 import '../controllers/pendaftaran_detail_controller.dart';
 
@@ -1126,7 +1133,7 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
           backgroundColor: Colors.white,
           elevation: 0,
           title: Text(
-            "Lengkapi Data Wajib Pajak",
+            "Data Wajib Pajak",
             style: TextStyle(color: MainColor),
           ),
           actions: [
@@ -1159,183 +1166,383 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
             ),
           ],
         ),
-        body: GetBuilder<PendaftaranDetailController>(
-          init: PendaftaranDetailController(),
-          builder: (controller) {
-            return Stepper(
-              type: StepperType.horizontal,
-              currentStep: controller.activeStepIndex,
-              steps: stepList(),
-              onStepContinue: () {
-                if (controller.activeStepIndex < (stepList().length - 1)) {
-                  setState(() {
-                    controller.activeStepIndex += 1;
-                  });
-                } else {
-                  print('Submited');
-                }
-              },
-              onStepCancel: () {
-                if (controller.activeStepIndex == 0) {
-                  return;
-                }
-                setState(() {
-                  controller.activeStepIndex -= 1;
-                });
-              },
-              onStepTapped: (int index) {
-                setState(() {
-                  controller.activeStepIndex = index;
-                });
-              },
-              controlsBuilder:
-                  (BuildContext context, ControlsDetails controls) {
-                final isLastStep =
-                    controller.activeStepIndex == stepList().length - 1;
-                return Container(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          (isLastStep)
-                              ? controller.dataArgument.status == "1"
-                                  ? SizedBox()
-                                  : SizedBox(
-                                      width: 150.w,
-                                      child: ElevatedButton(
-                                          onPressed: () {
-                                            if (controller
-                                                        .rt_usaha.text ==
-                                                    "" ||
-                                                controller
-                                                        .kota_usaha.text ==
-                                                    "" ||
-                                                controller
-                                                        .nohp_usaha.text ==
-                                                    "" ||
-                                                controller
-                                                        .email_usaha.text ==
-                                                    "" ||
-                                                controller
-                                                        .pekerjaan_pemilik.text ==
-                                                    "" ||
-                                                controller
-                                                        .kec_pemilik.text ==
-                                                    "" ||
-                                                controller
-                                                        .kel_pemilik.text ==
-                                                    "" ||
-                                                controller.alamat_pemilik.text ==
-                                                    "" ||
-                                                controller.rt_pemilik.text ==
-                                                    "" ||
-                                                controller.kota_pemilik.text ==
-                                                    "" ||
-                                                controller.nohp_pemilik.text ==
-                                                    "" ||
-                                                controller.email_pemilik.text ==
-                                                    "") {
-                                              RawSnackbar_top(
-                                                  message:
-                                                      'Semua Form Wajib diisi! \nSilahkan Periksa Kembali',
-                                                  kategori: "error",
-                                                  duration: 2);
-                                            } else {
-                                              getDefaultDialog().onConfirm(
-                                                  title:
-                                                      "Verifikasi Data Wajib Pajak",
-                                                  desc:
-                                                      "Pastikan anda telah memastikan data sudah benar",
-                                                  kategori: "warning",
-                                                  handler: () {
-                                                    Get.back();
-                                                    easyThrottle(
-                                                      handler: () {
-                                                        controller
-                                                            .ValidasiDaftar();
-                                                      },
-                                                    );
-                                                  });
-                                              //controller.ValidasiDaftar();
-                                            }
-                                          },
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                    Color>(lightBlueColor),
+        body: GestureDetector(
+          child: PageView(
+            controller: controller.pageController,
+            onPageChanged: (int page) {
+              controller.currentPage = page;
+              controller.swipePage();
+            },
+            children: [
+              Stack(
+                children: [
+                  GetBuilder<PendaftaranDetailController>(
+                    init: PendaftaranDetailController(),
+                    builder: (controller) {
+                      return Stepper(
+                        type: StepperType.horizontal,
+                        currentStep: controller.activeStepIndex,
+                        steps: stepList(),
+                        onStepContinue: () {
+                          if (controller.activeStepIndex <
+                              (stepList().length - 1)) {
+                            setState(() {
+                              controller.activeStepIndex += 1;
+                            });
+                          } else {
+                            print('Submited');
+                          }
+                        },
+                        onStepCancel: () {
+                          if (controller.activeStepIndex == 0) {
+                            return;
+                          }
+                          setState(() {
+                            controller.activeStepIndex -= 1;
+                          });
+                        },
+                        onStepTapped: (int index) {
+                          setState(() {
+                            controller.activeStepIndex = index;
+                          });
+                        },
+                        controlsBuilder:
+                            (BuildContext context, ControlsDetails controls) {
+                          final isLastStep = controller.activeStepIndex ==
+                              stepList().length - 1;
+                          return Container(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    (isLastStep)
+                                        ? controller.dataArgument.status == "1"
+                                            ? SizedBox()
+                                            : SizedBox(
+                                                width: 150.w,
+                                                child: ElevatedButton(
+                                                    onPressed: () {
+                                                      if (controller.rt_usaha.text == "" ||
+                                                          controller.kota_usaha.text ==
+                                                              "" ||
+                                                          controller.nohp_usaha
+                                                                  .text ==
+                                                              "" ||
+                                                          controller.email_usaha.text ==
+                                                              "" ||
+                                                          controller
+                                                                  .pekerjaan_pemilik
+                                                                  .text ==
+                                                              "" ||
+                                                          controller.kec_pemilik
+                                                                  .text ==
+                                                              "" ||
+                                                          controller.kel_pemilik
+                                                                  .text ==
+                                                              "" ||
+                                                          controller
+                                                                  .alamat_pemilik
+                                                                  .text ==
+                                                              "" ||
+                                                          controller
+                                                                  .rt_pemilik.text ==
+                                                              "" ||
+                                                          controller
+                                                                  .kota_pemilik
+                                                                  .text ==
+                                                              "" ||
+                                                          controller
+                                                                  .nohp_pemilik
+                                                                  .text ==
+                                                              "" ||
+                                                          controller
+                                                                  .email_pemilik
+                                                                  .text ==
+                                                              "") {
+                                                        RawSnackbar_top(
+                                                            message:
+                                                                'Semua Form Wajib diisi! \nSilahkan Periksa Kembali',
+                                                            kategori: "error",
+                                                            duration: 2);
+                                                      } else {
+                                                        getDefaultDialog()
+                                                            .onConfirm(
+                                                                title:
+                                                                    "Verifikasi Data Wajib Pajak",
+                                                                desc:
+                                                                    "Pastikan anda telah memastikan data sudah benar",
+                                                                kategori:
+                                                                    "warning",
+                                                                handler: () {
+                                                                  Get.back();
+                                                                  easyThrottle(
+                                                                    handler:
+                                                                        () {
+                                                                      controller
+                                                                          .ValidasiDaftar();
+                                                                    },
+                                                                  );
+                                                                });
+                                                        //controller.ValidasiDaftar();
+                                                      }
+                                                    },
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all<Color>(
+                                                                  lightBlueColor),
+                                                    ),
+                                                    child: Text(
+                                                      'Setujui Pendaftaran',
+                                                      style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                      ),
+                                                    )),
+                                              )
+                                        : SizedBox(
+                                            width: 140,
+                                            child: ElevatedButton(
+                                                onPressed:
+                                                    controls.onStepContinue,
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                              Color>(
+                                                          lightBlueColor),
+                                                ),
+                                                child: Text(
+                                                  'Selanjutnya',
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                )),
                                           ),
-                                          child: Text(
-                                            'Setujui Pendaftaran',
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    if (controller.activeStepIndex > 0)
+                                      SizedBox(
+                                        width: 100,
+                                        child: ElevatedButton(
+                                            onPressed: controls.onStepCancel,
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                          Color>(
+                                                      veryLightTextColor),
                                             ),
-                                          )),
-                                    )
-                              : SizedBox(
-                                  width: 140,
-                                  child: ElevatedButton(
-                                      onPressed: controls.onStepContinue,
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                lightBlueColor),
+                                            child: Text(
+                                              'Kembali',
+                                              style: TextStyle(fontSize: 14),
+                                            )),
                                       ),
-                                      child: Text(
-                                        'Selanjutnya',
-                                        style: TextStyle(fontSize: 14),
-                                      )),
+                                  ],
                                 ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          if (controller.activeStepIndex > 0)
-                            SizedBox(
-                              width: 100,
-                              child: ElevatedButton(
-                                  onPressed: controls.onStepCancel,
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            veryLightTextColor),
-                                  ),
-                                  child: Text(
-                                    'Kembali',
-                                    style: TextStyle(fontSize: 14),
-                                  )),
+                                (isLastStep)
+                                    ? controller.dataArgument.status == "1"
+                                        ? SizedBox()
+                                        : SizedBox(
+                                            width: 160.w,
+                                            child: ElevatedButton(
+                                                onPressed: () {
+                                                  controller.Dikembalikan();
+                                                },
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                              Color>(
+                                                          Color.fromARGB(255,
+                                                              247, 207, 30)),
+                                                ),
+                                                child: Text(
+                                                  'Dikembalikan/Ditolak',
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black),
+                                                )),
+                                          )
+                                    : SizedBox()
+                              ],
                             ),
-                        ],
-                      ),
-                      (isLastStep)
-                          ? controller.dataArgument.status == "1"
-                              ? SizedBox()
-                              : SizedBox(
-                                  width: 160.w,
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        controller.Dikembalikan();
-                                      },
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Color.fromARGB(
-                                                    255, 247, 207, 30)),
-                                      ),
-                                      child: Text(
-                                        'Dikembalikan/Ditolak',
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.black),
-                                      )),
-                                )
-                          : SizedBox()
-                    ],
+                          );
+                        },
+                      );
+                    },
                   ),
-                );
-              },
-            );
-          },
+                  swipeLeft(controller: controller),
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       controller.visibleswpe();
+                  //     },
+                  //     child: Text("Test"))
+                ],
+              ),
+              HistoryPembayaran(
+                  idWajibPajak: controller.dataArgument.idWajibPajak,
+                  controller1: controller),
+            ],
+          ),
         ),
       ),
     );
+  }
+}
+
+class swipeLeft extends StatelessWidget {
+  final PendaftaranDetailController controller;
+  const swipeLeft({
+    super.key,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<PendaftaranDetailController>(
+      init: PendaftaranDetailController(),
+      builder: (controller) {
+        return Positioned(
+          right: 0,
+          bottom: 35.r,
+          child: AnimatedOpacity(
+            curve: Curves.linear,
+            opacity: controller.isVisibleSwipe ? 1.0 : 0.0,
+            duration: Duration(milliseconds: 700),
+            child: Container(
+              height: 110.h,
+              width: 130.w,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 30.h,
+                    right: 0,
+                    child: Container(
+                      height: 35.h,
+                      width: 120.w,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: gradientColor),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(48),
+                            bottomLeft: Radius.circular(48),
+                            bottomRight: Radius.circular(7),
+                            topRight: Radius.circular(7),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 7,
+                                offset: Offset(5, 5),
+                                color: lightBlueColor.withOpacity(0.4)),
+                            BoxShadow(
+                                blurRadius: 7,
+                                offset: Offset(-2, -2),
+                                color: lightBlueColor.withOpacity(0.4))
+                          ]),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Texts.captionSm("Riwayat",
+                                  textAlign: TextAlign.right,
+                                  color: Colors.white),
+                              Texts.captionSm("Pembayaran ",
+                                  textAlign: TextAlign.right,
+                                  color: Colors.white),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 3.w,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 7.r,
+                    left: 7.r,
+                    child: SizedBox(
+                        child: Lottie.asset('assets/lottie/swipeleft.json',
+                            fit: BoxFit.fill, height: 65.h)),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class HistoryPembayaran extends StatelessWidget {
+  final PendaftaranDetailController controller1;
+  final String idWajibPajak;
+  const HistoryPembayaran(
+      {super.key, required this.idWajibPajak, required this.controller1});
+
+  @override
+  Widget build(BuildContext context) {
+    double initialX = 0.0;
+    return GetBuilder<PelaporanHistoryController>(
+        init: PelaporanHistoryController(Get.find<Api>()),
+        builder: (controller) {
+          final List<Tab> Tabs = <Tab>[
+            //5 tahun terakhir
+            Tab(text: "${controller.tahunhistory[0]}"),
+            Tab(text: "${controller.tahunhistory[1]}"),
+            Tab(text: "${controller.tahunhistory[2]}"),
+            Tab(text: "${controller.tahunhistory[3]}"),
+            Tab(text: "${controller.tahunhistory[4]}"),
+          ];
+          return SingleChildScrollView(
+            child: DefaultTabController(
+              length: 5, // Number of tabs
+              child: Builder(builder: (BuildContext context) {
+                final TabController tabController =
+                    DefaultTabController.of(context);
+                return Column(
+                  children: [
+                    TabBar(
+                      labelColor: lightBlueColor,
+                      unselectedLabelColor: MainColor,
+                      indicatorColor: lightBlueColor,
+                      //isScrollable: true,
+                      tabs: Tabs,
+                    ),
+                    SizedBox(
+                      height: 1280.h, // Adjust the height as needed
+                      child: Listener(
+                        onPointerDown: (PointerDownEvent event) {
+                          initialX = event.position.dx;
+                        },
+                        onPointerUp: (PointerUpEvent event) {
+                          double dx = event.position.dx - initialX;
+                          if (dx > 0) {
+                            // If dx is negative, it's a swipe left
+                            if (tabController.index == 0) {
+                              controller1.pageController.previousPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut);
+                            }
+                          }
+                        },
+                        child: TabBarView(
+                          controller: tabController,
+                          children: [
+                            HistoryPajak(id_wajib_pajak: idWajibPajak),
+                            HistoryPajak2(id_wajib_pajak: idWajibPajak),
+                            HistoryPajak3(id_wajib_pajak: idWajibPajak),
+                            HistoryPajak4(id_wajib_pajak: idWajibPajak),
+                            HistoryPajak5(id_wajib_pajak: idWajibPajak),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }),
+            ),
+          );
+        });
   }
 }

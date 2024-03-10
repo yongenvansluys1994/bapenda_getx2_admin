@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/modules/aktivitas/models/model_aktivitas.dart';
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
@@ -53,6 +54,22 @@ class Api {
 
   Future<Response> deleteData(int number) {
     return dio.delete("/v1/api/rest/material-movement/$number");
+  }
+
+  Future<List<ModelGetpelaporanUser>?> getPelaporanHistory(
+      {required String id_wajib_pajak,
+      required int tahun,
+      required String jenispajak}) async {
+    var response = await dio.get(
+        "/get_pelaporan_merge/index.php?id_wajib_pajak=${id_wajib_pajak}&tahun=${tahun}&jenispajak=${jenispajak}");
+    if (response.statusCode == 200) {
+      //print(response.data); //untuk check response yang diberikan oleh url
+      List data = json.decode(response.data);
+
+      return data.map((e) => ModelGetpelaporanUser.fromJson(e)).toList();
+    } else {
+      return null;
+    }
   }
 
   Future<List<ModelAds>?> getPPID(nik) async {

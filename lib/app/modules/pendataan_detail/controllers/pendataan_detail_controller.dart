@@ -8,6 +8,7 @@ import 'package:bapenda_getx2_admin/core/push_notification/push_notif_single.dar
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
 import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -50,6 +51,9 @@ class PendataanDetailController extends GetxController {
   String $id_institution_qris = "230714011";
   String $id_institution_va =
       "0292"; //4 digit id_institution khusus VA dari BPD
+  final PageController pageController = PageController();
+  int currentPage = 0;
+  bool isVisibleSwipe = false;
 
   @override
   void onInit() {
@@ -64,6 +68,7 @@ class PendataanDetailController extends GetxController {
       hitungPajak = false;
     }
     loadRekening();
+    visibleSwipe();
     update();
   }
 
@@ -483,6 +488,19 @@ class PendataanDetailController extends GetxController {
 
   void CheckSecurity(value) {
     isChecked = value;
+    update();
+  }
+
+  void visibleSwipe() {
+    Future.delayed(Duration(milliseconds: 700), () {
+      //isVisibleSwipe = !isVisibleSwipe;
+      isVisibleSwipe = true;
+      update();
+    });
+  }
+
+  void swipePage() {
+    isVisibleSwipe = !isVisibleSwipe;
     update();
   }
 
