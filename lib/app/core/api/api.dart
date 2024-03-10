@@ -4,7 +4,7 @@ import 'package:bapenda_getx2_admin/app/modules/aktivitas/models/model_aktivitas
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 
 //const baseUrlApi = 'https://yongen-bisa.com/bapenda_app/api';
 const baseUrlApi = 'https://yongen-bisa.com/bapenda_app/api_ver2';

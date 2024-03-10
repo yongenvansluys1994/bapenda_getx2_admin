@@ -6,7 +6,6 @@ import 'package:bapenda_getx2_admin/app/modules/auth/service/auth_via_db_service
 import 'package:bapenda_getx2_admin/app/modules/auth/service/employee_service.dart';
 import 'package:bapenda_getx2_admin/app/modules/login/services/login_services.dart';
 import 'package:bapenda_getx2_admin/utils/app_const.dart';
-import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
 
 import 'package:carousel_slider/carousel_controller.dart';
 

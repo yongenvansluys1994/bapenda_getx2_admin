@@ -1,15 +1,13 @@
-import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bapenda_getx2_admin/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
-import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
+
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 // ignore: must_be_immutable
 class MainDrawer extends StatelessWidget {

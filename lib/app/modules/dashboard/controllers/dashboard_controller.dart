@@ -84,7 +84,7 @@ class DashboardController extends GetxController with AuthCacheService {
         .listen((QuerySnapshot roomQuerySnapshot) {
       roomQuerySnapshot.docs.forEach((roomDoc) {
         // Accessing data for each room document
-        String roomId = roomDoc.id;
+        //String roomId = roomDoc.id;
 
         // Check if 'readBy' is a List and contains authModel.nik
         if (roomDoc['readBy'] is List &&

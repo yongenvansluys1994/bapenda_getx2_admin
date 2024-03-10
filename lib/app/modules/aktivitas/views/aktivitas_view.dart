@@ -2,7 +2,6 @@ import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/widgets/custom_appbar.dart';
 import 'package:bapenda_getx2_admin/widgets/nodata.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
-import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

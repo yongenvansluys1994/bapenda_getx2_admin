@@ -1,6 +1,5 @@
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:bapenda_getx2_admin/widgets/custom_appbar.dart';
-import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:flutter/material.dart';

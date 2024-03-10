@@ -3,14 +3,12 @@ import 'package:bapenda_getx2_admin/app/modules/dashboard/controllers/dashboard_
 import 'package:bapenda_getx2_admin/app/modules/dashboard/models/auth_model_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
 import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
 
 class MyprofilController extends GetxController {
   Api api;
