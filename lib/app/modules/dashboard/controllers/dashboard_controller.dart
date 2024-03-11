@@ -22,6 +22,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class DashboardController extends GetxController with AuthCacheService {
+  http.Client httpClient = http.Client();
   late AuthModel authModel;
   RxInt countUnseenChat = 0.obs;
   late String tokenMsg;
@@ -107,8 +108,8 @@ class DashboardController extends GetxController with AuthCacheService {
   }
 
   void grafik_hotel() async {
-    var response =
-        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_hotel.php"));
+    var response = await httpClient
+        .get(Uri.parse("${URL_APP_API}/admin/grafik_hotel.php"));
     var data = json.decode(response.body);
     String jsonStr = jsonEncode(data);
     List<dynamic> jsonData = json.decode(jsonStr);
@@ -125,8 +126,8 @@ class DashboardController extends GetxController with AuthCacheService {
   }
 
   void grafik_restoran() async {
-    var response =
-        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_restoran.php"));
+    var response = await httpClient
+        .get(Uri.parse("${URL_APP_API}/admin/grafik_restoran.php"));
     var data = json.decode(response.body);
     String jsonStr = jsonEncode(data);
     List<dynamic> jsonData = json.decode(jsonStr);
@@ -143,8 +144,8 @@ class DashboardController extends GetxController with AuthCacheService {
   }
 
   void grafik_katering() async {
-    var response =
-        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_katering.php"));
+    var response = await httpClient
+        .get(Uri.parse("${URL_APP_API}/admin/grafik_katering.php"));
     if (response.body != "0 results") {
       var data = json.decode(response.body);
       String jsonStr = jsonEncode(data);
@@ -164,8 +165,8 @@ class DashboardController extends GetxController with AuthCacheService {
   }
 
   void grafik_hiburan() async {
-    var response =
-        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_hiburan.php"));
+    var response = await httpClient
+        .get(Uri.parse("${URL_APP_API}/admin/grafik_hiburan.php"));
     var data = json.decode(response.body);
     String jsonStr = jsonEncode(data);
     List<dynamic> jsonData = json.decode(jsonStr);
@@ -182,8 +183,8 @@ class DashboardController extends GetxController with AuthCacheService {
   }
 
   void grafik_parkir() async {
-    var response =
-        await http.get(Uri.parse("${URL_APP_API}/admin/grafik_parkir.php"));
+    var response = await httpClient
+        .get(Uri.parse("${URL_APP_API}/admin/grafik_parkir.php"));
     var data = json.decode(response.body);
     String jsonStr = jsonEncode(data);
     List<dynamic> jsonData = json.decode(jsonStr);
@@ -200,31 +201,31 @@ class DashboardController extends GetxController with AuthCacheService {
   }
 
   void row_wpterdaftar() async {
-    var response =
-        await http.get(Uri.parse("${URL_APP_API}/admin/wp_terdaftar.php"));
+    var response = await httpClient
+        .get(Uri.parse("${URL_APP_API}/admin/wp_terdaftar.php"));
     var data = json.decode(response.body);
     wp_daftar = int.parse(data["total_terdaftar"]);
     update();
   }
 
   void row_wpbterdaftar() async {
-    var response =
-        await http.get(Uri.parse("${URL_APP_API}/admin/wp_totalsimpatda.php"));
+    var response = await httpClient
+        .get(Uri.parse("${URL_APP_API}/admin/wp_totalsimpatda.php"));
     var data1 = json.decode(response.body);
     wp_bdaftar = data1["total_wp"] - wp_daftar;
     update();
   }
 
   void row_admindaftar() async {
-    var response =
-        await http.get(Uri.parse("${URL_APP_API}/badge/row_admindaftar.php"));
+    var response = await httpClient
+        .get(Uri.parse("${URL_APP_API}/badge/row_admindaftar.php"));
     List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
     value_admindaftar.value = data[0]["tot_data"];
     update();
   }
 
   void row_adminpelaporan() async {
-    var response = await http
+    var response = await httpClient
         .get(Uri.parse("${URL_APP_API}/badge/row_adminpelaporan.php"));
 
     List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
@@ -235,7 +236,7 @@ class DashboardController extends GetxController with AuthCacheService {
   void grafik_vaqris() async {
     try {
       // Make GET request to your PHP script
-      var response = await http.get(Uri.parse(
+      var response = await httpClient.get(Uri.parse(
           'https://yongen-bisa.com/bapenda_app/api_ver2/admin/grafik_vaqris.php'));
 
       if (response.statusCode == 200) {
@@ -430,5 +431,32 @@ class DashboardController extends GetxController with AuthCacheService {
         title: "Selamat Datang",
         desc: "Nikmati fitur-fitur terbaru pada Big Update Bapenda Etam");
     update();
+  }
+
+  void stopProcess() async {
+    httpClient.close();
+    print("already close");
+    update();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void dispose() {
+    // Perform cleanup tasks when the controller is disposed
+    super.dispose();
+    print('Controller disposed');
+  }
+
+  @override
+  void onClose() {
+    // Method onClose() dipanggil ketika controller dihapus dari memory
+    // Anda dapat membatalkan request yang sedang berlangsung di sini
+
+    super.onClose();
+    print('Controller close');
   }
 }

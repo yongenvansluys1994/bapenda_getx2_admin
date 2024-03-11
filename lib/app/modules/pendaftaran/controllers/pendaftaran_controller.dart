@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class PendaftaranController extends GetxController {
+  http.Client httpClient = http.Client();
   bool isEmpty = false;
   bool isFailed = false;
   late AuthModel authModel;
@@ -55,7 +56,7 @@ class PendaftaranController extends GetxController {
     const limit = 8;
     final url = Uri.parse(
         '${URL_APP_API}/get_pendaftaran_admin/index.php?page=$page&limit=$limit');
-    final response = await http.get(url);
+    final response = await httpClient.get(url);
     if (response.statusCode == 200) {
       List newItems =
           (json.decode(response.body) as Map<String, dynamic>)["data"];
@@ -86,6 +87,7 @@ class PendaftaranController extends GetxController {
 
   @override
   void onClose() {
+    httpClient.close();
     super.onClose();
   }
 

@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class PendataanController extends GetxController {
+  http.Client httpClient = http.Client();
   final controllerScroll = ScrollController();
   RxList<ModelGetpelaporan> datalist_all = <ModelGetpelaporan>[].obs;
   late AuthModel authModel;
@@ -51,7 +52,7 @@ class PendataanController extends GetxController {
     const limit = 8;
     final url = Uri.parse(
         '${baseUrlApi}/get_pelaporan_admin/index.php?page=$page&limit=$limit&jenispajak=all');
-    final response = await http.get(url);
+    final response = await httpClient.get(url);
     if (response.statusCode == 200) {
       List newItems = json.decode(response.body);
       final list = newItems
@@ -96,6 +97,7 @@ class PendataanController extends GetxController {
 
   @override
   void onClose() {
+    httpClient.close();
     super.onClose();
   }
 }

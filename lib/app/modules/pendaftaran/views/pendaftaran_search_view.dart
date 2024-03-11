@@ -1,6 +1,5 @@
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
-import 'package:bapenda_getx2_admin/widgets/custom_appbar.dart';
-import 'package:bapenda_getx2_admin/widgets/custtombottombar.dart';
+import 'package:bapenda_getx2_admin/widgets/dismiss_keyboard.dart';
 import 'package:bapenda_getx2_admin/widgets/nodata.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
@@ -10,60 +9,110 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/pendaftaran_controller.dart';
+import '../controllers/pendaftaran_search_controller.dart';
 
-class PendaftaranView extends GetView<PendaftaranController> {
-  const PendaftaranView({Key? key}) : super(key: key);
+class PendaftaranSearchView extends GetView<PendaftaranSearchController> {
+  const PendaftaranSearchView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Texts.appBarText("Pendaftaran WP", color: MainColor),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
-            child: Container(
-              height: 40.h,
-              width: 40.w,
-              decoration: BoxDecoration(
-                color: lightColor,
-                border: Border.all(width: 2.w, color: shadowColor2),
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.search,
-                  color: primaryColor,
+    return GestureDetector(
+      onTap: () {
+        dismissKeyboard();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+            title: Container(
+              child: TextFormField(
+                controller: controller.searchbar,
+                decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.fromLTRB(22.r, 22.r, 22.r, 0),
+                  fillColor: Colors.white,
+                  filled: true,
+                  hintText: 'Ketik pencarian disini..',
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                  ),
                 ),
-                tooltip: "Open notifications menu",
-                onPressed: () {
-                  Get.toNamed(Routes.PENDAFTARAN_SEARCH,
-                      arguments: controller.authModel);
-                },
               ),
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 164, 186, 206),
+                  blurRadius: 5,
+                ),
+              ]),
             ),
-          ),
-        ],
-      ),
-      body: GetBuilder<PendaftaranController>(
-        init: PendaftaranController(),
-        builder: (controller) {
-          if (controller.isEmpty) {
-            return NoData(); //menampilkan lotties no data
-          }
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            elevation: 0,
+            backgroundColor: Colors.white,
+            actions: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+                child: Container(
+                  height: 40.h,
+                  width: 40.w,
+                  decoration: BoxDecoration(
+                    color: lightColor,
+                    border: Border.all(width: 2.w, color: shadowColor2),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.search,
+                      color: primaryColor,
+                    ),
+                    tooltip: "Open notifications menu",
+                    onPressed: () {
+                      controller.fetch();
+                    },
+                  ),
+                ),
+              ),
+            ],
+            leading: Padding(
+              padding: EdgeInsets.only(
+                  top: 5.h, bottom: 5.h, left: 6.w, right: 3.7.w),
+              child: Container(
+                height: 40.h,
+                width: 40.w,
+                decoration: BoxDecoration(
+                  color: lightColor,
+                  border: Border.all(width: 2.w, color: shadowColor2),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios_new_outlined,
+                    color: primaryColor,
+                  ),
+                  tooltip: "Back",
+                  onPressed: () {
+                    Get.back();
+                    //Get.offNamed(Routes.DASHBOARD);
+                  },
+                ),
+              ),
+            )),
+        body: GetBuilder<PendaftaranSearchController>(
+          init: PendaftaranSearchController(),
+          builder: (controller) {
+            if (controller.isFailed) {
+              return ShimmerWidget.Items1();
+            }
 
-          if (controller.isLoading) {
-            return ShimmerWidget.Items1();
-          }
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.r),
-            child: ListView.builder(
-                itemCount: controller.datalist.length + 1,
-                controller: controller.controllerScroll,
+            if (controller.isEmpty) {
+              return NoData(); //menampilkan lotties no data
+            }
+
+            if (controller.isLoading) {
+              return ShimmerWidget.Items1();
+            }
+            return ListView.builder(
+                itemCount: controller.datalist.length,
                 itemBuilder: (context, index) {
                   if (index < controller.datalist.length) {
                     var dataitem = controller.datalist[index];
@@ -235,32 +284,14 @@ class PendaftaranView extends GetView<PendaftaranController> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 32),
                       child: Center(
-                        child: controller.hasMore
-                            ? CircularProgressIndicator()
-                            : Text("Tidak ada data lagi"),
+                        child: Text("Tidak ada data lagi"),
                       ),
                     );
                   }
-                }),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Container(
-          width: 60.w,
-          height: 60.h,
-          child: Icon(
-            Icons.add,
-            size: 40,
-          ),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(colors: gradientColor)),
+                });
+          },
         ),
-        onPressed: () {},
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: customButtomBar(),
     );
   }
 }

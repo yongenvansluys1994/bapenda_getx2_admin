@@ -17,7 +17,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 // ignore: must_be_immutable
-class Dashboard extends StatelessWidget {
+class Dashboard extends GetView<DashboardController> {
   final DashboardController controller = Get.find();
   Dashboard({super.key});
   List<_SalesData> dataHotel = [

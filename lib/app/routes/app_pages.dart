@@ -22,10 +22,14 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/map_detail/views/map_detail_view.dart';
 import '../modules/pendaftaran/bindings/pendaftaran_binding.dart';
+import '../modules/pendaftaran/bindings/pendaftaran_search_binding.dart';
+import '../modules/pendaftaran/views/pendaftaran_search_view.dart';
 import '../modules/pendaftaran/views/pendaftaran_view.dart';
 import '../modules/pendaftaran_detail/bindings/pendaftaran_detail_binding.dart';
 import '../modules/pendaftaran_detail/views/pendaftaran_detail_view.dart';
 import '../modules/pendataan/bindings/pendataan_binding.dart';
+import '../modules/pendataan/bindings/pendataan_search_binding.dart';
+import '../modules/pendataan/views/pendataan_search_view.dart';
 import '../modules/pendataan/views/pendataan_view.dart';
 import '../modules/pendataan_detail/bindings/pendataan_detail_binding.dart';
 import '../modules/pendataan_detail/bindings/pendataan_detail_ppj_binding.dart';
@@ -78,10 +82,18 @@ class AppPages {
       binding: RegisterBaruBinding(),
     ),
     GetPage(
-        name: _Paths.PENDAFTARAN,
-        page: () => const PendaftaranView(),
-        binding: PendaftaranBinding(),
-        transition: Transition.noTransition),
+      name: _Paths.PENDAFTARAN,
+      page: () => const PendaftaranView(),
+      binding: PendaftaranBinding(),
+      transition: Transition.noTransition,
+      children: [
+        GetPage(
+          name: _Paths.PENDAFTARAN_SEARCH,
+          page: () => const PendaftaranSearchView(),
+          binding: PendaftaranSearchBinding(),
+        ),
+      ],
+    ),
     GetPage(
       name: _Paths.PENDAFTARAN_DETAIL,
       page: () => const PendaftaranDetailView(),
@@ -96,7 +108,14 @@ class AppPages {
         name: _Paths.PENDATAAN,
         page: () => const PendataanView(),
         binding: PendataanBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.noTransition,
+        children: [
+          GetPage(
+            name: _Paths.PENDATAAN_SEARCH,
+            page: () => const PendataanSearchView(),
+            binding: PendataanSearchBinding(),
+          ),
+        ]),
     GetPage(
       name: _Paths.PENDATAAN_DETAIL,
       page: () => const PendataanDetailView(),

@@ -76,6 +76,7 @@ class customButtomBar extends StatelessWidget {
                           ? null
                           : Get.toNamed(Routes.PENDAFTARAN,
                               arguments: controller.authModel);
+                      controller.stopProcess();
                       Get.delete<PendataanController>();
                       Get.delete<PendataanController_hiburan>();
                       Get.delete<PendataanController_hotel>();

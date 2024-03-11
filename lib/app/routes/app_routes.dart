@@ -28,6 +28,9 @@ abstract class Routes {
   static const LAP_DETAIL_QRIS = _Paths.LAPORAN_QRIS + _Paths.LAP_DETAIL_QRIS;
   static const PENDATAAN_DETAIL_PPJ =
       _Paths.PENDATAAN_DETAIL + _Paths.PENDATAAN_DETAIL_PPJ;
+  static const PENDAFTARAN_SEARCH =
+      _Paths.PENDAFTARAN + _Paths.PENDAFTARAN_SEARCH;
+  static const PENDATAAN_SEARCH = _Paths.PENDATAAN + _Paths.PENDATAAN_SEARCH;
 }
 
 abstract class _Paths {
@@ -56,4 +59,6 @@ abstract class _Paths {
   static const LAP_DETAIL_VA = '/lap-detail-va';
   static const LAP_DETAIL_QRIS = '/lap-detail-qris';
   static const PENDATAAN_DETAIL_PPJ = '/pendataan-detail-ppj';
+  static const PENDAFTARAN_SEARCH = '/pendaftaran-search';
+  static const PENDATAAN_SEARCH = '/pendataan-search';
 }

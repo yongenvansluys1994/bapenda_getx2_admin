@@ -5,8 +5,10 @@ import 'package:bapenda_getx2_admin/app/modules/pendataan/views/tab_pendataan/pe
 import 'package:bapenda_getx2_admin/app/modules/pendataan/views/tab_pendataan/pendataan_parkir.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendataan/views/tab_pendataan/pendataan_ppj.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendataan/views/tab_pendataan/pendataan_restoran.dart';
+import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 
 import 'package:bapenda_getx2_admin/widgets/custtombottombar.dart';
+import 'package:bapenda_getx2_admin/widgets/texts.dart';
 
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -32,16 +34,35 @@ class PendataanView extends GetView<PendataanController> {
               iconTheme: IconThemeData(color: MainColor //change your color here
                   ),
               backgroundColor: Colors.white,
+              centerTitle: true,
               elevation: 1,
               automaticallyImplyLeading: false,
-              title: Row(
-                children: <Widget>[
-                  Image.asset(
-                    "assets/images/appbar-bapenda.png",
-                    height: 68,
+              title: Texts.appBarText("Pendaftaran WP", color: MainColor),
+              actions: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+                  child: Container(
+                    height: 40.h,
+                    width: 40.w,
+                    decoration: BoxDecoration(
+                      color: lightColor,
+                      border: Border.all(width: 2.w, color: shadowColor2),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.search,
+                        color: primaryColor,
+                      ),
+                      tooltip: "Open notifications menu",
+                      onPressed: () {
+                        Get.toNamed(Routes.PENDATAAN_SEARCH,
+                            arguments: controller.authModel);
+                      },
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
               bottom: TabBar(
                 labelColor: textLink,
                 unselectedLabelColor: MainColor,
