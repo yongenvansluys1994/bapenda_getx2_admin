@@ -59,7 +59,6 @@ class DashboardController extends GetxController with AuthCacheService {
     super.onInit();
     grafik_hotel();
     grafik_restoran();
-    //grafik_katering();
     grafik_hiburan();
     grafik_parkir();
     grafik_vaqris();
@@ -348,16 +347,20 @@ class DashboardController extends GetxController with AuthCacheService {
   void checkLatestVersion() async {
     var response =
         await http.get(Uri.parse("${baseUrlApi}/cek_utilitas/index_admin.php"));
-    List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
-    String? DBVersion = data[0]["version"];
-    if (int.parse(DBVersion!) > currentversion) {
-      print("tampilkan dialog");
-      GetDialogDismissible(
-          currentversion: currentversion, DBVersion: DBVersion);
-    } else {
-      if (Get.arguments == "login" || Get.arguments == "autologin") {
-        showBanner();
+    if (response.statusCode == 200) {
+      List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
+      String? DBVersion = data[0]["version"];
+      if (int.parse(DBVersion!) > currentversion) {
+        print("tampilkan dialog");
+        GetDialogDismissible(
+            currentversion: currentversion, DBVersion: DBVersion);
+        return; // Menghentikan eksekusi setelah menampilkan dialog
       }
+    }
+
+    // Lanjutkan dengan logika lain jika diperlukan
+    if (Get.arguments == "login" || Get.arguments == "autologin") {
+      showBanner();
     }
   }
 

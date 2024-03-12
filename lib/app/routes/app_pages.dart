@@ -91,6 +91,7 @@ class AppPages {
           name: _Paths.PENDAFTARAN_SEARCH,
           page: () => const PendaftaranSearchView(),
           binding: PendaftaranSearchBinding(),
+          transition: Transition.noTransition,
         ),
       ],
     ),

@@ -51,12 +51,14 @@ class PendaftaranController extends GetxController {
     });
   }
 
-  Future fetch() async {
+  Future<void> fetch() async {
     if (isLoading) return;
+
     const limit = 8;
     final url = Uri.parse(
         '${URL_APP_API}/get_pendaftaran_admin/index.php?page=$page&limit=$limit');
     final response = await httpClient.get(url);
+
     if (response.statusCode == 200) {
       List newItems =
           (json.decode(response.body) as Map<String, dynamic>)["data"];
@@ -69,8 +71,11 @@ class PendaftaranController extends GetxController {
         hasMore = false;
         update();
       }
+
       datalist.addAll(list);
       update();
+
+      return; // Menghentikan eksekusi proses HTTP setelah berhasil mendapatkan respons
     }
   }
 
