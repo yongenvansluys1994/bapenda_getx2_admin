@@ -44,6 +44,7 @@ class DashboardController extends GetxController with AuthCacheService {
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   RxList list_id_wajib_pajak = [].obs;
+  int grafik = 0; //status grafik tampil atau tidak tampil
 
   //DashboardServices services;
   Api api;
@@ -57,22 +58,17 @@ class DashboardController extends GetxController with AuthCacheService {
 
     authModel = AuthModel.fromJson(user);
     super.onInit();
-    grafik_hotel();
-    grafik_restoran();
-    grafik_hiburan();
-    grafik_parkir();
-    grafik_vaqris();
-    row_wpterdaftar();
-    row_wpbterdaftar();
+    checkLatestVersion();
     requestPermission();
     loadFCM();
     listenFCM();
-    fetchMarkers();
-    checkLatestVersion();
 
     CountUnseenChat();
-    row_admindaftar();
-    row_adminpelaporan();
+    //row_admindaftar();
+    //row_adminpelaporan();
+    if (grafik == 1 || grafik == 2 || grafik == 3) {
+      grafik_fetch();
+    }
     update();
   }
 
@@ -106,112 +102,69 @@ class DashboardController extends GetxController with AuthCacheService {
     });
   }
 
-  void grafik_hotel() async {
-    var response = await httpClient
-        .get(Uri.parse("${URL_APP_API}/admin/grafik_hotel.php"));
-    var data = json.decode(response.body);
-    String jsonStr = jsonEncode(data);
-    List<dynamic> jsonData = json.decode(jsonStr);
-
-    // Iterate over each JSON object and populate the list
-    for (var item in jsonData) {
-      String month = item.keys.first; // Extract month
-      double sales = item.values.first.toDouble(); // Extract sales
-
-      // Create _SalesData object and add it to the list
-      dataHotel.add(SalesData(month, sales));
-    }
-    update();
-  }
-
-  void grafik_restoran() async {
-    var response = await httpClient
-        .get(Uri.parse("${URL_APP_API}/admin/grafik_restoran.php"));
-    var data = json.decode(response.body);
-    String jsonStr = jsonEncode(data);
-    List<dynamic> jsonData = json.decode(jsonStr);
-
-    // Iterate over each JSON object and populate the list
-    for (var item in jsonData) {
-      String month = item.keys.first; // Extract month
-      double sales = item.values.first.toDouble(); // Extract sales
-
-      // Create _SalesData object and add it to the list
-      dataRestoran.add(SalesData(month, sales));
-    }
-    update();
-  }
-
-  void grafik_katering() async {
-    var response = await httpClient
-        .get(Uri.parse("${URL_APP_API}/admin/grafik_katering.php"));
-    if (response.body != "0 results") {
+  Future<void> grafik_fetch() async {
+    try {
+      var response =
+          await httpClient.get(Uri.parse("${URL_APP_API}/admin/grafik.php"));
       var data = json.decode(response.body);
       String jsonStr = jsonEncode(data);
-      List<dynamic> jsonData = json.decode(jsonStr);
 
-      // Iterate over each JSON object and populate the list
+      List<dynamic> jsonData =
+          (json.decode(jsonStr) as Map<String, dynamic>)["parkir"];
+      print(json.encode(jsonData));
       for (var item in jsonData) {
-        String month = item.keys.first; // Extract month
-        double sales = item.values.first.toDouble(); // Extract sales
-
-        // Create _SalesData object and add it to the list
-        dataKatering.add(SalesData(month, sales));
+        String month = item.keys.first;
+        double sales = item.values.first.toDouble();
+        dataParkir.add(SalesData(month, sales));
       }
-    }
 
-    update();
+      List<dynamic> jsonData2 =
+          (json.decode(jsonStr) as Map<String, dynamic>)["hotel"];
+      print(json.encode(jsonData2));
+      for (var item in jsonData2) {
+        String month = item.keys.first;
+        double sales = item.values.first.toDouble();
+        dataHotel.add(SalesData(month, sales));
+      }
+
+      List<dynamic> jsonData3 =
+          (json.decode(jsonStr) as Map<String, dynamic>)["hiburan"];
+      print(json.encode(jsonData3));
+      for (var item in jsonData3) {
+        String month = item.keys.first;
+        double sales = item.values.first.toDouble();
+        dataHiburan.add(SalesData(month, sales));
+      }
+
+      List<dynamic> jsonData4 =
+          (json.decode(jsonStr) as Map<String, dynamic>)["restoran"];
+      print(json.encode(jsonData4));
+      for (var item in jsonData4) {
+        String month = item.keys.first;
+        double sales = item.values.first.toDouble();
+        dataRestoran.add(SalesData(month, sales));
+      }
+
+      // Call other void functions here
+      if (grafik == 2 || grafik == 3) {
+        await Future.delayed(Duration(seconds: 5));
+        await grafik_vaqris();
+      }
+
+      // Update the UI after all operations are completed
+      update();
+    } catch (e) {
+      print("An error occurred: $e");
+      // Handle the error here, if needed
+    }
   }
 
-  void grafik_hiburan() async {
-    var response = await httpClient
-        .get(Uri.parse("${URL_APP_API}/admin/grafik_hiburan.php"));
-    var data = json.decode(response.body);
-    String jsonStr = jsonEncode(data);
-    List<dynamic> jsonData = json.decode(jsonStr);
-
-    // Iterate over each JSON object and populate the list
-    for (var item in jsonData) {
-      String month = item.keys.first; // Extract month
-      double sales = item.values.first.toDouble(); // Extract sales
-
-      // Create _SalesData object and add it to the list
-      dataHiburan.add(SalesData(month, sales));
-    }
-    update();
-  }
-
-  void grafik_parkir() async {
-    var response = await httpClient
-        .get(Uri.parse("${URL_APP_API}/admin/grafik_parkir.php"));
-    var data = json.decode(response.body);
-    String jsonStr = jsonEncode(data);
-    List<dynamic> jsonData = json.decode(jsonStr);
-
-    // Iterate over each JSON object and populate the list
-    for (var item in jsonData) {
-      String month = item.keys.first; // Extract month
-      double sales = item.values.first.toDouble(); // Extract sales
-
-      // Create _SalesData object and add it to the list
-      dataParkir.add(SalesData(month, sales));
-    }
-    update();
-  }
-
-  void row_wpterdaftar() async {
+  Future<void> row_wpterdaftar() async {
     var response = await httpClient
         .get(Uri.parse("${URL_APP_API}/admin/wp_terdaftar.php"));
     var data = json.decode(response.body);
     wp_daftar = int.parse(data["total_terdaftar"]);
-    update();
-  }
-
-  void row_wpbterdaftar() async {
-    var response = await httpClient
-        .get(Uri.parse("${URL_APP_API}/admin/wp_totalsimpatda.php"));
-    var data1 = json.decode(response.body);
-    wp_bdaftar = data1["total_wp"] - wp_daftar;
+    wp_bdaftar = data["total_wp"] - wp_daftar;
     update();
   }
 
@@ -232,7 +185,7 @@ class DashboardController extends GetxController with AuthCacheService {
     update();
   }
 
-  void grafik_vaqris() async {
+  Future<void> grafik_vaqris() async {
     try {
       // Make GET request to your PHP script
       var response = await httpClient.get(Uri.parse(
@@ -244,6 +197,11 @@ class DashboardController extends GetxController with AuthCacheService {
 
         // Update countMap with the fetched data
         countMap.assignAll(data);
+        update();
+        if (grafik == 3) {
+          await Future.delayed(Duration(seconds: 5));
+          await row_wpterdaftar();
+        }
       } else {
         // Handle error
         print('Failed to load data: ${response.statusCode}');
@@ -252,6 +210,7 @@ class DashboardController extends GetxController with AuthCacheService {
       // Handle exceptions
       print('Exception occurred: $e');
     }
+    update();
   }
 
   void logout() {
@@ -350,17 +309,21 @@ class DashboardController extends GetxController with AuthCacheService {
     if (response.statusCode == 200) {
       List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
       String? DBVersion = data[0]["version"];
+      grafik = int.parse(data[0]["grafik"]);
+
       if (int.parse(DBVersion!) > currentversion) {
         print("tampilkan dialog");
         GetDialogDismissible(
             currentversion: currentversion, DBVersion: DBVersion);
         return; // Menghentikan eksekusi setelah menampilkan dialog
       }
+      update();
     }
 
     // Lanjutkan dengan logika lain jika diperlukan
     if (Get.arguments == "login" || Get.arguments == "autologin") {
       showBanner();
+      fetchMarkers();
     }
   }
 
