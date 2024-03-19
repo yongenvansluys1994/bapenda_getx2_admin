@@ -66,9 +66,7 @@ class DashboardController extends GetxController with AuthCacheService {
     CountUnseenChat();
     //row_admindaftar();
     //row_adminpelaporan();
-    if (grafik == 1 || grafik == 2 || grafik == 3) {
-      grafik_fetch();
-    }
+
     update();
   }
 
@@ -310,7 +308,9 @@ class DashboardController extends GetxController with AuthCacheService {
       List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
       String? DBVersion = data[0]["version"];
       grafik = int.parse(data[0]["grafik"]);
-
+      if (grafik == 1 || grafik == 2 || grafik == 3) {
+        grafik_fetch();
+      }
       if (int.parse(DBVersion!) > currentversion) {
         print("tampilkan dialog");
         GetDialogDismissible(
