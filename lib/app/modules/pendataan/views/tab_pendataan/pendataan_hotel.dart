@@ -51,6 +51,7 @@ class Pendataan_hotel extends StatelessWidget {
                             arguments: item,
                             parameters: {
                               "authModel_nik": controller.authModel.nik!,
+                              "authModel_no_hp": controller.authModel.noHp!,
                               "jenis": "Hotel",
                               "jenispajak": "Hotel",
                               "nmassets": "hotel"
@@ -131,7 +132,7 @@ class Pendataan_hotel extends StatelessWidget {
                                       children: [
                                         Container(
                                           width: 300.w,
-                                          height: 20.h,
+                                          height: 21.h,
                                           child: Stack(
                                             children: [
                                               Texts.caption(

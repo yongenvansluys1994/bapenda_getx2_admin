@@ -5,6 +5,7 @@ import 'package:bapenda_getx2_admin/app/modules/pendataan/controllers/pendataan_
 import 'package:bapenda_getx2_admin/app/modules/pendataan/models/model_getpelaporan.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendataan_detail/models/model_rekpajak.dart';
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_single.dart';
+import 'package:bapenda_getx2_admin/core/push_notification/push_notif_topic.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
 import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,6 +19,7 @@ import 'package:url_launcher/url_launcher.dart';
 class PendataanDetailController extends GetxController {
   final pendataanController = Get.find<PendataanController>();
   late ModelGetpelaporan dataArgument;
+  String? authModel_no_hp;
   String? id_wajib_pajak;
   String? id_pelaporan;
   String? id_rekening;
@@ -40,6 +42,7 @@ class PendataanDetailController extends GetxController {
   String? bukti;
   String? tarif_persen;
   int pajak = 0;
+  String? nik_admin;
   List data_dropdown = []; //edited line
   String? valuejenispajak;
   List<modelRekPajak> dataRekPajak = [];
@@ -58,7 +61,9 @@ class PendataanDetailController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    authModel_no_hp = Get.parameters['authModel_no_hp']!;
     dataArgument = Get.arguments;
+    nik_admin = Get.parameters['authModel_nik'];
     fetchdatadetail();
     if (dataArgument.tanggalLunas != "0") {
       CheckPembayaranQRIS();
@@ -178,7 +183,7 @@ class PendataanDetailController extends GetxController {
     request.fields['pendapatan'] = '${pendapatan}';
     request.fields['pajak'] = '${pajak}';
     request.fields['nik_admin'] =
-        Get.parameters['authModel_nik']!; //Get.parameters['authModel_nik']!;
+        nik_admin!; //Get.parameters['authModel_nik']!;
     request.fields['securitydouble'] = '${isChecked}';
 
     var response = await request.send();
@@ -201,6 +206,10 @@ class PendataanDetailController extends GetxController {
             "Pelaporan Pajak telah diverifikasi Admin, anda dapat melakukan pembayaran dengan E-Billing",
             "Buka Aplikasi untuk melihat Detailnya",
             "pelaporan_diverif");
+        sendPushMessage_topic(
+            "operatorsimpatda",
+            "Pelaporan Pajak An ${nama_usaha}",
+            "Terdapat pelaporan Pajak Baru, silakan membuka Simpatda untuk melakukan penetapan");
         getDefaultDialog().onFix(
             title: "Berhasil Menyimpan Data", desc: " ", kategori: "success");
         pendataanController.refreshData();
@@ -225,7 +234,7 @@ class PendataanDetailController extends GetxController {
         "POST", Uri.parse("${baseUrlApi}/admin/dikembalikan_pelaporan.php"));
     request.fields['id_pelaporan'] = dataArgument.idPelaporan;
     request.fields['nama_usaha'] = dataArgument.namaUsaha;
-    request.fields['nik'] = Get.parameters['authModel_nik']!;
+    request.fields['nik'] = nik_admin!;
 
     var response = await request.send();
     //final responseData = await response.stream.toBytes();

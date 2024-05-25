@@ -216,6 +216,8 @@ class PendataanSearchView extends GetView<PendataanSearchController> {
                                   arguments: item,
                                   parameters: {
                                     "authModel_nik": controller.authModel.nik!,
+                                    "authModel_no_hp":
+                                        controller.authModel.noHp!,
                                     "jenis": "All",
                                     "jenispajak": "${jenispajak}",
                                     "nmassets": "${itemjenispajak}"
@@ -225,6 +227,8 @@ class PendataanSearchView extends GetView<PendataanSearchController> {
                                   arguments: item,
                                   parameters: {
                                     "authModel_nik": controller.authModel.nik!,
+                                    "authModel_no_hp":
+                                        controller.authModel.noHp!,
                                     "jenis": "All",
                                     "jenispajak": "${jenispajak}",
                                     "nmassets": "${itemjenispajak}"
@@ -309,7 +313,7 @@ class PendataanSearchView extends GetView<PendataanSearchController> {
                                           children: [
                                             Container(
                                               width: 300.w,
-                                              height: 20.h,
+                                              height: 21.h,
                                               child: Stack(
                                                 children: [
                                                   Texts.caption(

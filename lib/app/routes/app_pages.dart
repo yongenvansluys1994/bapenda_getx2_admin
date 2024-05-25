@@ -10,6 +10,10 @@ import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard.dart';
 import '../modules/detail_screen/bindings/detail_screen_binding.dart';
 import '../modules/detail_screen/views/detail_screen_view.dart';
+import '../modules/laporan_1/bindings/laporan_1_binding.dart';
+import '../modules/laporan_1/views/laporan_1_view.dart';
+import '../modules/laporan_2/bindings/laporan_2_binding.dart';
+import '../modules/laporan_2/views/laporan_2_view.dart';
 import '../modules/laporan_qris/bindings/lap_detail_qris_binding.dart';
 import '../modules/laporan_qris/bindings/laporan_qris_binding.dart';
 import '../modules/laporan_qris/views/lap_detail_qris_view.dart';
@@ -181,6 +185,16 @@ class AppPages {
           binding: LapDetailQrisBinding(),
         ),
       ],
+    ),
+    GetPage(
+      name: _Paths.LAPORAN_1,
+      page: () => const Laporan1View(),
+      binding: Laporan1Binding(),
+    ),
+    GetPage(
+      name: _Paths.LAPORAN_2,
+      page: () => const Laporan2View(),
+      binding: Laporan2Binding(),
     ),
   ];
 }

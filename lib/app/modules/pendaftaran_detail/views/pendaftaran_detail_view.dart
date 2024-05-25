@@ -1219,87 +1219,103 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
                                     (isLastStep)
                                         ? controller.dataArgument.status == "1"
                                             ? SizedBox()
-                                            : SizedBox(
-                                                width: 150.w,
-                                                child: ElevatedButton(
-                                                    onPressed: () {
-                                                      if (controller.rt_usaha.text == "" ||
-                                                          controller.kota_usaha.text ==
-                                                              "" ||
-                                                          controller.nohp_usaha
-                                                                  .text ==
-                                                              "" ||
-                                                          controller.email_usaha.text ==
-                                                              "" ||
-                                                          controller
-                                                                  .pekerjaan_pemilik
-                                                                  .text ==
-                                                              "" ||
-                                                          controller.kec_pemilik
-                                                                  .text ==
-                                                              "" ||
-                                                          controller.kel_pemilik
-                                                                  .text ==
-                                                              "" ||
-                                                          controller
-                                                                  .alamat_pemilik
-                                                                  .text ==
-                                                              "" ||
-                                                          controller
-                                                                  .rt_pemilik.text ==
-                                                              "" ||
-                                                          controller
-                                                                  .kota_pemilik
-                                                                  .text ==
-                                                              "" ||
-                                                          controller
-                                                                  .nohp_pemilik
-                                                                  .text ==
-                                                              "" ||
-                                                          controller
-                                                                  .email_pemilik
-                                                                  .text ==
-                                                              "") {
-                                                        RawSnackbar_top(
-                                                            message:
-                                                                'Semua Form Wajib diisi! \nSilahkan Periksa Kembali',
-                                                            kategori: "error",
-                                                            duration: 2);
-                                                      } else {
-                                                        getDefaultDialog()
-                                                            .onConfirm(
-                                                                title:
-                                                                    "Verifikasi Data Wajib Pajak",
-                                                                desc:
-                                                                    "Pastikan anda telah memastikan data sudah benar",
+                                            : controller.authModel_no_hp !=
+                                                    "admin"
+                                                ? SizedBox()
+                                                : SizedBox(
+                                                    width: 150.w,
+                                                    child: ElevatedButton(
+                                                        onPressed: () {
+                                                          if (controller
+                                                                      .rt_usaha
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .kota_usaha
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .nohp_usaha
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .email_usaha
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .pekerjaan_pemilik
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .kec_pemilik
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .kel_pemilik
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .alamat_pemilik
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .rt_pemilik
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .kota_pemilik
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .nohp_pemilik
+                                                                      .text ==
+                                                                  "" ||
+                                                              controller
+                                                                      .email_pemilik
+                                                                      .text ==
+                                                                  "") {
+                                                            RawSnackbar_top(
+                                                                message:
+                                                                    'Semua Form Wajib diisi! \nSilahkan Periksa Kembali',
                                                                 kategori:
-                                                                    "warning",
-                                                                handler: () {
-                                                                  Get.back();
-                                                                  easyThrottle(
+                                                                    "error",
+                                                                duration: 2);
+                                                          } else {
+                                                            getDefaultDialog()
+                                                                .onConfirm(
+                                                                    title:
+                                                                        "Verifikasi Data Wajib Pajak",
+                                                                    desc:
+                                                                        "Pastikan anda telah memastikan data sudah benar",
+                                                                    kategori:
+                                                                        "warning",
                                                                     handler:
                                                                         () {
-                                                                      controller
-                                                                          .ValidasiDaftar();
-                                                                    },
-                                                                  );
-                                                                });
-                                                        //controller.ValidasiDaftar();
-                                                      }
-                                                    },
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                                  lightBlueColor),
-                                                    ),
-                                                    child: Text(
-                                                      'Setujui Pendaftaran',
-                                                      style: TextStyle(
-                                                        fontSize: 12.sp,
-                                                      ),
-                                                    )),
-                                              )
+                                                                      Get.back();
+                                                                      easyThrottle(
+                                                                        handler:
+                                                                            () {
+                                                                          controller
+                                                                              .ValidasiDaftar();
+                                                                        },
+                                                                      );
+                                                                    });
+                                                            //controller.ValidasiDaftar();
+                                                          }
+                                                        },
+                                                        style: ButtonStyle(
+                                                          backgroundColor:
+                                                              MaterialStateProperty
+                                                                  .all<Color>(
+                                                                      lightBlueColor),
+                                                        ),
+                                                        child: Text(
+                                                          'Setujui Pendaftaran',
+                                                          style: TextStyle(
+                                                            fontSize: 12.sp,
+                                                          ),
+                                                        )),
+                                                  )
                                         : SizedBox(
                                             width: 140,
                                             child: ElevatedButton(

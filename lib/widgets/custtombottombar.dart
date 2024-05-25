@@ -9,7 +9,6 @@ import 'package:bapenda_getx2_admin/app/modules/pendataan/controllers/pendataan_
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:badges/badges.dart' as badges;
@@ -70,24 +69,17 @@ class customButtomBar extends StatelessWidget {
                 MaterialButton(
                   minWidth: 40,
                   onPressed: () {
-                    if (controller.authModel.noHp == "staff_pendaftaran" ||
-                        controller.authModel.noHp == "admin") {
-                      Get.currentRoute == Routes.PENDAFTARAN
-                          ? null
-                          : Get.toNamed(Routes.PENDAFTARAN,
-                              arguments: controller.authModel);
-                      controller.stopProcess();
-                      Get.delete<PendataanController>();
-                      Get.delete<PendataanController_hiburan>();
-                      Get.delete<PendataanController_hotel>();
-                      Get.delete<PendataanController_katering>();
-                      Get.delete<PendataanController_parkir>();
-                      Get.delete<PendataanController_restoran>();
-                    } else {
-                      EasyLoading.showInfo(
-                          "Hanya Staff Bagian Pendaftaran yang dapat melihat menu ini",
-                          duration: Duration(seconds: 1));
-                    }
+                    Get.currentRoute == Routes.PENDAFTARAN
+                        ? null
+                        : Get.toNamed(Routes.PENDAFTARAN,
+                            arguments: controller.authModel);
+                    controller.stopProcess();
+                    Get.delete<PendataanController>();
+                    Get.delete<PendataanController_hiburan>();
+                    Get.delete<PendataanController_hotel>();
+                    Get.delete<PendataanController_katering>();
+                    Get.delete<PendataanController_parkir>();
+                    Get.delete<PendataanController_restoran>();
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -138,18 +130,11 @@ class customButtomBar extends StatelessWidget {
                 MaterialButton(
                   minWidth: 40,
                   onPressed: () {
-                    if (controller.authModel.noHp == "staff_pendataan" ||
-                        controller.authModel.noHp == "admin") {
-                      Get.currentRoute == Routes.PENDATAAN
-                          ? null
-                          : Get.toNamed(Routes.PENDATAAN,
-                              arguments: controller.authModel);
-                      Get.delete<PendaftaranController>();
-                    } else {
-                      EasyLoading.showInfo(
-                          "Hanya Staff Bagian Pendataan yang dapat melihat menu ini",
-                          duration: Duration(seconds: 1));
-                    }
+                    Get.currentRoute == Routes.PENDATAAN
+                        ? null
+                        : Get.toNamed(Routes.PENDATAAN,
+                            arguments: controller.authModel);
+                    Get.delete<PendaftaranController>();
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

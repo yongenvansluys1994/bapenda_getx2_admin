@@ -58,6 +58,7 @@ class Pendataan_ppj extends StatelessWidget {
                               arguments: item,
                               parameters: {
                                 "authModel_nik": controller.authModel.nik!,
+                                "authModel_no_hp": controller.authModel.noHp!,
                                 "jenis": "PPJ",
                                 "jenispajak": "PPJ",
                                 "nmassets": "ppj"
@@ -67,6 +68,7 @@ class Pendataan_ppj extends StatelessWidget {
                               arguments: item,
                               parameters: {
                                 "authModel_nik": controller.authModel.nik!,
+                                "authModel_no_hp": controller.authModel.noHp!,
                                 "jenis": "PPJ",
                                 "jenispajak": "PPJ",
                                 "nmassets": "ppj"
@@ -148,7 +150,7 @@ class Pendataan_ppj extends StatelessWidget {
                                       children: [
                                         Container(
                                           width: 300.w,
-                                          height: 20.h,
+                                          height: 21.h,
                                           child: Stack(
                                             children: [
                                               Texts.caption(

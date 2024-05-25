@@ -375,20 +375,19 @@ class Dashboard extends GetView<DashboardController> {
                                   dataSource: <_MetodePembayaran>[
                                     _MetodePembayaran(
                                         'VA',
-                                        int.parse(
-                                            controller.countMap['va'] == null
-                                                ? "0"
-                                                : controller.countMap['va']),
-                                        Color.fromARGB(255, 125, 225, 212)),
+                                        controller.countMap['VA'] == null
+                                            ? 0
+                                            : controller.countMap['VA'],
+                                        Color.fromARGB(255, 225, 213, 125)),
                                     _MetodePembayaran(
                                         'QRIS',
-                                        int.parse(
-                                            controller.countMap['qris'] == null
-                                                ? "0"
-                                                : controller.countMap['qris']),
-                                        Color.fromARGB(255, 133, 175, 223)),
+                                        controller.countMap['QRIS'] == null
+                                            ? 0
+                                            : controller.countMap['QRIS'],
+                                        Color.fromARGB(255, 125, 225, 208)),
                                   ],
                                   // Enable data label
+                                  name: "Transaksi",
                                   dataLabelSettings:
                                       DataLabelSettings(isVisible: false),
                                   xValueMapper: (_MetodePembayaran data, _) =>

@@ -1,5 +1,5 @@
 // ignore_for_file: constant_identifier_names
-const int currentversion = 26;
+const int currentversion = 27;
 const String APP_MODE = "dev";
 const String SHOW_WELCOME_PAGE = "welcome-page";
 const String STORAGE_LOGIN_DATA = "logindata";

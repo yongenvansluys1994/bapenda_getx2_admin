@@ -110,7 +110,7 @@ class AktivitasView extends GetView<AktivitasController> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           12, 0, 12, 0),
                                       child: Text(
-                                        '${DateFormat('dd-MM-yyyy HH:mm').format(dataitem.date)}',
+                                        '${DateFormat('dd-MM-yyyy HH:mm:ss').format(dataitem.date)}',
                                         style: TextStyle(fontSize: 11.sp),
                                       ),
                                     ),
@@ -123,6 +123,7 @@ class AktivitasView extends GetView<AktivitasController> {
                       ),
                     );
                   }
+                  return null;
                 }),
           );
         },

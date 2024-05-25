@@ -62,6 +62,7 @@ class DashboardController extends GetxController with AuthCacheService {
     requestPermission();
     loadFCM();
     listenFCM();
+    grafik_vaqris();
 
     CountUnseenChat();
     //row_admindaftar();
@@ -146,7 +147,7 @@ class DashboardController extends GetxController with AuthCacheService {
       // Call other void functions here
       if (grafik == 2 || grafik == 3) {
         await Future.delayed(Duration(seconds: 5));
-        await grafik_vaqris();
+        await row_wpterdaftar();
       }
 
       // Update the UI after all operations are completed
@@ -164,6 +165,10 @@ class DashboardController extends GetxController with AuthCacheService {
     wp_daftar = int.parse(data["total_terdaftar"]);
     wp_bdaftar = data["total_wp"] - wp_daftar;
     update();
+    if (grafik == 3) {
+      await Future.delayed(Duration(seconds: 5));
+      await grafik_vaqris();
+    }
   }
 
   void row_admindaftar() async {
@@ -187,7 +192,7 @@ class DashboardController extends GetxController with AuthCacheService {
     try {
       // Make GET request to your PHP script
       var response = await httpClient.get(Uri.parse(
-          'https://yongen-bisa.com/bapenda_app/api_ver2/admin/grafik_vaqris.php'));
+          'http://simpatda.bontangkita.id/simpatda/api_mobile2/vaqris/edee9b7c-b723-4990-a674-dfd6da7efdd1'));
 
       if (response.statusCode == 200) {
         // Parse JSON response
@@ -195,11 +200,8 @@ class DashboardController extends GetxController with AuthCacheService {
 
         // Update countMap with the fetched data
         countMap.assignAll(data);
+        print(jsonEncode(countMap));
         update();
-        if (grafik == 3) {
-          await Future.delayed(Duration(seconds: 5));
-          await row_wpterdaftar();
-        }
       } else {
         // Handle error
         print('Failed to load data: ${response.statusCode}');

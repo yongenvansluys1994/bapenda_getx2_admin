@@ -256,7 +256,9 @@ class LoginController extends GetxController with AuthCacheService {
     });
     noHp == "staff_pendaftaran" || noHp == "staff_pendataan" || noHp == "admin"
         ? FirebaseMessaging.instance.subscribeToTopic("operatorpejabat")
-        : FirebaseMessaging.instance.subscribeToTopic("user");
+        : noHp == "operatorsimpatda"
+            ? FirebaseMessaging.instance.subscribeToTopic("operatorsimpatda")
+            : FirebaseMessaging.instance.subscribeToTopic("user");
   }
 
   // @override

@@ -217,7 +217,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                     Center(
                                       child: Container(
                                         width: 250.w,
-                                        height: 36.h,
+                                        height: 37.h,
                                         decoration: BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 249, 249, 249),
@@ -498,7 +498,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                           topLeft: Radius.circular(10.w),
                                           topRight: Radius.circular(10.w)),
                                     ),
-                                    height: 40.h,
+                                    height: 41.h,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -556,7 +556,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                   Container(
                                     decoration:
                                         BoxDecoration(color: Colors.white),
-                                    height: 40.h,
+                                    height: 41.h,
                                     child: Padding(
                                       padding: EdgeInsets.only(left: 8.r),
                                       child: Row(
@@ -592,7 +592,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                     decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 230, 230, 230),
                                     ),
-                                    height: 40.h,
+                                    height: 41.h,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -654,7 +654,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                           bottomLeft: Radius.circular(4.w),
                                           bottomRight: Radius.circular(4.w)),
                                     ),
-                                    height: 40.h,
+                                    height: 41.h,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -940,7 +940,8 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                             controller.dataArgument.tanggalLunas != "0"
                                 ? detailTransaksi(controller: controller)
                                 : SizedBox(),
-                            controller.dataArgument.status == "0"
+                            controller.dataArgument.status == "0" &&
+                                    controller.authModel_no_hp == "admin"
                                 ? Column(
                                     children: [
                                       controller.dataArgument.jenispajak ==
@@ -1061,7 +1062,9 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                         controller.dataArgument.nomorKohir ==
                                             "0"
                                     ? SizedBox()
-                                    : SizedBox()
+                                    : SizedBox(),
+                            SizedBox(height: 10.h),
+                            // riwayatVerifikasi(controller: controller),
                           ],
                         ),
                       ));
@@ -1641,5 +1644,139 @@ class HistoryPembayaran extends StatelessWidget {
             ),
           );
         });
+  }
+}
+
+class riwayatVerifikasi extends StatelessWidget {
+  final PendataanDetailController controller;
+
+  riwayatVerifikasi({required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: double.infinity,
+        constraints: BoxConstraints(
+          maxWidth: 500,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.w),
+          border: Border.all(
+            color: Color(0xFFF1F4F8),
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 193, 193, 193),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: const Offset(2, 2),
+            ),
+            const BoxShadow(
+                color: Colors.white,
+                offset: Offset(-2, -2),
+                blurRadius: 10,
+                spreadRadius: 1),
+          ],
+        ),
+        child: Align(
+          alignment: AlignmentDirectional(0, 0),
+          child: Container(
+            width: double.infinity,
+            constraints: BoxConstraints(
+              maxWidth: 570,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: Color(0xFFE0E3E7),
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+                          child: Wrap(
+                            spacing: 0,
+                            runSpacing: 4,
+                            alignment: WrapAlignment.start,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            direction: Axis.horizontal,
+                            runAlignment: WrapAlignment.start,
+                            verticalDirection: VerticalDirection.down,
+                            clipBehavior: Clip.none,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 4, 0),
+                                child: Text(
+                                  'Riwayat Verifikasi',
+                                  style: TextStyle(
+                                    fontFamily: 'Outfit',
+                                    color: Color.fromARGB(255, 71, 80, 90),
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 4, 0),
+                                  child: Container(
+                                    width: 250.w,
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text.rich(
+                                      TextSpan(
+                                        text:
+                                            'Pelaporan Pajak Telah di verifikasi oleh : ',
+                                        style: TextStyle(fontSize: 13.sp),
+                                        children: [
+                                          TextSpan(
+                                            text: 'Dia Novita Sari',
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 32,
+                        width: 80.w,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF1F4F8),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+                          child: Text(
+                            '${DateFormat('dd-MM-yyyy HH:mm:ss').format(DateTime.now())}',
+                            style: TextStyle(fontSize: 11.sp),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }

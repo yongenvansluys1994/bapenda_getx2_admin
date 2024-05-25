@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/modules/aktivitas/models/model_aktivitas.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_2/models/laporan_2_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
 
 //const baseUrlApi = 'https://yongen-bisa.com/bapenda_app/api';
@@ -13,6 +16,7 @@ const URL_APP_API = "https://yongen-bisa.com/bapenda_app/api_ver2";
 const URL_SIMPATDA = "http://simpatda.bontangkita.id/simpatda";
 const String ApiFCM =
     "AAAAB69wS5U:APA91bGHHGdo_FzlMJlzO0rc4SUPIMt10OZLqzT60DwVdIU_SSmYkDVu5LRofJR3u9_AS8_ptJ-S5dHIB-7BYWoOTrHUY-pe04UKfLDuAH1ezeY7ohWZalRdShAfJOchSVR9wDuusnnj";
+const tokenApi = "edee9b7c-b723-4990-a674-dfd6da7efdd1";
 
 class Api {
   final Dio dio = Dio(
@@ -78,6 +82,36 @@ class Api {
       List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
 
       return data.map((e) => ModelAds.fromJson(e)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<ModelLaporan1>?> getLaporan1(
+      {DateTime? masa_awal, DateTime? masa_akhir}) async {
+    String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
+    String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
+    var response = await dio2.get(
+        "/laporan_1/edee9b7c-b723-4990-a674-dfd6da7efdd1/$masa_awalformat/$masa_akhirformat");
+    if (response.statusCode == 200) {
+      List data = json.decode(response.data);
+
+      return data.map((e) => ModelLaporan1.fromJson(e)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<ModelLaporan2>?> getLaporan2(
+      {DateTime? masa_awal, DateTime? masa_akhir}) async {
+    String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
+    String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
+    var response = await dio2.get(
+        "/laporan_2/edee9b7c-b723-4990-a674-dfd6da7efdd1/$masa_awalformat/$masa_akhirformat");
+    if (response.statusCode == 200) {
+      List data = json.decode(response.data);
+
+      return data.map((e) => ModelLaporan2.fromJson(e)).toList();
     } else {
       return null;
     }

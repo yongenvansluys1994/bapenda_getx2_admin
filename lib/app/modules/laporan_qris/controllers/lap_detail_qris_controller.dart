@@ -44,6 +44,7 @@ class LapDetailQrisController extends GetxController {
 
       List<String> numbers = datalist.map((model) => model.kdTagihan).toList();
       String encodedData = numbers.map(Uri.encodeQueryComponent).join(',');
+      //print(encodedData);
 
       var simpatdaUrl = Uri.parse(
           "http://simpatda.bontangkita.id/simpatda/api_mobile2/fetchSPTlaporan?json=$encodedData");

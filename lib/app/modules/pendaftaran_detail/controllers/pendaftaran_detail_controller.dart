@@ -14,6 +14,7 @@ import 'package:http/http.dart' as http;
 class PendaftaranDetailController extends GetxController {
   final daftarController = Get.find<PendaftaranController>();
   late ModelGetPendaftaran dataArgument;
+  String? authModel_no_hp;
 
   double? lat;
   double? long;
@@ -83,6 +84,7 @@ class PendaftaranDetailController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    authModel_no_hp = Get.parameters['authModel_no_hp']!;
     dataArgument = Get.arguments;
     nama_usaha.text = dataArgument.namaUsaha;
     alamat_usaha.text = dataArgument.alamatUsaha;

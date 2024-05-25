@@ -37,7 +37,8 @@ class PendataanView extends GetView<PendataanController> {
               centerTitle: true,
               elevation: 1,
               automaticallyImplyLeading: false,
-              title: Texts.appBarText("Pendaftaran WP", color: MainColor),
+              title:
+                  Texts.appBarText("Pendataan/Pelaporan WP", color: MainColor),
               actions: [
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),

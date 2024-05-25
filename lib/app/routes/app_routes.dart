@@ -31,6 +31,8 @@ abstract class Routes {
   static const PENDAFTARAN_SEARCH =
       _Paths.PENDAFTARAN + _Paths.PENDAFTARAN_SEARCH;
   static const PENDATAAN_SEARCH = _Paths.PENDATAAN + _Paths.PENDATAAN_SEARCH;
+  static const LAPORAN_1 = _Paths.LAPORAN_1;
+  static const LAPORAN_2 = _Paths.LAPORAN_2;
 }
 
 abstract class _Paths {
@@ -61,4 +63,6 @@ abstract class _Paths {
   static const PENDATAAN_DETAIL_PPJ = '/pendataan-detail-ppj';
   static const PENDAFTARAN_SEARCH = '/pendaftaran-search';
   static const PENDATAAN_SEARCH = '/pendataan-search';
+  static const LAPORAN_1 = '/laporan-1';
+  static const LAPORAN_2 = '/laporan-2';
 }

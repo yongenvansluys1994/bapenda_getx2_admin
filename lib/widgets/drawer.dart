@@ -129,78 +129,116 @@ buildDrawer() {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                color: primaryColor,
-                child: ListTile(
-                  onTap: () {},
-                  leading: Container(
-                    height: 30.h,
-                    width: 30.w,
-                    decoration: BoxDecoration(
-                      color: appBarColor,
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.user,
-                        color: primaryColor,
-                        size: 15,
-                      ),
-                    ),
-                  ),
-                  trailing: const FaIcon(
-                    FontAwesomeIcons.chevronRight,
-                    color: primaryColor,
-                    size: 15,
-                  ),
-                  title: Texts.caption(
-                    'Profil',
-                    color: primaryColor,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                color: primaryColor,
-                child: ListTile(
-                  onTap: () {},
-                  leading: Container(
-                    height: 30.h,
-                    width: 30.w,
-                    decoration: BoxDecoration(
-                      color: appBarColor,
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.shop,
-                        color: primaryColor,
-                        size: 15,
-                      ),
-                    ),
-                  ),
-                  trailing: const FaIcon(
-                    FontAwesomeIcons.chevronRight,
-                    color: primaryColor,
-                    size: 15,
-                  ),
-                  title: Texts.caption(
-                    'Promosi & Iklan',
-                    color: primaryColor,
-                  ),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 5.sp),
+            //   child: Card(
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10.r),
+            //     ),
+            //     color: primaryColor,
+            //     child: ListTile(
+            //       onTap: () {},
+            //       leading: Container(
+            //         height: 30.h,
+            //         width: 30.w,
+            //         decoration: BoxDecoration(
+            //           color: appBarColor,
+            //           borderRadius: BorderRadius.circular(8.r),
+            //         ),
+            //         child: Center(
+            //           child: FaIcon(
+            //             FontAwesomeIcons.user,
+            //             color: primaryColor,
+            //             size: 15,
+            //           ),
+            //         ),
+            //       ),
+            //       trailing: const FaIcon(
+            //         FontAwesomeIcons.chevronRight,
+            //         color: primaryColor,
+            //         size: 15,
+            //       ),
+            //       title: Texts.caption(
+            //         'Profil',
+            //         color: primaryColor,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 5.sp),
+            //   child: Card(
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10.r),
+            //     ),
+            //     color: primaryColor,
+            //     child: ListTile(
+            //       onTap: () {},
+            //       leading: Container(
+            //         height: 30.h,
+            //         width: 30.w,
+            //         decoration: BoxDecoration(
+            //           color: appBarColor,
+            //           borderRadius: BorderRadius.circular(8.r),
+            //         ),
+            //         child: Center(
+            //           child: FaIcon(
+            //             FontAwesomeIcons.shop,
+            //             color: primaryColor,
+            //             size: 15,
+            //           ),
+            //         ),
+            //       ),
+            //       trailing: const FaIcon(
+            //         FontAwesomeIcons.chevronRight,
+            //         color: primaryColor,
+            //         size: 15,
+            //       ),
+            //       title: Texts.caption(
+            //         'Promosi & Iklan',
+            //         color: primaryColor,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 5.sp),
+            //   child: Card(
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10.r),
+            //     ),
+            //     color: primaryColor,
+            //     child: ListTile(
+            //       onTap: () {
+            //         Get.toNamed(Routes.PPID, arguments: controller.authModel);
+            //       },
+            //       leading: Container(
+            //         height: 30.h,
+            //         width: 30.w,
+            //         decoration: BoxDecoration(
+            //           color: appBarColor,
+            //           borderRadius: BorderRadius.circular(8.r),
+            //         ),
+            //         child: Center(
+            //           child: FaIcon(
+            //             FontAwesomeIcons.newspaper,
+            //             color: primaryColor,
+            //             size: 15,
+            //           ),
+            //         ),
+            //       ),
+            //       trailing: const FaIcon(
+            //         FontAwesomeIcons.chevronRight,
+            //         color: primaryColor,
+            //         size: 15,
+            //       ),
+            //       title: Texts.caption(
+            //         'PPID',
+            //         color: primaryColor,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.sp),
               child: Card(
@@ -210,46 +248,7 @@ buildDrawer() {
                 color: primaryColor,
                 child: ListTile(
                   onTap: () {
-                    Get.offAndToNamed(Routes.PPID,
-                        arguments: controller.authModel);
-                  },
-                  leading: Container(
-                    height: 30.h,
-                    width: 30.w,
-                    decoration: BoxDecoration(
-                      color: appBarColor,
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.newspaper,
-                        color: primaryColor,
-                        size: 15,
-                      ),
-                    ),
-                  ),
-                  trailing: const FaIcon(
-                    FontAwesomeIcons.chevronRight,
-                    color: primaryColor,
-                    size: 15,
-                  ),
-                  title: Texts.caption(
-                    'PPID',
-                    color: primaryColor,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                color: primaryColor,
-                child: ListTile(
-                  onTap: () {
-                    Get.offAndToNamed(Routes.PUSH_NOTIFICATION,
+                    Get.toNamed(Routes.PUSH_NOTIFICATION,
                         arguments: controller.authModel);
                   },
                   leading: Container(
@@ -288,7 +287,7 @@ buildDrawer() {
                 color: primaryColor,
                 child: ListTile(
                   onTap: () {
-                    Get.offAndToNamed(Routes.AKTIVITAS,
+                    Get.toNamed(Routes.AKTIVITAS,
                         arguments: controller.authModel);
                   },
                   leading: Container(
@@ -356,10 +355,11 @@ buildDrawer() {
                         color: primaryColor,
                       ),
                       onTap: () {
-                        Get.offAndToNamed(Routes.LAPORAN_VA,
+                        Get.toNamed(Routes.LAPORAN_VA,
                             arguments: controller.authModel);
                       },
                     ),
+                    Divider(height: 0.0),
                     ListTile(
                       title: Texts.caption(
                         'Laporan Transaksi QRIS',
@@ -372,6 +372,28 @@ buildDrawer() {
                         //     desc:
                         //         "Riwayat Transaksi QRIS hanya bisa melalui Aplikasi DG QRIS Bankaltimtara",
                         //     kategori: "error");
+                      },
+                    ),
+                    Divider(height: 0.0),
+                    ListTile(
+                      title: Texts.caption(
+                        'Laporan Realisasi 1',
+                        color: primaryColor,
+                      ),
+                      onTap: () {
+                        Get.toNamed(Routes.LAPORAN_1,
+                            arguments: controller.authModel);
+                      },
+                    ),
+                    Divider(height: 0.0),
+                    ListTile(
+                      title: Texts.caption(
+                        'Laporan Realisasi 2',
+                        color: primaryColor,
+                      ),
+                      onTap: () {
+                        Get.toNamed(Routes.LAPORAN_2,
+                            arguments: controller.authModel);
                       },
                     ),
                   ],

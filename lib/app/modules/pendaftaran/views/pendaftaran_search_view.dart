@@ -150,6 +150,7 @@ class PendaftaranSearchView extends GetView<PendaftaranSearchController> {
                             arguments: dataitem,
                             parameters: {
                               "authModel_nik": controller.authModel.nik!,
+                              "authModel_no_hp": controller.authModel.noHp!,
                               "jenispajak": "${jenispajak}",
                               "nmassets": "${assetpajak}"
                             });
@@ -167,7 +168,7 @@ class PendaftaranSearchView extends GetView<PendaftaranSearchController> {
                                       10, 0, 0, 0),
                                   child: Container(
                                     width: 330.w,
-                                    height: 80.h,
+                                    height: 81.h,
                                     decoration: BoxDecoration(
                                       color: Color(0xFF0e3f8a),
                                       boxShadow: [

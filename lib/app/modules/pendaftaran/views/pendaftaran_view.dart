@@ -1,5 +1,4 @@
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
-import 'package:bapenda_getx2_admin/widgets/custom_appbar.dart';
 import 'package:bapenda_getx2_admin/widgets/custtombottombar.dart';
 import 'package:bapenda_getx2_admin/widgets/nodata.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
@@ -101,6 +100,7 @@ class PendaftaranView extends GetView<PendaftaranController> {
                             arguments: dataitem,
                             parameters: {
                               "authModel_nik": controller.authModel.nik!,
+                              "authModel_no_hp": controller.authModel.noHp!,
                               "jenispajak": "${jenispajak}",
                               "nmassets": "${assetpajak}"
                             });
@@ -118,7 +118,7 @@ class PendaftaranView extends GetView<PendaftaranController> {
                                       10, 0, 0, 0),
                                   child: Container(
                                     width: 330.w,
-                                    height: 80.h,
+                                    height: 81.h,
                                     decoration: BoxDecoration(
                                       color: Color(0xFF0e3f8a),
                                       boxShadow: [
