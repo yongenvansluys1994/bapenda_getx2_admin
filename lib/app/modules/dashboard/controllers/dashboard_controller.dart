@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/auth/service/auth_cache_service.dart';
+import 'package:bapenda_getx2_admin/app/modules/dashboard/controllers/jatuhtempo_controller.dart';
 import 'package:bapenda_getx2_admin/app/modules/dashboard/models/auth_model_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/dashboard/models/grafik1.dart';
 import 'dart:ui' as ui;
@@ -52,6 +53,9 @@ class DashboardController extends GetxController with AuthCacheService {
 
   @override
   void onInit() async {
+    final controller = Get.find<
+        JatuhTempoController>(); // Ganti YourController dengan nama controller GetX Anda
+    controller.fetchJatuhTempo(); // Menjalankan fetchJatuhTempo()
     // TODO: implement onInit
     final box = GetStorage();
     var user = box.read(STORAGE_LOGIN_USER_DATA);
@@ -67,7 +71,6 @@ class DashboardController extends GetxController with AuthCacheService {
     CountUnseenChat();
     //row_admindaftar();
     //row_adminpelaporan();
-
     update();
   }
 

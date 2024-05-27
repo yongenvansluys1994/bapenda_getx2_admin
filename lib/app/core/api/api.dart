@@ -5,6 +5,7 @@ import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model
 import 'package:bapenda_getx2_admin/app/modules/laporan_2/models/laporan_2_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
+import 'package:bapenda_getx2_admin/app/modules/push_notification/models/model_notifjtempo.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
@@ -112,6 +113,17 @@ class Api {
       List data = json.decode(response.data);
 
       return data.map((e) => ModelLaporan2.fromJson(e)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<ModelNotifJtempo>?> getJatuhTempo() async {
+    var response = await dio.get("/notifikasi/getjatuhtempo.php");
+    if (response.statusCode == 200) {
+      List data = json.decode(response.data);
+
+      return data.map((e) => ModelNotifJtempo.fromJson(e)).toList();
     } else {
       return null;
     }
