@@ -38,7 +38,7 @@ void main() async {
             () async {
               Get.put(
                 Api(),
-                permanent: true,//asdasdas
+                permanent: true,//tesbaru
               );
             },
           ),
