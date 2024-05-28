@@ -15,9 +15,31 @@ const baseUrlApi = 'https://yongen-bisa.com/bapenda_app/api_ver2';
 const URL_APP = "https://yongen-bisa.com/bapenda_app";
 const URL_APP_API = "https://yongen-bisa.com/bapenda_app/api_ver2";
 const URL_SIMPATDA = "http://simpatda.bontangkita.id/simpatda";
+const URL_APPSIMPATDA = "http://simpatda.bontangkita.id/api_ver2";
 const String ApiFCM =
     "AAAAB69wS5U:APA91bGHHGdo_FzlMJlzO0rc4SUPIMt10OZLqzT60DwVdIU_SSmYkDVu5LRofJR3u9_AS8_ptJ-S5dHIB-7BYWoOTrHUY-pe04UKfLDuAH1ezeY7ohWZalRdShAfJOchSVR9wDuusnnj";
 const tokenApi = "edee9b7c-b723-4990-a674-dfd6da7efdd1";
+
+final Dio dio3 = Dio(
+    BaseOptions(
+      baseUrl: URL_APPSIMPATDA,
+      connectTimeout: Duration(seconds: 10),
+      receiveTimeout: Duration(seconds: 10),
+      headers: {'Content-Type': 'application/json'},
+    ),
+  );
+
+  Future<Response> insertJatuhTempo(data) {
+    return dio3.post(
+      "/notifikasi/insert_jatuhtempo.php",
+      data: data,
+    );
+  }
+
+  Future<Response> cekJatuhTempo() {
+    return dio3
+        .get("/notifikasi/cek_jatuhtempo.php");
+  }
 
 class Api {
   final Dio dio = Dio(
@@ -160,6 +182,8 @@ class Api {
       throw Exception('Failed to load data');
     }
   }
+
+  
 
   // Future<List<ModelObjekku>?> getObjekku() async {
   //   var response = await http.get(Uri.parse("${URL_APP_API}/api/objekku/123"));

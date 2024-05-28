@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/auth/service/auth_cache_service.dart';
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_multiple.dart';
+import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +16,7 @@ class JatuhTempoController extends GetxController with AuthCacheService {
   JatuhTempoController(this.api);
 
   List<Map<String, String>> niksJatuhTempo = [];
-  List<String> allTokens = [];
-  List<String> allTokens2 = [];
+
   List<Map<String, String>> allTokens3 = [];
 
   @override
@@ -82,54 +82,19 @@ class JatuhTempoController extends GetxController with AuthCacheService {
         }
       }
     }
+    List<Map<String, String>> allTokensfake = [{"token":"ec_F7TSsTyWmaMBQDTpcj3:APA91bEacxHRwrpf1HWOn9fTC6nHct7skQ7ElIv_8kkCt9x-quVoSo9IoucuHdvqNDfo3SbygditGg5tJ0FdV6w8lrH4dIJcK6NkzQhyVupdbPVRjUjgqjjNtrMhABwTIk2hnoAtBKWp","name":"GUEST HOUSE  OMAH IJO","jatuh_tempo":"2024-05-05"},{"token":"ec_F7TSsTyWmaMBQDTpcj3:APA91bEacxHRwrpf1HWOn9fTC6nHct7skQ7ElIv_8kkCt9x-quVoSo9IoucuHdvqNDfo3SbygditGg5tJ0FdV6w8lrH4dIJcK6NkzQhyVupdbPVRjUjgqjjNtrMhABwTIk2hnoAtBKWp","name":"McDONALDS BONTANG","jatuh_tempo":"2024-05-05"}];
     print(jsonEncode(allTokens3));
-  }
+    // sendPushMessagesJatuhTempo(
+    //     allTokensfake,
+    //     "jatuh_tempo");
 
-  void getTokenList(List<String> niks) async {
-    allTokens2.clear();
-    // Buat daftar future untuk setiap panggilan dokumen Firestore
-    List<Future<DocumentSnapshot>> futures = niks.map((nik) {
-      return FirebaseFirestore.instance.collection("UserTokens").doc(nik).get();
-    }).toList();
-
-    // Tunggu semua future selesai
-    List<DocumentSnapshot> snaps = await Future.wait(futures);
-
-    // Simpan semua token dalam daftar
-    snaps.forEach((snap) {
-      if (snap.exists) {
-        // Mengambil token dari data DocumentSnapshot
-        String? token = snap['token'];
-        // Menambahkan token ke dalam daftar allTokens
-        if (token != null) {
-          allTokens.add(token);
-        }
-      }
+    await insertJatuhTempo({
+      'token': '${allTokensfake}',
     });
-
-    sendPushMessagesMultiple(
-        allTokens2,
-        "Pelaporan Pajak telah diverifikasi Admin, anda dapat melakukan pembayaran dengan E-Billing",
-        "Buka Aplikasi untuk melihat Detailnya",
-        "jatuh_tempo");
+    
   }
 
-  void getTokenList2() async {
-    allTokens2.clear();
-    // Buat daftar future untuk setiap panggilan dokumen Firestore
-
-    // Mengonversi daftar token menjadi JSON array dengan format yang diinginkan
-
-    allTokens2 = [
-      'elMr6E-KS0qML0WCVRvba2:APA91bFtuaEsEOi_oF0MfMeGKn7rKcx1XGkuJyvZdXafjzYZB5-Yb9oH2s5KPGoo2dCYxy8Phaq4-bBGEptfH47FPWN-mA6_invBEl_eOpdOwdA4hLLLEyV7JitBxZMe5bSSpWjEIFJN'
-    ];
-    print(jsonEncode(allTokens2));
-    sendPushMessagesMultiple(
-        allTokens2,
-        "Jatuh Tempo Pajak Anda 7 hari lagi, Bayar lebih cepat untuk menghindari denda",
-        "Buka Aplikasi untuk melihat Detailnya",
-        "jatuh_tempo");
-  }
+  
 
   @override
   void onReady() {

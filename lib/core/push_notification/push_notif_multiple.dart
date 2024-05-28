@@ -35,10 +35,12 @@ import 'package:http/http.dart' as http;
 //     print("error sending push notifications: $e");
 //   }
 // }
-void sendPushMessagesMultiple(
-    List<String> tokens, String title, String body, String desc) async {
+void sendPushMessagesJatuhTempo(
+    List<Map<String, String>> allTokens3,  String desc) async {
   try {
-    for (String token in tokens) {
+    for (Map<String, String> tokenInfo in allTokens3) {
+      String messageTitle = "Jatuh Tempo Pajak ${tokenInfo['name']} Anda 7 hari lagi";
+    String messageBody = "Bayar lebih cepat untuk menghindari denda, Buka Aplikasi untuk melihat Detailnya";
       await http.post(
         Uri.parse('https://fcm.googleapis.com/fcm/send'),
         headers: <String, String>{
@@ -48,21 +50,24 @@ void sendPushMessagesMultiple(
         body: jsonEncode(
           <String, dynamic>{
             'notification': <String, dynamic>{
-              'body': body,
-              'title': title,
+              'body': messageBody,
+              'title': messageTitle,
             },
             'priority': 'high',
             'data': <String, dynamic>{
               'click_action': 'FLUTTER_NOTIFICATION_CLICK',
               'id': '1',
               'status': 'done',
-              'desc': desc
+              'desc': desc,
+              'jatuh_tempo': tokenInfo['jatuh_tempo'],
+              'name': tokenInfo['name'],
             },
-            "to": token,
+            "to": tokenInfo['token'],
           },
         ),
       );
     }
+    
   } catch (e) {
     print("error sending push notifications: $e");
   }

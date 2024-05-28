@@ -53,9 +53,9 @@ class DashboardController extends GetxController with AuthCacheService {
 
   @override
   void onInit() async {
-    final controller = Get.find<
-        JatuhTempoController>(); // Ganti YourController dengan nama controller GetX Anda
-    controller.fetchJatuhTempo(); // Menjalankan fetchJatuhTempo()
+    
+     CheckJatuhTempo();
+    
     // TODO: implement onInit
     final box = GetStorage();
     var user = box.read(STORAGE_LOGIN_USER_DATA);
@@ -73,6 +73,23 @@ class DashboardController extends GetxController with AuthCacheService {
     //row_adminpelaporan();
     update();
   }
+
+  void CheckJatuhTempo() async {
+  try {
+    final response = await cekJatuhTempo();
+    final responseData = response.data;
+      if (responseData['status'] == 'tidak_ada') {
+        final controller = Get.find<
+        JatuhTempoController>(); 
+        controller.fetchJatuhTempo();
+      } else{
+        print("Data sudah ada");
+      }
+    
+  } catch (e) {
+     
+  }
+}
 
   void CountUnseenChat() {
     FirebaseFirestore.instance
