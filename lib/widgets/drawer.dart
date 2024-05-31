@@ -287,6 +287,45 @@ buildDrawer() {
                 color: primaryColor,
                 child: ListTile(
                   onTap: () {
+                    Get.toNamed(Routes.NOTIF_JATUHTEMPO,
+                        arguments: controller.authModel);
+                  },
+                  leading: Container(
+                    height: 30.h,
+                    width: 30.w,
+                    decoration: BoxDecoration(
+                      color: appBarColor,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Center(
+                      child: FaIcon(
+                        FontAwesomeIcons.facebookMessenger,
+                        color: primaryColor,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                  trailing: const FaIcon(
+                    FontAwesomeIcons.chevronRight,
+                    color: primaryColor,
+                    size: 15,
+                  ),
+                  title: Texts.caption(
+                    'Notif Jatuh Tempo',
+                    color: primaryColor,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.sp),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                color: primaryColor,
+                child: ListTile(
+                  onTap: () {
                     Get.toNamed(Routes.AKTIVITAS,
                         arguments: controller.authModel);
                   },

@@ -26,7 +26,7 @@ class PushNotificationController extends GetxController {
   // }
 
   tambah() async {
-    sendPushMessage_topic("operatorpejabat", judul.text, isi.text);
+    sendPushMessage_topic("user", judul.text, isi.text);
     getDefaultDialog().onFix(
         title: "Berhasil Kirim Broadcast",
         desc:

@@ -33,6 +33,7 @@ abstract class Routes {
   static const PENDATAAN_SEARCH = _Paths.PENDATAAN + _Paths.PENDATAAN_SEARCH;
   static const LAPORAN_1 = _Paths.LAPORAN_1;
   static const LAPORAN_2 = _Paths.LAPORAN_2;
+  static const NOTIF_JATUHTEMPO = _Paths.NOTIF_JATUHTEMPO;
 }
 
 abstract class _Paths {
@@ -65,4 +66,5 @@ abstract class _Paths {
   static const PENDATAAN_SEARCH = '/pendataan-search';
   static const LAPORAN_1 = '/laporan-1';
   static const LAPORAN_2 = '/laporan-2';
+  static const NOTIF_JATUHTEMPO = '/notif-jatuhtempo';
 }

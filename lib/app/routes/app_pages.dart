@@ -25,6 +25,8 @@ import '../modules/laporan_va/views/laporan_va_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/map_detail/views/map_detail_view.dart';
+import '../modules/notif_jatuhtempo/bindings/notif_jatuhtempo_binding.dart';
+import '../modules/notif_jatuhtempo/views/notif_jatuhtempo_view.dart';
 import '../modules/pendaftaran/bindings/pendaftaran_binding.dart';
 import '../modules/pendaftaran/bindings/pendaftaran_search_binding.dart';
 import '../modules/pendaftaran/views/pendaftaran_search_view.dart';
@@ -195,6 +197,11 @@ class AppPages {
       name: _Paths.LAPORAN_2,
       page: () => const Laporan2View(),
       binding: Laporan2Binding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIF_JATUHTEMPO,
+      page: () => const NotifJatuhtempoView(),
+      binding: NotifJatuhtempoBinding(),
     ),
   ];
 }

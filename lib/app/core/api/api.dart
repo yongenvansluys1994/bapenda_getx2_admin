@@ -4,6 +4,7 @@ import 'package:bapenda_getx2_admin/app/modules/aktivitas/models/model_aktivitas
 import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_2/models/laporan_2_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
+import 'package:bapenda_getx2_admin/app/modules/notif_jatuhtempo/models/model_riwayatjtempo.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:bapenda_getx2_admin/app/modules/push_notification/models/model_notifjtempo.dart';
 import 'package:dio/dio.dart';
@@ -21,25 +22,24 @@ const String ApiFCM =
 const tokenApi = "edee9b7c-b723-4990-a674-dfd6da7efdd1";
 
 final Dio dio3 = Dio(
-    BaseOptions(
-      baseUrl: URL_APPSIMPATDA,
-      connectTimeout: Duration(seconds: 10),
-      receiveTimeout: Duration(seconds: 10),
-      headers: {'Content-Type': 'application/json'},
-    ),
+  BaseOptions(
+    baseUrl: URL_APPSIMPATDA,
+    connectTimeout: Duration(seconds: 10),
+    receiveTimeout: Duration(seconds: 10),
+    headers: {'Content-Type': 'application/json'},
+  ),
+);
+
+Future<Response> insertJatuhTempo(List<Map<String, String>> data) {
+  return dio3.post(
+    "/notifikasi/insert_jatuhtempo.php",
+    data: {'token': jsonEncode(data)},
   );
+}
 
-  Future<Response> insertJatuhTempo(data) {
-    return dio3.post(
-      "/notifikasi/insert_jatuhtempo.php",
-      data: data,
-    );
-  }
-
-  Future<Response> cekJatuhTempo() {
-    return dio3
-        .get("/notifikasi/cek_jatuhtempo.php");
-  }
+Future<Response> cekJatuhTempo() {
+  return dio3.get("/notifikasi/cek_jatuhtempo.php");
+}
 
 class Api {
   final Dio dio = Dio(
@@ -141,7 +141,7 @@ class Api {
   }
 
   Future<List<ModelNotifJtempo>?> getJatuhTempo() async {
-    var response = await dio.get("/notifikasi/getjatuhtempo.php");
+    var response = await dio3.get("/notifikasi/getjatuhtempo.php");
     if (response.statusCode == 200) {
       List data = json.decode(response.data);
 
@@ -182,8 +182,6 @@ class Api {
       throw Exception('Failed to load data');
     }
   }
-
-  
 
   // Future<List<ModelObjekku>?> getObjekku() async {
   //   var response = await http.get(Uri.parse("${URL_APP_API}/api/objekku/123"));

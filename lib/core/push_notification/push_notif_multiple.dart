@@ -36,11 +36,13 @@ import 'package:http/http.dart' as http;
 //   }
 // }
 void sendPushMessagesJatuhTempo(
-    List<Map<String, String>> allTokens3,  String desc) async {
+    List<Map<String, String>> allTokens3, String desc) async {
   try {
     for (Map<String, String> tokenInfo in allTokens3) {
-      String messageTitle = "Jatuh Tempo Pajak ${tokenInfo['name']} Anda 7 hari lagi";
-    String messageBody = "Bayar lebih cepat untuk menghindari denda, Buka Aplikasi untuk melihat Detailnya";
+      String messageTitle =
+          "Jatuh Tempo Pajak ${tokenInfo['name']} Anda 7 hari lagi";
+      String messageBody =
+          "Bayar lebih cepat untuk menghindari denda, Buka Aplikasi untuk melihat Detailnya";
       await http.post(
         Uri.parse('https://fcm.googleapis.com/fcm/send'),
         headers: <String, String>{
@@ -67,7 +69,6 @@ void sendPushMessagesJatuhTempo(
         ),
       );
     }
-    
   } catch (e) {
     print("error sending push notifications: $e");
   }

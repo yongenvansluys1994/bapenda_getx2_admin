@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/auth/service/auth_cache_service.dart';
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_multiple.dart';
-import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -77,24 +76,32 @@ class JatuhTempoController extends GetxController with AuthCacheService {
           allTokens3.add({
             "token": token,
             "name": nikMap['name']!,
-            "jatuh_tempo": nikMap['jatuh_tempo']!
+            "jatuh_tempo": nikMap['jatuh_tempo']!,
+            "date_kirim": "${DateTime.now()}"
           });
         }
       }
     }
-    List<Map<String, String>> allTokensfake = [{"token":"ec_F7TSsTyWmaMBQDTpcj3:APA91bEacxHRwrpf1HWOn9fTC6nHct7skQ7ElIv_8kkCt9x-quVoSo9IoucuHdvqNDfo3SbygditGg5tJ0FdV6w8lrH4dIJcK6NkzQhyVupdbPVRjUjgqjjNtrMhABwTIk2hnoAtBKWp","name":"GUEST HOUSE  OMAH IJO","jatuh_tempo":"2024-05-05"},{"token":"ec_F7TSsTyWmaMBQDTpcj3:APA91bEacxHRwrpf1HWOn9fTC6nHct7skQ7ElIv_8kkCt9x-quVoSo9IoucuHdvqNDfo3SbygditGg5tJ0FdV6w8lrH4dIJcK6NkzQhyVupdbPVRjUjgqjjNtrMhABwTIk2hnoAtBKWp","name":"McDONALDS BONTANG","jatuh_tempo":"2024-05-05"}];
-    print(jsonEncode(allTokens3));
-    // sendPushMessagesJatuhTempo(
-    //     allTokensfake,
-    //     "jatuh_tempo");
+    // List<Map<String, String>> allTokensfake = [
+    //   {
+    //     "token":
+    //         "emjCqIPwRB6sl6ahdgn3At:APA91bFqB8DXtfJmGG9Egn-0zQAk-6j7RbHz-WGxJX4hBDW5RrIQkr4dpRYspvQuxwqgO3SVK0ZB74twNf0x0j0pJ-9X2c9t0PrwlmByMfQdsmnLFl8Qvrs__-QDb9w2gAyR04nIXgtC",
+    //     "name": "GUEST HOUSE  OMAH IJO",
+    //     "jatuh_tempo": "2024-05-05"
+    //   },
+    //   {
+    //     "token":
+    //         "emjCqIPwRB6sl6ahdgn3At:APA91bFqB8DXtfJmGG9Egn-0zQAk-6j7RbHz-WGxJX4hBDW5RrIQkr4dpRYspvQuxwqgO3SVK0ZB74twNf0x0j0pJ-9X2c9t0PrwlmByMfQdsmnLFl8Qvrs__-QDb9w2gAyR04nIXgtC",
+    //     "name": "McDONALDS BONTANG",
+    //     "jatuh_tempo": "2024-05-05"
+    //   }
+    // ];
 
-    await insertJatuhTempo({
-      'token': '${allTokensfake}',
-    });
-    
+    sendPushMessagesJatuhTempo(allTokens3, "jatuh_tempo");
+    print(jsonEncode("Notif jatuh tempo sudah terkirim"));
+
+    await insertJatuhTempo(allTokens3);
   }
-
-  
 
   @override
   void onReady() {
