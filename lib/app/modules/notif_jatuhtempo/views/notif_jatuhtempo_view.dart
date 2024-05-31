@@ -87,9 +87,40 @@ class NotifJatuhtempoView extends GetView<NotifJatuhtempoController> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 0, 4, 0),
-                                            child: Text(
-                                              'Telah terkirim Notifikasi Peringatan Jatuh Tempo kepada WP\nJatuh Tempo : ${DateFormat('dd-MM-yyyy').format(dataitem.jatuhTempo)}',
-                                              style: TextStyle(fontSize: 11.sp),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Telah terkirim Notifikasi Peringatan Jatuh Tempo kepada WP',
+                                                  style: TextStyle(
+                                                      fontSize: 11.sp),
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Color.fromARGB(
+                                                        255,
+                                                        241,
+                                                        99,
+                                                        89), // Warna latar belakang
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5), // Membuat border bulat
+                                                  ),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 8,
+                                                      vertical:
+                                                          4), // Padding untuk jarak antara teks dan border
+                                                  child: Text(
+                                                    'Jatuh Tempo : ${DateFormat('dd-MM-yyyy').format(dataitem.jatuhTempo)}',
+                                                    style: TextStyle(
+                                                      fontSize: 11.sp,
+                                                      color: Colors
+                                                          .white, // Warna teks
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ],
