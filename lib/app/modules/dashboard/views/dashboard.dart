@@ -2,6 +2,7 @@ import 'package:bapenda_getx2_admin/app/modules/dashboard/models/grafik1.dart';
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 
 import 'package:bapenda_getx2_admin/widgets/custtombottombar.dart';
+import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -247,7 +248,7 @@ class Dashboard extends GetView<DashboardController> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.r),
                     child: Container(
-                      height: 150.h,
+                      height: ResponsiveHelper.isTablet() ? 180.h : 150.h,
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -267,30 +268,38 @@ class Dashboard extends GetView<DashboardController> {
                               fontSize: 12.sp,
                             )),
                         legend: Legend(
-                          isVisible: true,
-                          position: LegendPosition.left,
-                        ),
+                            isVisible: true,
+                            position: LegendPosition.left,
+                            iconHeight:
+                                ResponsiveHelper.isTablet() ? 50 : null),
                         series: <DoughnutSeries<_DaftarWP, String>>[
                           DoughnutSeries<_DaftarWP, String>(
                             strokeColor: Colors.white,
                             strokeWidth: 2,
                             dataSource: <_DaftarWP>[
-                              _DaftarWP('WP Terdaftar', controller.wp_daftar,
+                              _DaftarWP(' WP Terdaftar', controller.wp_daftar,
                                   Color.fromARGB(255, 125, 225, 212)),
                               _DaftarWP(
-                                  'WP Belum Terdaftar',
+                                  ' WP Belum Terdaftar',
                                   controller.wp_bdaftar,
                                   Color.fromARGB(255, 133, 175, 223)),
                             ],
                             // Enable data label
                             dataLabelSettings: DataLabelSettings(
                               isVisible: true,
+                              textStyle: TextStyle(
+                                fontSize: ResponsiveHelper.isTablet()
+                                    ? 8.sp
+                                    : null, // Set your desired font size here
+                                color: Colors
+                                    .black, // You can also set the text color if needed
+                              ),
                             ),
                             dataLabelMapper: (_DaftarWP data, _) =>
                                 '${data.jumlah} WP',
                             xValueMapper: (_DaftarWP data, _) => data.data,
                             yValueMapper: (_DaftarWP data, _) => data.jumlah,
-                            radius: "47",
+                            radius: ResponsiveHelper.isTablet() ? "70" : "47",
                           ),
                         ],
                         margin: EdgeInsets.zero,
@@ -344,7 +353,8 @@ class Dashboard extends GetView<DashboardController> {
                                       data.year,
                                   yValueMapper: (_MetodePembayaran data, _) =>
                                       data.sales,
-                                  radius: "47",
+                                  radius:
+                                      ResponsiveHelper.isTablet() ? "70" : "47",
                                   pointColorMapper:
                                       (_MetodePembayaran data, _) => data.color,
                                 ),
@@ -392,7 +402,8 @@ class Dashboard extends GetView<DashboardController> {
                                       DataLabelSettings(isVisible: false),
                                   xValueMapper: (_MetodePembayaran data, _) =>
                                       data.year,
-                                  radius: "47",
+                                  radius:
+                                      ResponsiveHelper.isTablet() ? "70" : "47",
                                   yValueMapper: (_MetodePembayaran data, _) =>
                                       data.sales,
                                   pointColorMapper:

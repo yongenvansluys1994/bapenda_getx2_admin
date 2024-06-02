@@ -7,6 +7,7 @@ import 'package:bapenda_getx2_admin/app/modules/pendataan/controllers/pendataan_
 import 'package:bapenda_getx2_admin/app/modules/pendataan/controllers/pendataan_controller_parkir.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendataan/controllers/pendataan_controller_restoran.dart';
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
+import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,7 @@ class customButtomBar extends StatelessWidget {
       shape: CircularNotchedRectangle(),
       notchMargin: 10,
       child: Container(
-        height: 60,
+        height: ResponsiveHelper.isTablet() ? Get.height * 0.065 : 60,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -33,7 +34,7 @@ class customButtomBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 MaterialButton(
-                  minWidth: 40,
+                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : 40,
                   onPressed: () {
                     Get.currentRoute == Routes.DASHBOARD
                         ? null
@@ -49,15 +50,24 @@ class customButtomBar extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Icon(
-                        Icons.dashboard,
-                        color: Get.currentRoute == Routes.DASHBOARD
-                            ? Colors.blue
-                            : Colors.grey,
-                      ),
+                      ResponsiveHelper.isTablet()
+                          ? Icon(
+                              Icons.dashboard,
+                              size: Get.width * 0.05,
+                              color: Get.currentRoute == Routes.DASHBOARD
+                                  ? Colors.blue
+                                  : Colors.grey,
+                            )
+                          : Icon(
+                              Icons.dashboard,
+                              color: Get.currentRoute == Routes.DASHBOARD
+                                  ? Colors.blue
+                                  : Colors.grey,
+                            ),
                       Text(
                         'Beranda',
                         style: TextStyle(
+                          fontSize: ResponsiveHelper.isTablet() ? 11.sp : null,
                           color: Get.currentRoute == Routes.DASHBOARD
                               ? Colors.blue
                               : Colors.grey,
@@ -67,7 +77,7 @@ class customButtomBar extends StatelessWidget {
                   ),
                 ),
                 MaterialButton(
-                  minWidth: 40,
+                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : 40,
                   onPressed: () {
                     Get.currentRoute == Routes.PENDAFTARAN
                         ? null
@@ -106,18 +116,25 @@ class customButtomBar extends StatelessWidget {
                           padding: EdgeInsets.all(6),
                           elevation: 0,
                         ),
-                        child: Icon(Icons.quick_contacts_mail_rounded,
-                            color: Get.currentRoute == Routes.PENDAFTARAN
-                                ? Colors.blue
-                                : Colors.grey),
+                        child: ResponsiveHelper.isTablet()
+                            ? Icon(Icons.quick_contacts_mail_rounded,
+                                size: Get.width * 0.05,
+                                color: Get.currentRoute == Routes.PENDAFTARAN
+                                    ? Colors.blue
+                                    : Colors.grey)
+                            : Icon(Icons.quick_contacts_mail_rounded,
+                                color: Get.currentRoute == Routes.PENDAFTARAN
+                                    ? Colors.blue
+                                    : Colors.grey),
                       ),
                       Text(
                         "Pendaftaran",
                         style: TextStyle(
+                            fontSize:
+                                ResponsiveHelper.isTablet() ? 11.sp : null,
                             color: Get.currentRoute == Routes.PENDAFTARAN
                                 ? Colors.blue
-                                : Colors.grey,
-                            fontSize: 11.sp),
+                                : Colors.grey),
                       ),
                     ],
                   ),
@@ -128,7 +145,7 @@ class customButtomBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 MaterialButton(
-                  minWidth: 40,
+                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : 40,
                   onPressed: () {
                     Get.currentRoute == Routes.PENDATAAN
                         ? null
@@ -161,16 +178,25 @@ class customButtomBar extends StatelessWidget {
                           padding: EdgeInsets.all(6),
                           elevation: 0,
                         ),
-                        child: Icon(
-                          Icons.my_library_books_outlined,
-                          color: Get.currentRoute == Routes.PENDATAAN
-                              ? Colors.blue
-                              : Colors.grey,
-                        ),
+                        child: ResponsiveHelper.isTablet()
+                            ? Icon(
+                                Icons.my_library_books_outlined,
+                                size: Get.width * 0.05,
+                                color: Get.currentRoute == Routes.PENDATAAN
+                                    ? Colors.blue
+                                    : Colors.grey,
+                              )
+                            : Icon(
+                                Icons.my_library_books_outlined,
+                                color: Get.currentRoute == Routes.PENDATAAN
+                                    ? Colors.blue
+                                    : Colors.grey,
+                              ),
                       ),
                       Text(
                         'Pendataan',
                         style: TextStyle(
+                          fontSize: ResponsiveHelper.isTablet() ? 11.sp : null,
                           color: Get.currentRoute == Routes.PENDATAAN
                               ? Colors.blue
                               : Colors.grey,
@@ -180,7 +206,7 @@ class customButtomBar extends StatelessWidget {
                   ),
                 ),
                 MaterialButton(
-                  minWidth: 40,
+                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : 40,
                   onPressed: () {
                     Get.currentRoute == Routes.CHAT_ROOMS
                         ? null
@@ -209,16 +235,25 @@ class customButtomBar extends StatelessWidget {
                           padding: EdgeInsets.all(6),
                           elevation: 0,
                         ),
-                        child: Icon(
-                          Icons.feed_outlined,
-                          color: Get.currentRoute == Routes.CHAT_ROOMS
-                              ? Colors.blue
-                              : Colors.grey,
-                        ),
+                        child: ResponsiveHelper.isTablet()
+                            ? Icon(
+                                Icons.feed_outlined,
+                                size: Get.width * 0.05,
+                                color: Get.currentRoute == Routes.CHAT_ROOMS
+                                    ? Colors.blue
+                                    : Colors.grey,
+                              )
+                            : Icon(
+                                Icons.feed_outlined,
+                                color: Get.currentRoute == Routes.CHAT_ROOMS
+                                    ? Colors.blue
+                                    : Colors.grey,
+                              ),
                       ),
                       Text(
                         'Chat',
                         style: TextStyle(
+                          fontSize: ResponsiveHelper.isTablet() ? 11.sp : null,
                           color: Get.currentRoute == Routes.CHAT_ROOMS
                               ? Colors.blue
                               : Colors.grey,

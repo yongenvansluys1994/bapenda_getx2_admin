@@ -4,6 +4,7 @@ import 'package:bapenda_getx2_admin/widgets/nodata.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
+import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -115,10 +116,17 @@ class PendaftaranView extends GetView<PendaftaranController> {
                                 top: 9,
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      10, 0, 0, 0),
+                                      ResponsiveHelper.isTablet() ? 40.r : 10.r,
+                                      0,
+                                      0,
+                                      0),
                                   child: Container(
-                                    width: 330.w,
-                                    height: 81.h,
+                                    width: ResponsiveHelper.isTablet()
+                                        ? 300.w
+                                        : 330.w,
+                                    height: ResponsiveHelper.isTablet()
+                                        ? 96.h
+                                        : 81.h,
                                     decoration: BoxDecoration(
                                       color: Color(0xFF0e3f8a),
                                       boxShadow: [
@@ -194,7 +202,7 @@ class PendaftaranView extends GetView<PendaftaranController> {
                                 ),
                               ),
                               Positioned(
-                                right: 1,
+                                right: ResponsiveHelper.isTablet() ? 15.r : 1.r,
                                 child: SizedBox(
                                   height: 21.h,
                                   child: ElevatedButton(

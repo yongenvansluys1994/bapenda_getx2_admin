@@ -1,3 +1,4 @@
+import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,8 +75,8 @@ buildDrawer() {
                       child: ClipRRect(
                           child: Image.asset(
                         "assets/icon/${controller.authModel.foto}",
-                        height: 40.h,
-                        width: 40.w,
+                        height: ResponsiveHelper.isTablet() ? 25.h : 40.h,
+                        width: ResponsiveHelper.isTablet() ? 25.h : 40.w,
                         fit: BoxFit.cover,
                       )),
                     ),
@@ -87,44 +88,81 @@ buildDrawer() {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Texts.body2(
-                            '${controller.authModel.nama}',
-                            textAlign: TextAlign.left,
-                          ),
-                          Texts.caption(
-                            '${controller.authModel.nik}',
-                            textAlign: TextAlign.left,
-                            color: shadowColor,
-                          )
+                          ResponsiveHelper.isTablet()
+                              ? Texts.captionXs(
+                                  '${controller.authModel.nama}',
+                                  textAlign: TextAlign.left,
+                                )
+                              : Texts.body2(
+                                  '${controller.authModel.nama}',
+                                  textAlign: TextAlign.left,
+                                ),
+                          ResponsiveHelper.isTablet()
+                              ? Texts.captionXs(
+                                  '${controller.authModel.nik}',
+                                  textAlign: TextAlign.left,
+                                )
+                              : Texts.caption(
+                                  '${controller.authModel.nik}',
+                                  textAlign: TextAlign.left,
+                                  color: shadowColor,
+                                )
                         ],
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Container(
-                        width: 30.sp,
-                        height: 30.sp,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.9),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0x2B202529),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          shape: BoxShape.circle,
-                        ),
-                        alignment: AlignmentDirectional(0.00, 0.00),
-                        child: Icon(
-                          Icons.close,
-                          color: MainColor,
-                          size: 22.sp,
-                        ),
-                      ),
-                    ),
+                    ResponsiveHelper.isTablet()
+                        ? InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              width: 20.sp,
+                              height: 20.sp,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.9),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 4,
+                                    color: Color(0x2B202529),
+                                    offset: Offset(0, 2),
+                                  )
+                                ],
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: AlignmentDirectional(0.00, 0.00),
+                              child: Icon(
+                                Icons.close,
+                                color: MainColor,
+                                size: 15.sp,
+                              ),
+                            ),
+                          )
+                        : InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              width: 30.sp,
+                              height: 30.sp,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.9),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 4,
+                                    color: Color(0x2B202529),
+                                    offset: Offset(0, 2),
+                                  )
+                                ],
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: AlignmentDirectional(0.00, 0.00),
+                              child: Icon(
+                                Icons.close,
+                                color: MainColor,
+                                size: 22.sp,
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -252,11 +290,12 @@ buildDrawer() {
                         arguments: controller.authModel);
                   },
                   leading: Container(
-                    height: 30.h,
-                    width: 30.w,
+                    height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
+                    width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
                     decoration: BoxDecoration(
                       color: appBarColor,
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(
+                          ResponsiveHelper.isTablet() ? 2.r : 8.r),
                     ),
                     child: Center(
                       child: FaIcon(
@@ -271,10 +310,15 @@ buildDrawer() {
                     color: primaryColor,
                     size: 15,
                   ),
-                  title: Texts.caption(
-                    'Pesan Broadcast',
-                    color: primaryColor,
-                  ),
+                  title: ResponsiveHelper.isTablet()
+                      ? Texts.captionXs(
+                          'Pesan Broadcast',
+                          color: primaryColor,
+                        )
+                      : Texts.caption(
+                          'Pesan Broadcast',
+                          color: primaryColor,
+                        ),
                 ),
               ),
             ),
@@ -291,11 +335,12 @@ buildDrawer() {
                         arguments: controller.authModel);
                   },
                   leading: Container(
-                    height: 30.h,
-                    width: 30.w,
+                    height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
+                    width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
                     decoration: BoxDecoration(
                       color: appBarColor,
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(
+                          ResponsiveHelper.isTablet() ? 2.r : 8.r),
                     ),
                     child: Center(
                       child: FaIcon(
@@ -310,10 +355,13 @@ buildDrawer() {
                     color: primaryColor,
                     size: 15,
                   ),
-                  title: Texts.caption(
-                    'Notif Jatuh Tempo',
-                    color: primaryColor,
-                  ),
+                  title: ResponsiveHelper.isTablet()
+                      ? Texts.captionXs('Notif Jatuh Tempo',
+                          color: primaryColor, maxLines: 2)
+                      : Texts.caption(
+                          'Notif Jatuh Tempo',
+                          color: primaryColor,
+                        ),
                 ),
               ),
             ),
@@ -330,11 +378,12 @@ buildDrawer() {
                         arguments: controller.authModel);
                   },
                   leading: Container(
-                    height: 30.h,
-                    width: 30.w,
+                    height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
+                    width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
                     decoration: BoxDecoration(
                       color: appBarColor,
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(
+                          ResponsiveHelper.isTablet() ? 2.r : 8.r),
                     ),
                     child: Center(
                       child: FaIcon(
@@ -349,10 +398,15 @@ buildDrawer() {
                     color: primaryColor,
                     size: 15,
                   ),
-                  title: Texts.caption(
-                    'Aktivitas',
-                    color: primaryColor,
-                  ),
+                  title: ResponsiveHelper.isTablet()
+                      ? Texts.captionXs(
+                          'Aktivitas',
+                          color: primaryColor,
+                        )
+                      : Texts.caption(
+                          'Aktivitas',
+                          color: primaryColor,
+                        ),
                 ),
               ),
             ),
@@ -364,11 +418,12 @@ buildDrawer() {
                 ),
                 child: ExpansionTile(
                   leading: Container(
-                    height: 30.h,
-                    width: 30.w,
+                    height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
+                    width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
                     decoration: BoxDecoration(
                       color: appBarColor,
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(
+                          ResponsiveHelper.isTablet() ? 2.r : 8.r),
                     ),
                     child: Center(
                       child: FaIcon(
@@ -383,16 +438,26 @@ buildDrawer() {
                     color: primaryColor,
                     size: 15,
                   ),
-                  title: Texts.caption(
-                    'Laporan',
-                    color: primaryColor,
-                  ),
+                  title: ResponsiveHelper.isTablet()
+                      ? Texts.captionXs(
+                          'Laporan',
+                          color: primaryColor,
+                        )
+                      : Texts.caption(
+                          'Laporan',
+                          color: primaryColor,
+                        ),
                   children: <Widget>[
                     ListTile(
-                      title: Texts.caption(
-                        'Laporan Transaksi VA',
-                        color: primaryColor,
-                      ),
+                      title: ResponsiveHelper.isTablet()
+                          ? Texts.captionXs(
+                              'Laporan Transaksi VA',
+                              color: primaryColor,
+                            )
+                          : Texts.caption(
+                              'Laporan Transaksi VA',
+                              color: primaryColor,
+                            ),
                       onTap: () {
                         Get.toNamed(Routes.LAPORAN_VA,
                             arguments: controller.authModel);
@@ -400,10 +465,15 @@ buildDrawer() {
                     ),
                     Divider(height: 0.0),
                     ListTile(
-                      title: Texts.caption(
-                        'Laporan Transaksi QRIS',
-                        color: primaryColor,
-                      ),
+                      title: ResponsiveHelper.isTablet()
+                          ? Texts.captionXs(
+                              'Laporan Transaksi QRIS',
+                              color: primaryColor,
+                            )
+                          : Texts.caption(
+                              'Laporan Transaksi QRIS',
+                              color: primaryColor,
+                            ),
                       onTap: () {
                         Get.toNamed(Routes.LAP_DETAIL_QRIS);
                         // getDefaultDialog().onFix(
@@ -415,10 +485,15 @@ buildDrawer() {
                     ),
                     Divider(height: 0.0),
                     ListTile(
-                      title: Texts.caption(
-                        'Laporan Realisasi 1',
-                        color: primaryColor,
-                      ),
+                      title: ResponsiveHelper.isTablet()
+                          ? Texts.captionXs(
+                              'Laporan Realisasi 1',
+                              color: primaryColor,
+                            )
+                          : Texts.caption(
+                              'Laporan Realisasi 1',
+                              color: primaryColor,
+                            ),
                       onTap: () {
                         Get.toNamed(Routes.LAPORAN_1,
                             arguments: controller.authModel);
@@ -426,10 +501,15 @@ buildDrawer() {
                     ),
                     Divider(height: 0.0),
                     ListTile(
-                      title: Texts.caption(
-                        'Laporan Realisasi 2',
-                        color: primaryColor,
-                      ),
+                      title: ResponsiveHelper.isTablet()
+                          ? Texts.captionXs(
+                              'Laporan Realisasi 2',
+                              color: primaryColor,
+                            )
+                          : Texts.caption(
+                              'Laporan Realisasi 2',
+                              color: primaryColor,
+                            ),
                       onTap: () {
                         Get.toNamed(Routes.LAPORAN_2,
                             arguments: controller.authModel);
@@ -454,11 +534,12 @@ buildDrawer() {
                     controller.logout();
                   },
                   leading: Container(
-                    height: 30.h,
-                    width: 30.w,
+                    height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
+                    width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
                     decoration: BoxDecoration(
                       color: appBarColor,
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(
+                          ResponsiveHelper.isTablet() ? 2.r : 8.r),
                     ),
                     child: Center(
                       child: Transform.scale(
@@ -476,10 +557,15 @@ buildDrawer() {
                     color: primaryColor,
                     size: 15,
                   ),
-                  title: Texts.caption(
-                    "Log Out",
-                    color: primaryColor,
-                  ),
+                  title: ResponsiveHelper.isTablet()
+                      ? Texts.captionXs(
+                          "Log Out",
+                          color: primaryColor,
+                        )
+                      : Texts.caption(
+                          "Log Out",
+                          color: primaryColor,
+                        ),
                 ),
               ),
             ),
