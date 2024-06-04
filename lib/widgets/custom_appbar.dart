@@ -1,5 +1,6 @@
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
+import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,15 +31,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       // ),
       actions: [
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+          padding: EdgeInsets.symmetric(
+              vertical: Get.height * 0.006, horizontal: Get.width * 0.015),
           child: Container(
             height: 40.h,
             width: 40.w,
-            decoration: BoxDecoration(
-              color: lightColor,
-              border: Border.all(width: 2.w, color: shadowColor2),
-              borderRadius: BorderRadius.circular(8.r),
-            ),
+            decoration: ResponsiveHelper.isTablet()
+                ? null
+                : BoxDecoration(
+                    color: lightColor,
+                    border: Border.all(width: 2.w, color: shadowColor2),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
             child: IconButton(
               icon: const Icon(
                 Icons.notifications,
@@ -52,16 +56,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ],
       leading: leading == true
           ? Padding(
-              padding: EdgeInsets.only(
-                  top: 5.h, bottom: 5.h, left: 6.w, right: 3.7.w),
+              padding: EdgeInsets.symmetric(
+                  vertical: Get.height * 0.006, horizontal: Get.width * 0.009),
               child: Container(
                 height: 40.h,
                 width: 40.w,
-                decoration: BoxDecoration(
-                  color: lightColor,
-                  border: Border.all(width: 2.w, color: shadowColor2),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
+                decoration: ResponsiveHelper.isTablet()
+                    ? null
+                    : BoxDecoration(
+                        color: lightColor,
+                        border: Border.all(width: 2.w, color: shadowColor2),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
                 child: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios_new_outlined,
@@ -82,5 +88,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(1170, GetPlatform.isDesktop ? 70 : 50);
+  Size get preferredSize => Size(
+      1170.w,
+      GetPlatform.isDesktop
+          ? 70.h
+          : ResponsiveHelper.isTablet()
+              ? 55.h
+              : 50.h);
 }

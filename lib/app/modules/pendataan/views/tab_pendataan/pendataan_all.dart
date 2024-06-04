@@ -105,7 +105,7 @@ class Pendataan_all extends StatelessWidget {
                 return Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                   child: Container(
-                    height: 90.h,
+                    height: Get.height * 0.130,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
@@ -221,7 +221,7 @@ class Pendataan_all extends StatelessWidget {
                                       children: [
                                         Container(
                                           width: 300.w,
-                                          height: 21.h,
+                                          height: Get.height * 0.04,
                                           child: Stack(
                                             children: [
                                               Texts.caption(

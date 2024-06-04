@@ -47,7 +47,9 @@ class JatuhTempoController extends GetxController with AuthCacheService {
       //print(jsonEncode(niksJatuhTempo));
       update();
     }
-    getTokenList3(niksJatuhTempo);
+    if (niksJatuhTempo.isNotEmpty) {
+      getTokenList3(niksJatuhTempo);
+    }
 
     //EasyLoading.dismiss();
     update();
@@ -99,6 +101,7 @@ class JatuhTempoController extends GetxController with AuthCacheService {
 
     sendPushMessagesJatuhTempo(allTokens3, "jatuh_tempo");
     print(jsonEncode("Notif jatuh tempo sudah terkirim"));
+    print(jsonEncode(allTokens3));
 
     await insertJatuhTempo(allTokens3);
   }

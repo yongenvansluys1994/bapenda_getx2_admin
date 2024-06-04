@@ -4,6 +4,7 @@ import 'package:bapenda_getx2_admin/widgets/nodata.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
+import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -39,12 +40,14 @@ class PendataanSearchView extends GetView<PendataanSearchController> {
                   ),
                 ),
               ),
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 164, 186, 206),
-                  blurRadius: 5,
-                ),
-              ]),
+              decoration: ResponsiveHelper.isTablet()
+                  ? null
+                  : BoxDecoration(boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(255, 164, 186, 206),
+                        blurRadius: 5,
+                      ),
+                    ]),
             ),
             automaticallyImplyLeading: false,
             centerTitle: true,
@@ -56,15 +59,18 @@ class PendataanSearchView extends GetView<PendataanSearchController> {
                 child: Container(
                   height: 40.h,
                   width: 40.w,
-                  decoration: BoxDecoration(
-                    color: lightColor,
-                    border: Border.all(width: 2.w, color: shadowColor2),
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
+                  decoration: ResponsiveHelper.isTablet()
+                      ? null
+                      : BoxDecoration(
+                          color: lightColor,
+                          border: Border.all(width: 2.w, color: shadowColor2),
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
                   child: IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.search,
                       color: primaryColor,
+                      size: ResponsiveHelper.isTablet() ? 30 : null,
                     ),
                     tooltip: "Open notifications menu",
                     onPressed: () {
@@ -80,11 +86,13 @@ class PendataanSearchView extends GetView<PendataanSearchController> {
               child: Container(
                 height: 40.h,
                 width: 40.w,
-                decoration: BoxDecoration(
-                  color: lightColor,
-                  border: Border.all(width: 2.w, color: shadowColor2),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
+                decoration: ResponsiveHelper.isTablet()
+                    ? null
+                    : BoxDecoration(
+                        color: lightColor,
+                        border: Border.all(width: 2.w, color: shadowColor2),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
                 child: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios_new_outlined,

@@ -60,7 +60,7 @@ class Dashboard extends GetView<DashboardController> {
             centerTitle: true,
             title: Image.asset(
               "assets/images/appbar-bapenda.png",
-              height: 68,
+              height: Get.width * 0.2,
             ),
             leading: Builder(
               builder: (BuildContext context) {
@@ -69,11 +69,13 @@ class Dashboard extends GetView<DashboardController> {
                   child: Container(
                     height: 40.h,
                     width: 40.w,
-                    decoration: BoxDecoration(
-                      color: lightColor,
-                      border: Border.all(width: 2.w, color: shadowColor2),
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
+                    decoration: ResponsiveHelper.isTablet()
+                        ? null
+                        : BoxDecoration(
+                            color: lightColor,
+                            border: Border.all(width: 2.w, color: shadowColor2),
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
                     child: IconButton(
                       icon: const FaIcon(
                         FontAwesomeIcons.bars,
@@ -96,11 +98,13 @@ class Dashboard extends GetView<DashboardController> {
                 child: Container(
                   height: 40.h,
                   width: 40.w,
-                  decoration: BoxDecoration(
-                    color: lightColor,
-                    border: Border.all(width: 2.w, color: shadowColor2),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
+                  decoration: ResponsiveHelper.isTablet()
+                      ? null
+                      : BoxDecoration(
+                          color: lightColor,
+                          border: Border.all(width: 2.w, color: shadowColor2),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
                   child: IconButton(
                     icon: const Icon(
                       Icons.notifications,

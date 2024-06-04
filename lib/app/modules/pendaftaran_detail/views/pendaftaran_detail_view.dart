@@ -12,6 +12,7 @@ import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
+import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -46,7 +47,11 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
               ? StepState.editing
               : StepState.complete,
           isActive: controller.activeStepIndex >= 0,
-          title: const Text('USAHA'),
+          title: Text(
+            'USAHA',
+            style:
+                TextStyle(fontSize: ResponsiveHelper.isTablet() ? 10.sp : null),
+          ),
           content: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -507,7 +512,9 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
               ? StepState.editing
               : StepState.complete,
           isActive: controller.activeStepIndex >= 1,
-          title: const Text('PEMILIK'),
+          title: Text('PEMILIK',
+              style: TextStyle(
+                  fontSize: ResponsiveHelper.isTablet() ? 10.sp : null)),
           content: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -1052,7 +1059,9 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
         Step(
           state: StepState.complete,
           isActive: controller.activeStepIndex >= 2,
-          title: const Text('LOKASI'),
+          title: Text('LOKASI',
+              style: TextStyle(
+                  fontSize: ResponsiveHelper.isTablet() ? 10.sp : null)),
           content: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -1134,7 +1143,9 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
           elevation: 0,
           title: Text(
             "Data Wajib Pajak",
-            style: TextStyle(color: MainColor),
+            style: TextStyle(
+                color: MainColor,
+                fontSize: ResponsiveHelper.isTablet() ? 11.sp : null),
           ),
           actions: [
             Padding(
@@ -1224,6 +1235,7 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
                                                 ? SizedBox()
                                                 : SizedBox(
                                                     width: 150.w,
+                                                    height: Get.height * 0.04,
                                                     child: ElevatedButton(
                                                         onPressed: () {
                                                           if (controller
@@ -1312,12 +1324,17 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
                                                         child: Text(
                                                           'Setujui Pendaftaran',
                                                           style: TextStyle(
-                                                            fontSize: 12.sp,
+                                                            fontSize:
+                                                                ResponsiveHelper
+                                                                        .isTablet()
+                                                                    ? 11.sp
+                                                                    : null,
                                                           ),
                                                         )),
                                                   )
                                         : SizedBox(
-                                            width: 140,
+                                            width: Get.width * 0.3,
+                                            height: Get.height * 0.04,
                                             child: ElevatedButton(
                                                 onPressed:
                                                     controls.onStepContinue,
@@ -1329,8 +1346,11 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
                                                 ),
                                                 child: Text(
                                                   'Selanjutnya',
-                                                  style:
-                                                      TextStyle(fontSize: 14),
+                                                  style: TextStyle(
+                                                      fontSize: ResponsiveHelper
+                                                              .isTablet()
+                                                          ? 11.5.sp
+                                                          : null),
                                                 )),
                                           ),
                                     const SizedBox(
@@ -1338,7 +1358,8 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
                                     ),
                                     if (controller.activeStepIndex > 0)
                                       SizedBox(
-                                        width: 100,
+                                        width: Get.width * 0.3,
+                                        height: Get.height * 0.04,
                                         child: ElevatedButton(
                                             onPressed: controls.onStepCancel,
                                             style: ButtonStyle(
@@ -1349,7 +1370,11 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
                                             ),
                                             child: Text(
                                               'Kembali',
-                                              style: TextStyle(fontSize: 14),
+                                              style: TextStyle(
+                                                  fontSize: ResponsiveHelper
+                                                          .isTablet()
+                                                      ? 11.sp
+                                                      : null),
                                             )),
                                       ),
                                   ],
@@ -1432,7 +1457,7 @@ class swipeLeft extends StatelessWidget {
                     top: 30.h,
                     right: 0,
                     child: Container(
-                      height: 35.h,
+                      height: Get.width * 0.085,
                       width: 120.w,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(colors: gradientColor),
@@ -1504,11 +1529,36 @@ class HistoryPembayaran extends StatelessWidget {
         builder: (controller) {
           final List<Tab> Tabs = <Tab>[
             //5 tahun terakhir
-            Tab(text: "${controller.tahunhistory[0]}"),
-            Tab(text: "${controller.tahunhistory[1]}"),
-            Tab(text: "${controller.tahunhistory[2]}"),
-            Tab(text: "${controller.tahunhistory[3]}"),
-            Tab(text: "${controller.tahunhistory[4]}"),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[0]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[1]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[2]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[3]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[4]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
           ];
           return SingleChildScrollView(
             child: DefaultTabController(
@@ -1526,7 +1576,8 @@ class HistoryPembayaran extends StatelessWidget {
                       tabs: Tabs,
                     ),
                     SizedBox(
-                      height: 1280.h, // Adjust the height as needed
+                      height: (Get.height * 0.135) *
+                          12, // Adjust the height as needed
                       child: Listener(
                         onPointerDown: (PointerDownEvent event) {
                           initialX = event.position.dx;

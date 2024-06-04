@@ -29,15 +29,18 @@ class PendaftaranView extends GetView<PendaftaranController> {
             child: Container(
               height: 40.h,
               width: 40.w,
-              decoration: BoxDecoration(
-                color: lightColor,
-                border: Border.all(width: 2.w, color: shadowColor2),
-                borderRadius: BorderRadius.circular(8.r),
-              ),
+              decoration: ResponsiveHelper.isTablet()
+                  ? null
+                  : BoxDecoration(
+                      color: lightColor,
+                      border: Border.all(width: 2.w, color: shadowColor2),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
               child: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.search,
                   color: primaryColor,
+                  size: ResponsiveHelper.isTablet() ? 30 : null,
                 ),
                 tooltip: "Open notifications menu",
                 onPressed: () {

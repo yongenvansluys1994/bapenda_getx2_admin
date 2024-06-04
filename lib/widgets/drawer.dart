@@ -9,6 +9,7 @@ import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:badges/badges.dart' as badges;
 
 // ignore: must_be_immutable
 class MainDrawer extends StatelessWidget {
@@ -329,39 +330,55 @@ buildDrawer() {
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 color: primaryColor,
-                child: ListTile(
-                  onTap: () {
-                    Get.toNamed(Routes.NOTIF_JATUHTEMPO,
-                        arguments: controller.authModel);
-                  },
-                  leading: Container(
-                    height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
-                    width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
-                    decoration: BoxDecoration(
-                      color: appBarColor,
-                      borderRadius: BorderRadius.circular(
-                          ResponsiveHelper.isTablet() ? 2.r : 8.r),
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.facebookMessenger,
+                child: Stack(
+                  children: [
+                    ListTile(
+                      onTap: () {
+                        Get.toNamed(Routes.NOTIF_JATUHTEMPO,
+                            arguments: controller.authModel);
+                      },
+                      leading: Container(
+                        height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
+                        width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
+                        decoration: BoxDecoration(
+                          color: appBarColor,
+                          borderRadius: BorderRadius.circular(
+                              ResponsiveHelper.isTablet() ? 2.r : 8.r),
+                        ),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.facebookMessenger,
+                            color: primaryColor,
+                            size: 15,
+                          ),
+                        ),
+                      ),
+                      trailing: const FaIcon(
+                        FontAwesomeIcons.chevronRight,
                         color: primaryColor,
                         size: 15,
                       ),
+                      title: ResponsiveHelper.isTablet()
+                          ? Texts.captionXs('Notif Jatuh Tempo',
+                              color: primaryColor, maxLines: 2)
+                          : Texts.caption(
+                              'Notif Jatuh Tempo',
+                              color: primaryColor,
+                            ),
                     ),
-                  ),
-                  trailing: const FaIcon(
-                    FontAwesomeIcons.chevronRight,
-                    color: primaryColor,
-                    size: 15,
-                  ),
-                  title: ResponsiveHelper.isTablet()
-                      ? Texts.captionXs('Notif Jatuh Tempo',
-                          color: primaryColor, maxLines: 2)
-                      : Texts.caption(
-                          'Notif Jatuh Tempo',
-                          color: primaryColor,
-                        ),
+                    Positioned(
+                      right: 8.r,
+                      child: badges.Badge(
+                        badgeStyle: badges.BadgeStyle(
+                            shape: badges.BadgeShape.square,
+                            badgeColor: Colors.red,
+                            borderRadius: BorderRadius.circular(5)),
+                        badgeContent: Text(' Baru ',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 10.5.sp)),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -416,104 +433,154 @@ buildDrawer() {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
                 ),
-                child: ExpansionTile(
-                  leading: Container(
-                    height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
-                    width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
-                    decoration: BoxDecoration(
-                      color: appBarColor,
-                      borderRadius: BorderRadius.circular(
-                          ResponsiveHelper.isTablet() ? 2.r : 8.r),
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.file,
+                child: Stack(
+                  children: [
+                    ExpansionTile(
+                      leading: Container(
+                        height: ResponsiveHelper.isTablet() ? 15.h : 30.h,
+                        width: ResponsiveHelper.isTablet() ? 15.w : 30.w,
+                        decoration: BoxDecoration(
+                          color: appBarColor,
+                          borderRadius: BorderRadius.circular(
+                              ResponsiveHelper.isTablet() ? 2.r : 8.r),
+                        ),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.file,
+                            color: primaryColor,
+                            size: 15,
+                          ),
+                        ),
+                      ),
+                      trailing: const FaIcon(
+                        FontAwesomeIcons.chevronDown,
                         color: primaryColor,
                         size: 15,
                       ),
-                    ),
-                  ),
-                  trailing: const FaIcon(
-                    FontAwesomeIcons.chevronDown,
-                    color: primaryColor,
-                    size: 15,
-                  ),
-                  title: ResponsiveHelper.isTablet()
-                      ? Texts.captionXs(
-                          'Laporan',
-                          color: primaryColor,
-                        )
-                      : Texts.caption(
-                          'Laporan',
-                          color: primaryColor,
+                      title: ResponsiveHelper.isTablet()
+                          ? Texts.captionXs(
+                              'Laporan',
+                              color: primaryColor,
+                            )
+                          : Texts.caption(
+                              'Laporan',
+                              color: primaryColor,
+                            ),
+                      children: <Widget>[
+                        ListTile(
+                          title: ResponsiveHelper.isTablet()
+                              ? Texts.captionXs(
+                                  'Laporan Transaksi VA',
+                                  color: primaryColor,
+                                )
+                              : Texts.caption(
+                                  'Laporan Transaksi VA',
+                                  color: primaryColor,
+                                ),
+                          onTap: () {
+                            Get.toNamed(Routes.LAPORAN_VA,
+                                arguments: controller.authModel);
+                          },
                         ),
-                  children: <Widget>[
-                    ListTile(
-                      title: ResponsiveHelper.isTablet()
-                          ? Texts.captionXs(
-                              'Laporan Transaksi VA',
-                              color: primaryColor,
-                            )
-                          : Texts.caption(
-                              'Laporan Transaksi VA',
-                              color: primaryColor,
+                        Divider(height: 0.0),
+                        ListTile(
+                          title: ResponsiveHelper.isTablet()
+                              ? Texts.captionXs(
+                                  'Laporan Transaksi QRIS',
+                                  color: primaryColor,
+                                )
+                              : Texts.caption(
+                                  'Laporan Transaksi QRIS',
+                                  color: primaryColor,
+                                ),
+                          onTap: () {
+                            Get.toNamed(Routes.LAP_DETAIL_QRIS);
+                            // getDefaultDialog().onFix(
+                            //     title: "Mohon Maaf",
+                            //     desc:
+                            //         "Riwayat Transaksi QRIS hanya bisa melalui Aplikasi DG QRIS Bankaltimtara",
+                            //     kategori: "error");
+                          },
+                        ),
+                        Divider(height: 0.0),
+                        Stack(
+                          children: [
+                            ListTile(
+                              title: ResponsiveHelper.isTablet()
+                                  ? Texts.captionXs(
+                                      'Laporan Realisasi 1',
+                                      color: primaryColor,
+                                    )
+                                  : Texts.caption(
+                                      'Laporan Realisasi 1',
+                                      color: primaryColor,
+                                    ),
+                              onTap: () {
+                                Get.toNamed(Routes.LAPORAN_1,
+                                    arguments: controller.authModel);
+                              },
                             ),
-                      onTap: () {
-                        Get.toNamed(Routes.LAPORAN_VA,
-                            arguments: controller.authModel);
-                      },
+                            Positioned(
+                              right: 8.r,
+                              child: badges.Badge(
+                                badgeStyle: badges.BadgeStyle(
+                                    shape: badges.BadgeShape.square,
+                                    badgeColor: Colors.red,
+                                    borderRadius: BorderRadius.circular(5)),
+                                badgeContent: Text(' Baru ',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10.5.sp)),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(height: 0.0),
+                        Stack(
+                          children: [
+                            ListTile(
+                              title: ResponsiveHelper.isTablet()
+                                  ? Texts.captionXs(
+                                      'Laporan Realisasi 2',
+                                      color: primaryColor,
+                                    )
+                                  : Texts.caption(
+                                      'Laporan Realisasi 2',
+                                      color: primaryColor,
+                                    ),
+                              onTap: () {
+                                Get.toNamed(Routes.LAPORAN_2,
+                                    arguments: controller.authModel);
+                              },
+                            ),
+                            Positioned(
+                              right: 8.r,
+                              child: badges.Badge(
+                                badgeStyle: badges.BadgeStyle(
+                                    shape: badges.BadgeShape.square,
+                                    badgeColor: Colors.red,
+                                    borderRadius: BorderRadius.circular(5)),
+                                badgeContent: Text(' Baru ',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10.5.sp)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    Divider(height: 0.0),
-                    ListTile(
-                      title: ResponsiveHelper.isTablet()
-                          ? Texts.captionXs(
-                              'Laporan Transaksi QRIS',
-                              color: primaryColor,
-                            )
-                          : Texts.caption(
-                              'Laporan Transaksi QRIS',
-                              color: primaryColor,
-                            ),
-                      onTap: () {
-                        Get.toNamed(Routes.LAP_DETAIL_QRIS);
-                        // getDefaultDialog().onFix(
-                        //     title: "Mohon Maaf",
-                        //     desc:
-                        //         "Riwayat Transaksi QRIS hanya bisa melalui Aplikasi DG QRIS Bankaltimtara",
-                        //     kategori: "error");
-                      },
-                    ),
-                    Divider(height: 0.0),
-                    ListTile(
-                      title: ResponsiveHelper.isTablet()
-                          ? Texts.captionXs(
-                              'Laporan Realisasi 1',
-                              color: primaryColor,
-                            )
-                          : Texts.caption(
-                              'Laporan Realisasi 1',
-                              color: primaryColor,
-                            ),
-                      onTap: () {
-                        Get.toNamed(Routes.LAPORAN_1,
-                            arguments: controller.authModel);
-                      },
-                    ),
-                    Divider(height: 0.0),
-                    ListTile(
-                      title: ResponsiveHelper.isTablet()
-                          ? Texts.captionXs(
-                              'Laporan Realisasi 2',
-                              color: primaryColor,
-                            )
-                          : Texts.caption(
-                              'Laporan Realisasi 2',
-                              color: primaryColor,
-                            ),
-                      onTap: () {
-                        Get.toNamed(Routes.LAPORAN_2,
-                            arguments: controller.authModel);
-                      },
+                    Positioned(
+                      right: 8.r,
+                      child: badges.Badge(
+                        badgeStyle: badges.BadgeStyle(
+                            shape: badges.BadgeShape.square,
+                            badgeColor: Colors.red,
+                            borderRadius: BorderRadius.circular(5)),
+                        badgeContent: Text(' Baru ',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 10.5.sp)),
+                      ),
                     ),
                   ],
                 ),

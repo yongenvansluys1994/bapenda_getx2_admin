@@ -50,7 +50,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                             Container(
                               width: double.infinity,
                               constraints: BoxConstraints(
-                                maxWidth: 500,
+                                maxWidth: Get.width * 0.95,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -217,7 +217,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                     Center(
                                       child: Container(
                                         width: 250.w,
-                                        height: 37.h,
+                                        height: Get.height * 0.055,
                                         decoration: BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 249, 249, 249),
@@ -258,7 +258,8 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                                       fontSize: 13.sp,
                                                       fontWeight:
                                                           FontWeight.normal,
-                                                      height: 0.5,
+                                                      height:
+                                                          Get.height * 0.00055,
                                                     ),
                                                   ),
                                                 ),
@@ -274,7 +275,8 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                                       fontSize: 13.sp,
                                                       fontWeight:
                                                           FontWeight.normal,
-                                                      height: 0.5,
+                                                      height:
+                                                          Get.height * 0.00055,
                                                     ),
                                                   ),
                                                 ),
@@ -295,7 +297,8 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                                       fontSize: 13.sp,
                                                       fontWeight:
                                                           FontWeight.normal,
-                                                      height: 0.5,
+                                                      height:
+                                                          Get.height * 0.00055,
                                                     ),
                                                   ),
                                                 ),
@@ -311,7 +314,8 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                                       fontSize: 13.sp,
                                                       fontWeight:
                                                           FontWeight.normal,
-                                                      height: 0.5,
+                                                      height:
+                                                          Get.height * 0.00055,
                                                     ),
                                                   ),
                                                 ),
@@ -466,7 +470,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                             Container(
                               width: double.infinity,
                               constraints: BoxConstraints(
-                                maxWidth: 500,
+                                maxWidth: Get.width * 0.95,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -498,7 +502,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                           topLeft: Radius.circular(10.w),
                                           topRight: Radius.circular(10.w)),
                                     ),
-                                    height: 41.h,
+                                    height: Get.height * 0.07,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -556,7 +560,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                   Container(
                                     decoration:
                                         BoxDecoration(color: Colors.white),
-                                    height: 41.h,
+                                    height: Get.height * 0.07,
                                     child: Padding(
                                       padding: EdgeInsets.only(left: 8.r),
                                       child: Row(
@@ -592,7 +596,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                     decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 230, 230, 230),
                                     ),
-                                    height: 41.h,
+                                    height: Get.height * 0.07,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -654,7 +658,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                           bottomLeft: Radius.circular(4.w),
                                           bottomRight: Radius.circular(4.w)),
                                     ),
-                                    height: 41.h,
+                                    height: Get.height * 0.07,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -716,7 +720,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                             Container(
                               width: double.infinity,
                               constraints: BoxConstraints(
-                                maxWidth: 500,
+                                maxWidth: Get.width * 0.95,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -1092,7 +1096,7 @@ class detailTransaksi extends StatelessWidget {
     return Container(
       width: double.infinity,
       constraints: BoxConstraints(
-        maxWidth: 500,
+        maxWidth: Get.width * 0.95,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -1516,7 +1520,7 @@ class swipeLeft extends StatelessWidget {
                     top: 30.h,
                     right: 0,
                     child: Container(
-                      height: 35.h,
+                      height: Get.height * 0.055,
                       width: 120.w,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(colors: gradientColor),
@@ -1588,11 +1592,36 @@ class HistoryPembayaran extends StatelessWidget {
         builder: (controller) {
           final List<Tab> Tabs = <Tab>[
             //5 tahun terakhir
-            Tab(text: "${controller.tahunhistory[0]}"),
-            Tab(text: "${controller.tahunhistory[1]}"),
-            Tab(text: "${controller.tahunhistory[2]}"),
-            Tab(text: "${controller.tahunhistory[3]}"),
-            Tab(text: "${controller.tahunhistory[4]}"),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[0]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[1]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[2]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[3]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
+            Tab(
+              child: Text(
+                "${controller.tahunhistory[4]}",
+                style: TextStyle(fontSize: 11.sp), // Ubah ukuran font di sini
+              ),
+            ),
           ];
           return SingleChildScrollView(
             child: DefaultTabController(
@@ -1657,7 +1686,7 @@ class riwayatVerifikasi extends StatelessWidget {
     return Container(
         width: double.infinity,
         constraints: BoxConstraints(
-          maxWidth: 500,
+          maxWidth: Get.width * 0.95,
         ),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -1685,7 +1714,7 @@ class riwayatVerifikasi extends StatelessWidget {
           child: Container(
             width: double.infinity,
             constraints: BoxConstraints(
-              maxWidth: 570,
+              maxWidth: Get.width * 0.95,
             ),
             decoration: BoxDecoration(
               color: Colors.white,
