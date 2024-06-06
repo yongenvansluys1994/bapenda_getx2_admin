@@ -1458,7 +1458,7 @@ class swipeLeft extends StatelessWidget {
                     right: 0,
                     child: Container(
                       height: Get.width * 0.085,
-                      width: 120.w,
+                      width: 125.w,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(colors: gradientColor),
                           borderRadius: BorderRadius.only(

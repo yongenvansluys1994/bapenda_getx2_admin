@@ -40,6 +40,7 @@ class ModelGetPendaftaran {
     required this.status,
     required this.imageKtp,
     required this.imageNpwp,
+    required this.lastActive,
   });
 
   String idDaftarwp;
@@ -69,6 +70,7 @@ class ModelGetPendaftaran {
   String status;
   String imageKtp;
   String imageNpwp;
+  String lastActive;
 
   factory ModelGetPendaftaran.fromJson(Map<String, dynamic> json) =>
       ModelGetPendaftaran(
@@ -99,6 +101,7 @@ class ModelGetPendaftaran {
         status: json["status"],
         imageKtp: json["image_ktp"],
         imageNpwp: json["image_npwp"],
+        lastActive: json["last_active"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -129,5 +132,6 @@ class ModelGetPendaftaran {
         "status": status,
         "image_ktp": imageKtp,
         "image_npwp": imageNpwp,
+        "last_active": lastActive,
       };
 }

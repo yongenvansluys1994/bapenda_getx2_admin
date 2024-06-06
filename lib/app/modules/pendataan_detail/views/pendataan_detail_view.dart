@@ -217,7 +217,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                     Center(
                                       child: Container(
                                         width: 250.w,
-                                        height: Get.height * 0.055,
+                                        height: Get.height * 0.045,
                                         decoration: BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 249, 249, 249),
@@ -502,7 +502,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                           topLeft: Radius.circular(10.w),
                                           topRight: Radius.circular(10.w)),
                                     ),
-                                    height: Get.height * 0.07,
+                                    height: Get.height * 0.05,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -596,7 +596,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                     decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 230, 230, 230),
                                     ),
-                                    height: Get.height * 0.07,
+                                    height: Get.height * 0.05,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -658,7 +658,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                           bottomLeft: Radius.circular(4.w),
                                           bottomRight: Radius.circular(4.w)),
                                     ),
-                                    height: Get.height * 0.07,
+                                    height: Get.height * 0.05,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -1520,8 +1520,8 @@ class swipeLeft extends StatelessWidget {
                     top: 30.h,
                     right: 0,
                     child: Container(
-                      height: Get.height * 0.055,
-                      width: 120.w,
+                      height: Get.height * 0.045,
+                      width: 125.w,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(colors: gradientColor),
                           borderRadius: BorderRadius.only(

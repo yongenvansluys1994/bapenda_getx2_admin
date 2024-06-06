@@ -34,7 +34,7 @@ class customButtomBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 MaterialButton(
-                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : 40,
+                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : Get.width * 0.20,
                   onPressed: () {
                     Get.currentRoute == Routes.DASHBOARD
                         ? null
@@ -77,7 +77,7 @@ class customButtomBar extends StatelessWidget {
                   ),
                 ),
                 MaterialButton(
-                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : 40,
+                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : Get.width * 0.20,
                   onPressed: () {
                     Get.currentRoute == Routes.PENDAFTARAN
                         ? null
@@ -145,7 +145,7 @@ class customButtomBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 MaterialButton(
-                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : 40,
+                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : Get.width * 0.20,
                   onPressed: () {
                     Get.currentRoute == Routes.PENDATAAN
                         ? null
@@ -206,7 +206,7 @@ class customButtomBar extends StatelessWidget {
                   ),
                 ),
                 MaterialButton(
-                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : 40,
+                  minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : Get.width * 0.20,
                   onPressed: () {
                     Get.currentRoute == Routes.CHAT_ROOMS
                         ? null
