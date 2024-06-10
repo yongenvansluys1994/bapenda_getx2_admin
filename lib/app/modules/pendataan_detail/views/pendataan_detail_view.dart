@@ -6,6 +6,7 @@ import 'package:bapenda_getx2_admin/app/modules/pendataan_detail/views/histori_p
 import 'package:bapenda_getx2_admin/app/modules/pendataan_detail/views/histori_pajak4.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendataan_detail/views/histori_pajak5.dart';
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
+import 'package:bapenda_getx2_admin/widgets/buttons.dart';
 import 'package:bapenda_getx2_admin/widgets/custom_appbar.dart';
 import 'package:bapenda_getx2_admin/widgets/easythrottle.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
@@ -1032,19 +1033,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                         width: 160.w,
                                         child: ElevatedButton(
                                             onPressed: () {
-                                              getDefaultDialog().onConfirm(
-                                                title: "Tolak Pelaporan ini?",
-                                                desc:
-                                                    "Jika anda melakukan penolakan, Pelaporan Pajak ini akan terhapus permanen dari sistem, dan Wajib pajak akan menerima pemberitahuan penolakannya.",
-                                                kategori: "warning",
-                                                handler: () {
-                                                  easyThrottle(
-                                                    handler: () {
-                                                      controller.Dikembalikan();
-                                                    },
-                                                  );
-                                                },
-                                              );
+                                              MethodPenolakan(controller);
                                             },
                                             style: ButtonStyle(
                                               backgroundColor:
@@ -1059,7 +1048,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                                   fontSize: 14,
                                                   color: Colors.black),
                                             )),
-                                      )
+                                      ),
                                     ],
                                   )
                                 : controller.dataArgument.status == "1" &&
@@ -1083,6 +1072,99 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
             ],
           ),
         ));
+  }
+
+  Future<dynamic> MethodPenolakan(PendataanDetailController controller) {
+    return Get.defaultDialog(
+      radius: 12.r,
+      titlePadding: EdgeInsets.zero,
+      content: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(4),
+            child: Texts.caption("Pilih Alasan Penolakan",
+                isBold: true, color: Colors.black),
+          ),
+          Container(
+            child: DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                errorStyle: TextStyle(height: 0),
+                isDense: true,
+                contentPadding: EdgeInsets.fromLTRB(10, 30, 10, 0),
+                fillColor: Colors.white,
+                filled: true,
+                hintText: '',
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: lightGreenColor, width: 2),
+                ),
+              ),
+              items: [
+                DropdownMenuItem(
+                  child: Text('Bukti LHP Tidak Jelas'),
+                  value: 'Bukti LHP Tidak Jelas',
+                ),
+                DropdownMenuItem(
+                  child: Text('Bukti LHP Tidak Ada'),
+                  value: 'Bukti LHP Tidak Ada',
+                ),
+                DropdownMenuItem(
+                  child: Text('Salah Memasukan Omzet'),
+                  value: 'Salah Memasukan Omzet',
+                ),
+              ],
+              onChanged: (newVal) {
+                controller.updateValueDropdownPenolakan("${newVal}");
+              },
+              value: controller.valueAlasanPenolakan == ""
+                  ? null
+                  : controller.valueAlasanPenolakan,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        SizedBox(
+          width: 80.w,
+          child: Buttons.gradientButton(
+            handler: () {
+              Get.back();
+            },
+            widget: Texts.button("Batal"),
+            borderSide: false,
+            gradient: [
+              Colors.pinkAccent.withOpacity(0.8),
+              Colors.redAccent.withOpacity(0.7)
+            ],
+          ),
+        ),
+        SizedBox(
+          width: 80.w,
+          child: Buttons.gradientButton(
+            handler: () {
+              print("data di tolak");
+              if (controller.valueAlasanPenolakan == null) {
+                RawSnackbar_top(
+                    message: "Alasan Penolakan belum dipilih",
+                    kategori: "warning",
+                    duration: 2);
+              } else {
+                easyThrottle(
+                  handler: () {
+                    controller.Dikembalikan();
+                  },
+                );
+              }
+            },
+            widget: Texts.button("Tolak"),
+            borderSide: false,
+            gradient: [Colors.cyan, Colors.greenAccent],
+          ),
+        ),
+      ],
+    );
   }
 }
 

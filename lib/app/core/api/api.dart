@@ -37,6 +37,13 @@ Future<Response> insertJatuhTempo(List<Map<String, String>> data) {
   );
 }
 
+Future<Response> insertNotifTolak(data) {
+  return dio3.post(
+    "/notifikasi/notif_penolakan.php",
+    data: data,
+  );
+}
+
 Future<Response> cekJatuhTempo() {
   return dio3.get("/notifikasi/cek_jatuhtempo.php");
 }

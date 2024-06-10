@@ -57,6 +57,7 @@ class PendataanDetailController extends GetxController {
   final PageController pageController = PageController();
   int currentPage = 0;
   bool isVisibleSwipe = false;
+  String? valueAlasanPenolakan;
 
   @override
   void onInit() {
@@ -123,6 +124,13 @@ class PendataanDetailController extends GetxController {
     id_rekening =
         '${selectedRekPajak.idRekening}'; //ganti id_rekening sesuai jenis pajak yg dipilih
     hitungPajak = true; //agar nilai pajak tampil di UI
+    update();
+  }
+
+  void updateValueDropdownPenolakan(String value) async {
+    valueAlasanPenolakan =
+        value; //value kode_rekening  sesuai jenis pajak yg dipilih
+
     update();
   }
 
@@ -239,6 +247,11 @@ class PendataanDetailController extends GetxController {
     var response = await request.send();
     //final responseData = await response.stream.toBytes();
     //final respStr = String.fromCharCodes(responseData);
+    insertNotifTolak({
+      'kategori': 'pelaporan_dikembalikan',
+      'keterangan':
+          'Pelaporan Pajak Ditolak dengan alasan ${valueAlasanPenolakan}',
+    });
     if (response.statusCode == 200) {
       DocumentSnapshot snap = await FirebaseFirestore.instance
           .collection("UserTokens")
@@ -247,10 +260,11 @@ class PendataanDetailController extends GetxController {
       String token = snap['token'];
       sendPushMessage(
           token,
-          "Pelaporan Pajak Anda Ditolak/Dikembalikan, disebabkan kesalahan penginputan oleh Wajib Pajak",
+          "Pelaporan Pajak Anda Ditolak/Dikembalikan, dengan alasan ${valueAlasanPenolakan}",
           "Mohon untuk Menginput Ulang Pelaporan Pajak dengan benar atau berkordinasi dengan Admin. Terima Kasih",
           "pelaporan_dikembalikan");
       EasyLoading.dismiss();
+      Get.back();
       Get.back();
       RawSnackbar_top(
           message: "Berhasil Kembalikan/Menolak Data Pelaporan Pajak",
