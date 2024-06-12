@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PendataanDetailController extends GetxController {
@@ -248,9 +249,10 @@ class PendataanDetailController extends GetxController {
     //final responseData = await response.stream.toBytes();
     //final respStr = String.fromCharCodes(responseData);
     insertNotifTolak({
+      'nik': '${dataArgument.nikUser}',
       'kategori': 'pelaporan_dikembalikan',
       'keterangan':
-          'Pelaporan Pajak Ditolak dengan alasan ${valueAlasanPenolakan}',
+          'Mohon Maaf Pelaporan Pajak Periode ${DateFormat('MMMM', 'id_ID').format(DateTime.parse(masa_pajak2!))} Ditolak dengan alasan ${valueAlasanPenolakan}, Silakan menginput Pelaporan Pajak Kembali',
     });
     if (response.statusCode == 200) {
       DocumentSnapshot snap = await FirebaseFirestore.instance
@@ -260,7 +262,7 @@ class PendataanDetailController extends GetxController {
       String token = snap['token'];
       sendPushMessage(
           token,
-          "Pelaporan Pajak Anda Ditolak/Dikembalikan, dengan alasan ${valueAlasanPenolakan}",
+          "Mohon Maaf Pelaporan Pajak Anda Ditolak/Dikembalikan, dengan alasan ${valueAlasanPenolakan}",
           "Mohon untuk Menginput Ulang Pelaporan Pajak dengan benar atau berkordinasi dengan Admin. Terima Kasih",
           "pelaporan_dikembalikan");
       EasyLoading.dismiss();

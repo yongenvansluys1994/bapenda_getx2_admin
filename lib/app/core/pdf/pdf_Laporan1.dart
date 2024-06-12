@@ -43,7 +43,23 @@ class PdfLaporan1 {
             pw.Container(
               height: 20.h,
               child: pw.Center(
+                child: pw.Text("Jumlah QRIS",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14.sp)),
+              ),
+            ),
+            pw.Container(
+              height: 20.h,
+              child: pw.Center(
                 child: pw.Text("QRIS",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14.sp)),
+              ),
+            ),
+            pw.Container(
+              height: 20.h,
+              child: pw.Center(
+                child: pw.Text("Jumlah VA",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 14.sp)),
               ),
@@ -80,7 +96,15 @@ class PdfLaporan1 {
               height: 20.h,
               child: pw.Center(
                 child: pw.Text(
-                  "${laporan[index].jenisPajak.substring(0, 15)} ",
+                  "${laporan[index].jenisPajak} ",
+                ),
+              ),
+            ),
+            pw.Container(
+              height: 20.h,
+              child: pw.Center(
+                child: pw.Text(
+                  "${laporan[index].jumlahQris} ",
                 ),
               ),
             ),
@@ -89,6 +113,14 @@ class PdfLaporan1 {
               child: pw.Center(
                 child: pw.Text(
                   "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(double.parse(laporan[index].qris).toInt())}",
+                ),
+              ),
+            ),
+            pw.Container(
+              height: 20.h,
+              child: pw.Center(
+                child: pw.Text(
+                  "${laporan[index].jumlahVa} ",
                 ),
               ),
             ),

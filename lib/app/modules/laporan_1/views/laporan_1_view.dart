@@ -280,14 +280,18 @@ class Laporan1View extends GetView<Laporan1Controller> {
                     columnSpacing: 15,
                     columns: [
                       DataColumn(label: Text('JENIS PAJAK')),
+                      DataColumn(label: Text('JUMLAH_QRIS')),
                       DataColumn(label: Text('QRIS')),
+                      DataColumn(label: Text('JUMLAH_VA')),
                       DataColumn(label: Text('VIRTUAL ACCOUNT')),
                     ],
                     rows: controller.datalist.map((dataItem) {
                       return DataRow(cells: [
                         DataCell(Text("${dataItem.jenisPajak}")),
+                        DataCell(Text("${dataItem.jumlahQris}")),
                         DataCell(Text(
                             "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(double.parse(dataItem.qris).toInt())}")),
+                        DataCell(Text("${dataItem.jumlahVa}")),
                         DataCell(Text(
                             "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(double.parse(dataItem.va).toInt())}")),
                       ]);
