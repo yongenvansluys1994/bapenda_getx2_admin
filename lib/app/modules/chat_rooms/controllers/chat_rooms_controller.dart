@@ -25,7 +25,7 @@ class ChatRoomsController extends GetxController {
   void fetchRooms() {
     FirebaseFirestore.instance
         .collection('rooms')
-        .where('participants', arrayContains: authModel.nik)
+        .where('participants', arrayContains: 'admin')
         .orderBy('createdAt', descending: true)
         .snapshots()
         .listen((chatQuerySnapshot) async {

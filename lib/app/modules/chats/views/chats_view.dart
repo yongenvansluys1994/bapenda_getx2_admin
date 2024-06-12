@@ -33,33 +33,46 @@ class ChatsView extends GetView<ChatsController> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Obx(
-                  () => ListView.builder(
-                      itemCount: controller.documents.length,
-                      physics: PageScrollPhysics(),
-                      shrinkWrap: true,
-                      reverse: true,
-                      itemBuilder: (context, index) {
-                        var data_livechat = controller.documents[index];
-                        //mengatasi error null timestamp saat sendchat
-                        final currentTime =
-                            Timestamp.fromMicrosecondsSinceEpoch(
-                                DateTime.now().millisecondsSinceEpoch);
-                        Timestamp t = data_livechat['createdAt'] == null
-                            ? currentTime
-                            : data_livechat['createdAt'] as Timestamp;
-                        late DateTime date = t.toDate();
-                        // end mengatasi error null timestamp saat sendchat
-                        if (data_livechat['nikFrom'] ==
-                            controller.authModel.nik) {
-                          return ChatFrom(
-                              data_livechat: data_livechat, date: date);
-                        } else {
-                          return ChatTo(
-                              data_livechat: data_livechat, date: date);
-                        }
-                      }),
-                ),
+                Obx(() {
+                  if (controller.documents.isEmpty) {
+                    return Center(
+                      child: Column(
+                        children: [
+                          SizedBox(height: Get.height * 0.35),
+                          CircularProgressIndicator(),
+                          SizedBox(height: 10.h),
+                          Texts.caption("Sedang memuat chat, Mohon Menunggu..")
+                        ],
+                      ),
+                    );
+                  } else {
+                    return ListView.builder(
+                        itemCount: controller.documents.length,
+                        physics: PageScrollPhysics(),
+                        shrinkWrap: true,
+                        reverse: true,
+                        itemBuilder: (context, index) {
+                          var data_livechat = controller.documents[index];
+                          //mengatasi error null timestamp saat sendchat
+                          final currentTime =
+                              Timestamp.fromMicrosecondsSinceEpoch(
+                                  DateTime.now().millisecondsSinceEpoch);
+                          Timestamp t = data_livechat['createdAt'] == null
+                              ? currentTime
+                              : data_livechat['createdAt'] as Timestamp;
+                          late DateTime date = t.toDate();
+                          // end mengatasi error null timestamp saat sendchat
+                          if (data_livechat['nikFrom'] ==
+                              controller.authModel.nik) {
+                            return ChatFrom(
+                                data_livechat: data_livechat, date: date);
+                          } else {
+                            return ChatTo(
+                                data_livechat: data_livechat, date: date);
+                          }
+                        });
+                  }
+                }),
                 SizedBox(height: 40.h),
               ],
             ),
@@ -329,8 +342,7 @@ class ChatFrom extends StatelessWidget {
                           children: [
                             Texts.subtitle2("${timeago.format(date)}",
                                 color: Colors.grey),
-                            Texts.captionSm(
-                                "${data_livechat['participantsInfo'][0]['participant'] == controller.authModel.nik ? data_livechat['participantsInfo'][0]['nama'] : data_livechat['participantsInfo'][1]['nama']}",
+                            Texts.captionSm("${controller.authModel.nama}",
                                 color: Colors.grey),
                           ],
                         ),

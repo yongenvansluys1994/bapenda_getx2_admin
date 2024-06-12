@@ -24,109 +24,137 @@ class ChatRoomsView extends GetView<ChatRoomsController> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Obx(
-                () => ListView.builder(
-                    itemCount: controller.room_list.length,
-                    physics: PageScrollPhysics(),
-                    shrinkWrap: true,
-                    reverse: true,
-                    itemBuilder: (context, index) {
-                      var data_livechat = controller.room_list[index];
-                      //mengatasi error null timestamp saat sendchat
-                      bool readBy = false;
-                      if (data_livechat['readBy'] is List &&
-                          data_livechat['readBy']
-                              .contains('${controller.authModel.nik}')) {
-                        readBy = true;
-                      } else {
-                        readBy = false;
-                      }
-                      final currentTime = Timestamp.fromMicrosecondsSinceEpoch(
-                          DateTime.now().millisecondsSinceEpoch);
-                      Timestamp t = data_livechat['createdAt'] == null
-                          ? currentTime
-                          : data_livechat['createdAt'] as Timestamp;
-                      late DateTime date = t.toDate();
-                      // end mengatasi error null timestamp saat sendchat
-                      return InkWell(
-                        onTap: () {
-                          Get.toNamed(Routes.CHATS,
-                              arguments: controller.authModel,
-                              parameters: {
-                                'roomID': data_livechat['postID'],
-                                'textTo': data_livechat['nikFrom'] ==
-                                        controller.authModel.nik
-                                    ? data_livechat['nikTo']
-                                    : data_livechat['nikFrom'],
-                                'namaTo':
-                                    '${data_livechat['participantsInfo'][0]['participant'] == controller.authModel.nik ? data_livechat['participantsInfo'][1]['nama'] : data_livechat['participantsInfo'][0]['nama']}',
-                                'createRoom': 'no'
-                              });
-                        },
-                        child: ListTile(
-                          leading: Card(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: kdisetujui,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(0.1.r),
-                              child: ClipRRect(
+              Obx(() {
+                if (controller.room_list.isEmpty) {
+                  return Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: Get.height * 0.35),
+                        CircularProgressIndicator(),
+                        SizedBox(height: 10.h),
+                        Texts.caption("Sedang memuat chat, Mohon Menunggu..")
+                      ],
+                    ),
+                  );
+                } else {
+                  return ListView.builder(
+                      itemCount: controller.room_list.length,
+                      physics: PageScrollPhysics(),
+                      shrinkWrap: true,
+                      reverse: false,
+                      itemBuilder: (context, index) {
+                        var data_livechat = controller.room_list[index];
+                        //mengatasi error null timestamp saat sendchat
+                        bool readBy = false;
+                        bool containsNoDigits(String s) {
+                          return !RegExp(r'\d').hasMatch(s);
+                        }
+
+                        bool allElementsContainDigits(List<dynamic> list) {
+                          return list.every((element) {
+                            if (element is int) {
+                              return true;
+                            } else if (element is String) {
+                              return !containsNoDigits(element);
+                            }
+                            return false;
+                          });
+                        }
+
+                        if (allElementsContainDigits(data_livechat['readBy'])) {
+                          readBy = false;
+                        } else {
+                          readBy = true;
+                        }
+
+                        final currentTime =
+                            Timestamp.fromMicrosecondsSinceEpoch(
+                                DateTime.now().millisecondsSinceEpoch);
+                        Timestamp t = data_livechat['createdAt'] == null
+                            ? currentTime
+                            : data_livechat['createdAt'] as Timestamp;
+                        late DateTime date = t.toDate();
+                        // end mengatasi error null timestamp saat sendchat
+                        return InkWell(
+                          onTap: () {
+                            Get.toNamed(Routes.CHATS,
+                                arguments: controller.authModel,
+                                parameters: {
+                                  'roomID': data_livechat['postID'],
+                                  'textTo': data_livechat['nikFrom'] == 'admin'
+                                      ? data_livechat['nikTo']
+                                      : data_livechat['nikFrom'],
+                                  'namaTo':
+                                      '${data_livechat['participantsInfo'][0]['participant'] == 'admin' ? data_livechat['participantsInfo'][1]['nama'] : data_livechat['participantsInfo'][0]['nama']}',
+                                  'createRoom': 'no'
+                                });
+                          },
+                          child: ListTile(
+                            leading: Card(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              color: kdisetujui,
+                              shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(40),
-                                child: Image.asset(
-                                  'assets/icon/${data_livechat['participantsInfo'][0]['participant'] == controller.authModel.nik ? data_livechat['participantsInfo'][1]['avatar'] : data_livechat['participantsInfo'][0]['avatar']}', //'assets/icon/${data_livechat['foto']}'
-                                  height: 50.h,
-                                  width: 50.h,
-                                  fit: BoxFit.cover,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(0.1.r),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(40),
+                                  child: Image.asset(
+                                    'assets/icon/${data_livechat['participantsInfo'][0]['participant'] == 'admin' ? data_livechat['participantsInfo'][1]['avatar'] : data_livechat['participantsInfo'][0]['avatar']}', //'assets/icon/${data_livechat['foto']}'
+                                    height: 50.h,
+                                    width: 50.h,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          title: Texts.caption(
-                              "${data_livechat['participantsInfo'][0]['participant'] == controller.authModel.nik ? data_livechat['participantsInfo'][1]['nama'] : data_livechat['participantsInfo'][0]['nama']}"),
-                          subtitle: Texts.caption(
-                              "${data_livechat['lastText']}", //${data_livechat['participantsInfo'][1]['countUnseenChat']}
-                              maxLines: 20,
-                              color: shadowText),
-                          trailing: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 6.r),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Texts.captionSm("${timeago.format(date)}",
-                                    color: readBy != true
-                                        ? kdisetujui
-                                        : Blacksoft),
-                                readBy != true
-                                    ? Container(
-                                        width: 18.sp,
-                                        height: 18.sp,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF39D2C0),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 4,
-                                              color: Color(0x2B202529),
-                                              offset: Offset(0, 2),
-                                            )
-                                          ],
-                                          shape: BoxShape.circle,
-                                        ),
-                                        alignment:
-                                            AlignmentDirectional(0.00, 0.00),
-                                      )
-                                    : SizedBox(
-                                        height: 2.h,
-                                      )
-                              ],
+                            title: Texts.caption(
+                                "${data_livechat['participantsInfo'][0]['participant'] == 'admin' ? data_livechat['participantsInfo'][1]['nama'] : data_livechat['participantsInfo'][0]['nama']}"),
+                            subtitle: Texts.caption(
+                                "${data_livechat['lastText']}..", //${data_livechat['participantsInfo'][1]['countUnseenChat']}
+                                maxLines: 3,
+                                color: shadowText),
+                            trailing: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 6.r),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Texts.captionSm("${timeago.format(date)}",
+                                      color: readBy != true
+                                          ? kdisetujui
+                                          : Blacksoft),
+                                  readBy != true
+                                      ? Container(
+                                          width: 18.sp,
+                                          height: 18.sp,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFF39D2C0),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                blurRadius: 4,
+                                                color: Color(0x2B202529),
+                                                offset: Offset(0, 2),
+                                              )
+                                            ],
+                                            shape: BoxShape.circle,
+                                          ),
+                                          alignment:
+                                              AlignmentDirectional(0.00, 0.00),
+                                        )
+                                      : SizedBox(
+                                          height: 2.h,
+                                        )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
-              ),
+                        );
+                      });
+                }
+              }),
               SizedBox(height: 5.h),
             ],
           ),
