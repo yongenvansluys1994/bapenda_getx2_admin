@@ -568,6 +568,39 @@ buildDrawer() {
                             ),
                           ],
                         ),
+                        Divider(height: 0.0),
+                        Stack(
+                          children: [
+                            ListTile(
+                              title: ResponsiveHelper.isTablet()
+                                  ? Texts.captionXs(
+                                      'Laporan Wajib Pajak',
+                                      color: primaryColor,
+                                    )
+                                  : Texts.caption(
+                                      'Laporan Wajib Pajak',
+                                      color: primaryColor,
+                                    ),
+                              onTap: () {
+                                Get.toNamed(Routes.LAPORAN_DAFTARUSER,
+                                    arguments: controller.authModel);
+                              },
+                            ),
+                            Positioned(
+                              right: 8.r,
+                              child: badges.Badge(
+                                badgeStyle: badges.BadgeStyle(
+                                    shape: badges.BadgeShape.square,
+                                    badgeColor: Colors.red,
+                                    borderRadius: BorderRadius.circular(5)),
+                                badgeContent: Text(' Baru ',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10.5.sp)),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                     Positioned(

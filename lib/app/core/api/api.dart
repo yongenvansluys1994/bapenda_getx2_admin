@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bapenda_getx2_admin/app/modules/aktivitas/models/model_aktivitas.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_2/models/laporan_2_model.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser/models/model_lapdaftaruser.dart';
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
 import 'package:bapenda_getx2_admin/app/modules/notif_jatuhtempo/models/model_riwayatjtempo.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
@@ -127,6 +128,20 @@ class Api {
       List data = json.decode(response.data);
 
       return data.map((e) => ModelLaporan1.fromJson(e)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<ModelLapDaftarUser>?> getLapDaftarUser(
+      {DateTime? masa_awal, DateTime? masa_akhir, String? jenispajak}) async {
+    String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
+    String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
+    var response = await dio.get("/laporan/laporan_daftaruser.php?masa_awal=${masa_awalformat}&masa_akhir=${masa_akhirformat}&jenispajak=${jenispajak}");
+    if (response.statusCode == 200) {
+      List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
+
+      return data.map((e) => ModelLapDaftarUser.fromJson(e)).toList();
     } else {
       return null;
     }

@@ -220,6 +220,7 @@ class getDefaultDialog {
   }) {
     Get.defaultDialog(
       radius: 12.r,
+      title: "",
       titlePadding: EdgeInsets.zero,
       content: Column(
         children: [
@@ -261,6 +262,7 @@ class getDefaultDialog {
     required String desc,
   }) {
     Get.defaultDialog(
+      title: "",
         backgroundColor: Colors.transparent,
         titlePadding: EdgeInsets.zero,
         content: Stack(

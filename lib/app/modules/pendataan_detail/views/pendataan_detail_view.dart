@@ -14,6 +14,7 @@ import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
+import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -503,7 +504,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                           topLeft: Radius.circular(10.w),
                                           topRight: Radius.circular(10.w)),
                                     ),
-                                    height: Get.height * 0.05,
+                                    height: ResponsiveHelper.isTablet() ? Get.height * 0.09 : Get.height * 0.062,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -561,7 +562,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                   Container(
                                     decoration:
                                         BoxDecoration(color: Colors.white),
-                                    height: Get.height * 0.07,
+                                    height: ResponsiveHelper.isTablet() ? Get.height * 0.1 : Get.height * 0.062,
                                     child: Padding(
                                       padding: EdgeInsets.only(left: 8.r),
                                       child: Row(
@@ -597,7 +598,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                     decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 230, 230, 230),
                                     ),
-                                    height: Get.height * 0.05,
+                                    height: ResponsiveHelper.isTablet() ? Get.height * 0.09 : Get.height * 0.062,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -659,7 +660,7 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                           bottomLeft: Radius.circular(4.w),
                                           bottomRight: Radius.circular(4.w)),
                                     ),
-                                    height: Get.height * 0.05,
+                                    height: ResponsiveHelper.isTablet() ? Get.height * 0.09 : Get.height * 0.062,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,

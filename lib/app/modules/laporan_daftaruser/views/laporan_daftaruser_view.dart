@@ -1,33 +1,30 @@
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
-import 'package:bapenda_getx2_admin/app/modules/laporan_2/controllers/laporan_2_controller.dart';
 import 'package:bapenda_getx2_admin/widgets/custom_appbar.dart';
 import 'package:bapenda_getx2_admin/widgets/easythrottle.dart';
+import 'package:bapenda_getx2_admin/widgets/nodata.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class Laporan2View extends GetView<Laporan2Controller> {
-  const Laporan2View({Key? key}) : super(key: key);
+import '../controllers/laporan_daftaruser_controller.dart';
+
+class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
+  const LaporanDaftaruserView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Laporan Realisasi 2",
-        leading: true,
-        isLogin: true,
-      ),
+      appBar: CustomAppBar(title: "Data Wajib Pajak Termuktahir", leading: true, isLogin: true),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            GetBuilder<Laporan2Controller>(
-                init: Laporan2Controller(Get.find<Api>()),
+            GetBuilder<LaporanDaftaruserController>(
+                init: LaporanDaftaruserController(Get.find<Api>()),
                 builder: (controller) {
                   return Container(
                     decoration: BoxDecoration(
@@ -53,8 +50,7 @@ class Laporan2View extends GetView<Laporan2Controller> {
                                         Padding(
                                           padding: const EdgeInsets.all(4),
                                           child: Texts.caption("Masa Awal",
-                                              isBold: true,
-                                              color: Colors.white),
+                                              isBold: true, color: Colors.white),
                                         ),
                                         Stack(
                                           children: [
@@ -92,8 +88,8 @@ class Laporan2View extends GetView<Laporan2Controller> {
                                                   controller.FinalDate == null
                                                       ? ""
                                                       : "${controller.FinalDate}",
-                                                  style: TextStyle(
-                                                      fontSize: 14.sp),
+                                                  style:
+                                                      TextStyle(fontSize: 14.sp),
                                                 ),
                                                 margin: EdgeInsets.only(
                                                     left: 10, top: 13),
@@ -117,8 +113,7 @@ class Laporan2View extends GetView<Laporan2Controller> {
                                         Padding(
                                           padding: const EdgeInsets.all(4),
                                           child: Texts.caption("Masa Akhir",
-                                              isBold: true,
-                                              color: Colors.white),
+                                              isBold: true, color: Colors.white),
                                         ),
                                         Stack(
                                           children: [
@@ -157,8 +152,8 @@ class Laporan2View extends GetView<Laporan2Controller> {
                                                           null
                                                       ? ""
                                                       : "${controller.FinalDate_akhir}",
-                                                  style: TextStyle(
-                                                      fontSize: 14.sp),
+                                                  style:
+                                                      TextStyle(fontSize: 14.sp),
                                                 ),
                                                 margin: EdgeInsets.only(
                                                     left: 10, top: 13),
@@ -223,49 +218,163 @@ class Laporan2View extends GetView<Laporan2Controller> {
                               // ),
                               SizedBox(height: 10.h),
                               Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 40.h,
-                                      width: 100.w,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                            Color.fromARGB(189, 252, 252, 252),
-                                            Color.fromARGB(174, 242, 242, 242)
-                                          ]),
-                                          borderRadius: BorderRadius.circular(5),
-                                        ),
-                                        child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.transparent,
-                                              shadowColor: Colors.transparent,
-                                            ),
-                                            child: Text(
-                                              "Cari",
-                                              style: TextStyle(color: Colors.black),
-                                            ),
-                                            onPressed: () {
-                                              if (controller.selectedDate == null ||
-                                                  controller.selectedDate_akhir ==
-                                                      null) {
-                                                EasyLoading.showError(
-                                                    "Masa Pajak harus dipilih");
-                                              } else {
-                                                easyThrottle(
-                                                  handler: () {
-                                                    controller.populateDatalist();
-                                                    // controller.simpanLaporan();
-                                                  },
-                                                );
-                                              }
-                                            }),
-                                      ),
+                                child: SizedBox(
+                                  height: 40.h,
+                                  width: 100.w,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(colors: [
+                                        Color.fromARGB(189, 252, 252, 252),
+                                        Color.fromARGB(174, 242, 242, 242)
+                                      ]),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
-                                     SizedBox(width: 5.h),
-                                    GetBuilder<Laporan2Controller>(
-                init: Laporan2Controller(Get.find<Api>()),
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.transparent,
+                                          shadowColor: Colors.transparent,
+                                        ),
+                                        child: Text(
+                                          "Cari",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                        onPressed: () {
+                                           easyThrottle(
+                                              handler: () {
+                                                controller.populateDatalist();
+                                                // controller.simpanLaporan();
+                                              },
+                                            );
+                                          // if (controller.selectedDate == null ||
+                                          //     controller.selectedDate_akhir ==
+                                          //         null) {
+                                          //   EasyLoading.showError(
+                                          //       "Masa Pajak harus dipilih");
+                                          // } else {
+                                          //   // easyThrottle(
+                                          //   //   handler: () {
+                                          //   //     controller.populateDatalist();
+                                          //   //     // controller.simpanLaporan();
+                                          //   //   },
+                                          //   // );
+                                          // }
+                                        }),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 5.h),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+            Divider(),Text("Warna hijau adalah data yang diperbaharui"),
+            GetBuilder<LaporanDaftaruserController>(
+                init: LaporanDaftaruserController(Get.find<Api>()),
+                builder: (controller) {
+                  if (controller.isLoading) {
+                    return ShimmerWidget.Items1();
+                  }
+                  if (controller.isEmpty) {
+                    return NoData();
+                  }
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: 15,
+                      columns: [
+                        DataColumn(label: Text('NPWPD',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('NAMA USAHA',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('ALAMAT_USAHA',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('RT USAHA',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('NO.HP USAHA',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('EMAIL USAHA',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('NAMA PEMILIK',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('PEKERJAAN PEMILIK',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('NO.HP PEMILIK',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('EMAIL PEMILIK',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('KOORDINAT',style: TextStyle(fontSize: 11.sp))),
+                        DataColumn(label: Text('TGL PERUBAHAN',style: TextStyle(fontSize: 11.sp))),
+                      ],
+                      rows: controller.datalist.map((dataItem) {
+                        return DataRow(cells: [
+                           DataCell(Container(width: Get.width * 0.3,height:Get.height * 0.05,child: Align(alignment: Alignment.centerLeft,
+ child: Text("${dataItem.npwpd}",style: TextStyle(fontSize: 9.5.sp),)))),
+                          DataCell(Container(
+                         height:Get.height * 0.05,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.namaUsaha}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                          DataCell(Container(
+                          width: Get.width * 0.5, height:Get.height * 0.05,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Text("${dataItem.alamatUsaha}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3),
+                        )),
+                         DataCell(Container(
+                         height:Get.height * 0.05,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.rtUsaha}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                           DataCell(Container(
+                         height:Get.height * 0.05,
+                          constraints: BoxConstraints(maxWidth: 200), color:  ( dataItem.nohpUsaha != ' ' && dataItem.nohpUsaha.isNotEmpty) ? Colors.green[300] : null,
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.nohpUsaha}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                          DataCell(Container(
+                         height:Get.height * 0.05,color:  (dataItem.emailUsaha != '-' && dataItem.emailUsaha != ' ' && dataItem.emailUsaha.isNotEmpty) ? Colors.green[300] : null,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.emailUsaha}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                          DataCell(Container(
+                         width: Get.width * 0.5,height:Get.height * 0.05,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.namaPemilik}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                          DataCell(Container(
+                         width: Get.width * 0.35,height:Get.height * 0.05,color: (dataItem.pekerjaanPemilik != 'Pemilik' && dataItem.pekerjaanPemilik != ' ' && dataItem.pekerjaanPemilik.isNotEmpty) ? Colors.green[300] : null,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.pekerjaanPemilik}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                        DataCell(Container(
+                         width: Get.width * 0.35,height:Get.height * 0.05,color:  (dataItem.nohpPemilik != ' ' && dataItem.nohpPemilik.isNotEmpty) ? Colors.green[300] : null,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.nohpPemilik}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                          DataCell(Container(
+                         width: Get.width * 0.35,height:Get.height * 0.05,color:  (dataItem.emailUsaha != '-' && dataItem.emailPemilik != ' ' && dataItem.emailPemilik.isNotEmpty) ? Colors.green[300] : null,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.emailPemilik}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                          DataCell(Container(
+                         width: Get.width * 0.5,height:Get.height * 0.05,color:  (dataItem.koordinat != ' ' && dataItem.koordinat.isNotEmpty) ? Colors.green[300] : null,
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.koordinat}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                        DataCell(Container(
+                         width: Get.width * 0.5,height:Get.height * 0.05,color: Colors.green[300],
+                          constraints: BoxConstraints(maxWidth: 200), 
+                          child: Align(alignment: Alignment.centerLeft,
+child: Text("${dataItem.date}",style: TextStyle(fontSize: 9.5.sp), overflow: TextOverflow.ellipsis, maxLines: 3)),
+                        )),
+                        ]);
+                      }).toList(),
+                    ),
+                  );
+                }),
+            SizedBox(height: 5.h),
+            GetBuilder<LaporanDaftaruserController>(
+                init: LaporanDaftaruserController(Get.find<Api>()),
                 builder: (controller) {
                   return controller.displayResult == true
                       ? Center(
@@ -281,96 +390,17 @@ class Laporan2View extends GetView<Laporan2Controller> {
                                   ),
                                   child: Text("Cetak PDF"),
                                   onPressed: () {
-                                    easyThrottle(
-                                      handler: () {
-                                        controller.cetakLHP();
-                                      },
-                                    );
+                                    // easyThrottle(
+                                    //   handler: () {
+                                    //     controller.cetakLHP();
+                                    //   },
+                                    // );
                                   }),
                             ),
                           ),
                         )
                       : SizedBox();
                 })
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 5.h),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-            Divider(),
-            GetBuilder<Laporan2Controller>(
-              init: Laporan2Controller(Get.find<Api>()),
-              builder: (controller) {
-                if (controller.isLoading) {
-                  return ShimmerWidget.Items1();
-                }
-                if (controller.isEmpty) {
-                  return Center(child: Texts.body1("Data tidak ditemukan."));
-                }
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: [
-                      DataColumn(
-                          label: Text(
-                        'TGL \nPENETAPAN',
-                        textAlign: TextAlign.center,
-                      )),
-                      DataColumn(label: Text('JATUH TEMPO')),
-                      DataColumn(label: Text('KODE REKENING')),
-                      DataColumn(
-                          label: Text(
-                        'NAMA \nREKENING',
-                        textAlign: TextAlign.center,
-                      )),
-                      DataColumn(label: Text('NO KOHIR')),
-                      DataColumn(label: Text('NAMA WP')),
-                      DataColumn(label: Text('NPWPD')),
-                      DataColumn(label: Text('PAJAK')),
-                      DataColumn(label: Text('DENDA')),
-                      DataColumn(label: Text('DIBAYAR')),
-                      DataColumn(label: Text('MASA PAJAK')),
-                      DataColumn(label: Text('METODE BAYAR')),
-                    ],
-                    rows: controller.datalist.map((dataItem) {
-                      return DataRow(cells: [
-                        DataCell(Text(dataItem.tglPenetapan)),
-                        DataCell(Text(dataItem.batasBayar)),
-                        DataCell(Text(dataItem.kodeRekening)),
-                        DataCell(Container(
-                          width: Get.width * 0.5, 
-                          constraints: BoxConstraints(maxWidth: 200), 
-                          child: Text("${dataItem.namaRekening}", overflow: TextOverflow.ellipsis, maxLines: 3),
-                        )),
-                        DataCell(Text(dataItem.nomorKohir)),
-                        DataCell(Container(
-                          width: Get.width * 0.5, 
-                          constraints: BoxConstraints(maxWidth: 200), 
-                          child: Text("${dataItem.namaWp}", overflow: TextOverflow.ellipsis, maxLines: 3),
-                        )),
-                        DataCell(Text(dataItem.npwpd)),
-                        DataCell(Text(
-                            "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(dataItem.jumlahPajak)}")),
-                        DataCell(Text(
-                            "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(dataItem.denda)}")),
-                        DataCell(Text(
-                            "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(dataItem.telahDibayar)}")),
-                        DataCell(Text(dataItem.masaPajak)),
-                        DataCell(Text(dataItem.uraianH2H)),
-                      ]);
-                    }).toList(),
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 5.h),
-            
           ],
         ),
       ),

@@ -14,6 +14,8 @@ import '../modules/laporan_1/bindings/laporan_1_binding.dart';
 import '../modules/laporan_1/views/laporan_1_view.dart';
 import '../modules/laporan_2/bindings/laporan_2_binding.dart';
 import '../modules/laporan_2/views/laporan_2_view.dart';
+import '../modules/laporan_daftaruser/bindings/laporan_daftaruser_binding.dart';
+import '../modules/laporan_daftaruser/views/laporan_daftaruser_view.dart';
 import '../modules/laporan_qris/bindings/lap_detail_qris_binding.dart';
 import '../modules/laporan_qris/bindings/laporan_qris_binding.dart';
 import '../modules/laporan_qris/views/lap_detail_qris_view.dart';
@@ -202,6 +204,11 @@ class AppPages {
       name: _Paths.NOTIF_JATUHTEMPO,
       page: () => const NotifJatuhtempoView(),
       binding: NotifJatuhtempoBinding(),
+    ),
+    GetPage(
+      name: _Paths.LAPORAN_DAFTARUSER,
+      page: () => const LaporanDaftaruserView(),
+      binding: LaporanDaftaruserBinding(),
     ),
   ];
 }
