@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
+import 'package:bapenda_getx2_admin/app/core/pdf/pdf_Lapdaftaruser.dart';
+import 'package:bapenda_getx2_admin/app/core/pdf/pdf_helper.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser/models/model_lapdaftaruser.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,20 +21,21 @@ class LaporanDaftaruserController extends GetxController {
   bool isLoading = false;
   bool isEmpty = false;
 
-
   @override
   void onInit() {
     super.onInit();
-
   }
 
   void populateDatalist() async {
+    displayResult = false;
     isLoading = true;
     update();
     datalist.clear();
     //EasyLoading.show();
     final data_mentah = await api.getLapDaftarUser(
-        masa_awal: selectedDate, masa_akhir: selectedDate_akhir, jenispajak: valueJenisPajak);
+        masa_awal: selectedDate,
+        masa_akhir: selectedDate_akhir,
+        jenispajak: valueJenisPajak);
     print(jsonEncode(data_mentah));
     if (data_mentah == null) {
       isEmpty = true;
@@ -96,6 +99,13 @@ class LaporanDaftaruserController extends GetxController {
     update();
   }
 
+  Future cetakLHP() async {
+    final pdfFile = await PdfLapWajibPajakTermuktahir.generate(
+        datalist, selectedDate, selectedDate_akhir);
+    PdfHelper.openFile(pdfFile);
+    update();
+  }
+
   @override
   void onReady() {
     super.onReady();
@@ -105,6 +115,4 @@ class LaporanDaftaruserController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-   
 }

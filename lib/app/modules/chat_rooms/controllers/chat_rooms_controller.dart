@@ -30,6 +30,7 @@ class ChatRoomsController extends GetxController {
         .snapshots()
         .listen((chatQuerySnapshot) async {
       final List<Map<String, dynamic>> updatedRooms = [];
+      final Map<String, Map<String, dynamic>> userCache = {};
 
       await Future.forEach(chatQuerySnapshot.docs, (room) async {
         final Map<String, dynamic> roomData =
@@ -37,21 +38,27 @@ class ChatRoomsController extends GetxController {
         final List<dynamic> participants = roomData['participants'];
         final List<Map<String, dynamic>> participantsInfo = [];
 
-        // Use Future.wait to wait for all the async operations to complete
+        // Fetch all user data in parallel
         await Future.wait(participants.map((participant) async {
-          final DocumentSnapshot userDoc = await FirebaseFirestore.instance
-              .collection('UserTokens')
-              .doc(participant)
-              .get();
+          if (userCache.containsKey(participant)) {
+            participantsInfo.add(userCache[participant]!);
+          } else {
+            final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+                .collection('UserTokens')
+                .doc(participant)
+                .get();
 
-          if (userDoc.exists) {
-            final Map<String, dynamic> userData =
-                userDoc.data() as Map<String, dynamic>;
-            participantsInfo.add({
-              'participant': participant,
-              'avatar': userData['image'],
-              'nama': userData['nama'],
-            });
+            if (userDoc.exists) {
+              final Map<String, dynamic> userData =
+                  userDoc.data() as Map<String, dynamic>;
+              final participantInfo = {
+                'participant': participant,
+                'avatar': userData['image'],
+                'nama': userData['nama'],
+              };
+              userCache[participant] = participantInfo;
+              participantsInfo.add(participantInfo);
+            }
           }
         }));
 

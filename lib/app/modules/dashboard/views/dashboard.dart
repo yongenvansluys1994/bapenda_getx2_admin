@@ -335,6 +335,11 @@ class Dashboard extends GetView<DashboardController> {
                               color: Colors.white,
                             ),
                             child: SfCircularChart(
+                              title: ChartTitle(
+                                  text: "Data Dummy",
+                                  textStyle: TextStyle(
+                                    fontSize: 11.4.sp,
+                                  )),
                               tooltipBehavior: TooltipBehavior(enable: true),
                               legend: Legend(
                                   isVisible: true,
@@ -378,6 +383,11 @@ class Dashboard extends GetView<DashboardController> {
                               color: Colors.white,
                             ),
                             child: SfCircularChart(
+                              title: ChartTitle(
+                                  text: "Jumlah Transaksi \nOnline",
+                                  textStyle: TextStyle(
+                                    fontSize: 11.4.sp,
+                                  )),
                               tooltipBehavior: TooltipBehavior(enable: true),
                               legend: Legend(
                                   isVisible: true,

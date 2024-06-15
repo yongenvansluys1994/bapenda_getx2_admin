@@ -77,6 +77,7 @@ class Laporan2Controller extends GetxController {
 
   // Function to manually add values to the datalist
   void populateDatalist() async {
+    displayResult = false;
     isLoading = true;
     update();
     datalist.clear();

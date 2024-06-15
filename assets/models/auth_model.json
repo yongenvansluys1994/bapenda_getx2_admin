@@ -2,7 +2,7 @@
   {
     "id_rekening": "211",
     "kode_rekening": "4.1.1.02.01",
-    "nama_rekening": "Restoran",
+    "nama_rekening": "Pajak Restoran dan Sejenisnya",
     "rumus": "10",
     "tarif": "0"
   },
@@ -107,28 +107,28 @@
   {
     "id_rekening": "1249",
     "kode_rekening": "4.1.1.02.02",
-    "nama_rekening": "Rumah Makan",
+    "nama_rekening": "Pajak Rumah Makan dan Sejenisnya",
     "rumus": "10",
     "tarif": "0"
   },
   {
     "id_rekening": "1250",
     "kode_rekening": "4.1.1.02.03",
-    "nama_rekening": "Kafetaria",
+    "nama_rekening": "Pajak Kafetaria dan Sejenisnya",
     "rumus": "10",
     "tarif": "0"
   },
   {
     "id_rekening": "1251",
     "kode_rekening": "4.1.1.02.04",
-    "nama_rekening": "Kantin",
+    "nama_rekening": "Pajak Kantin dan Sejenisnya",
     "rumus": "10",
     "tarif": "0"
   },
   {
     "id_rekening": "1255",
     "kode_rekening": "4.1.1.02.05",
-    "nama_rekening": "Katering",
+    "nama_rekening": "Pajak Jasa Boga/Katering dan Sejenisnya",
     "rumus": "10",
     "tarif": "0"
   },
