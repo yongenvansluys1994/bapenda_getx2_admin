@@ -196,7 +196,8 @@ class Dashboard extends GetView<DashboardController> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.all(12.r),
+                  padding:
+                      EdgeInsets.only(left: 12.r, right: 12.r, bottom: 12.r),
                   child: Container(
                     height: 250.h,
                     width: 350.w,
@@ -206,7 +207,11 @@ class Dashboard extends GetView<DashboardController> {
                         ),
                         margin: EdgeInsets.only(top: 1),
                         // Chart title
-                        title: ChartTitle(text: ''),
+                        title: ChartTitle(
+                            text: "Jumlah Pelaporan Pajak",
+                            textStyle: TextStyle(
+                              fontSize: 12.sp,
+                            )),
                         // Enable legend
                         legend: Legend(
                             isVisible: true, position: LegendPosition.bottom),
