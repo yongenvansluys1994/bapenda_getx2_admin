@@ -258,9 +258,17 @@ class PendataanDetailController extends GetxController {
       'nik': '${dataArgument.nikUser}',
       'kategori': 'pelaporan_dikembalikan',
       'keterangan':
-          'Mohon Maaf Pelaporan Pajak Periode ${DateFormat('MMMM', 'id_ID').format(DateTime.parse(masa_pajak2!))} Ditolak dengan alasan ${valueAlasanPenolakan}, Silakan menginput Pelaporan Pajak Kembali',
+          'Mohon Maaf Pelaporan Pajak Periode ${DateFormat('MMMM').format(DateFormat("dd-MM-yyyy").parse(masa_pajak2!))} Ditolak dengan alasan ${valueAlasanPenolakan}, Silakan menginput Pelaporan Pajak Kembali',
     });
     if (response.statusCode == 200) {
+      EasyLoading.dismiss();
+      Get.back();
+      Get.back();
+      RawSnackbar_top(
+          message: "Berhasil Kembalikan/Menolak Data Pelaporan Pajak",
+          kategori: "success",
+          duration: 2);
+      pendataanController.refreshData();
       DocumentSnapshot snap = await FirebaseFirestore.instance
           .collection("UserTokens")
           .doc(dataArgument.nikUser)
@@ -271,14 +279,6 @@ class PendataanDetailController extends GetxController {
           "Mohon Maaf Pelaporan Pajak Anda Ditolak/Dikembalikan, dengan alasan ${valueAlasanPenolakan}",
           "Mohon untuk Menginput Ulang Pelaporan Pajak dengan benar atau berkordinasi dengan Admin. Terima Kasih",
           "pelaporan_dikembalikan");
-      EasyLoading.dismiss();
-      Get.back();
-      Get.back();
-      RawSnackbar_top(
-          message: "Berhasil Kembalikan/Menolak Data Pelaporan Pajak",
-          kategori: "success",
-          duration: 2);
-      pendataanController.refreshData();
     } else {
       RawSnackbar_top(
           message: "Gagal proses Penolakan Data",
