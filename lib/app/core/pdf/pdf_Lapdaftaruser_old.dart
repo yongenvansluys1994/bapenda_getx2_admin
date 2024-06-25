@@ -14,7 +14,7 @@ class PdfLapWPBelummuktahir {
     final pdf = pw.Document();
 
     const pageSize = 32;
-    const rowsPerPage = 40; // Adjust the number of rows per page as needed
+    const rowsPerPage = 21; // Adjust the number of rows per page as needed
 
     // Function to generate a single page of the PDF
     pw.Widget generatePage(List<ModelLapDaftarUser> pageData, int pageIndex) {
