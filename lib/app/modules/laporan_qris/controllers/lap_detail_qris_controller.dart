@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_qris/models/model_laporan_qris.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -44,7 +45,7 @@ class LapDetailQrisController extends GetxController {
 
       List<String> numbers = datalist.map((model) => model.kdTagihan).toList();
       String encodedData = numbers.map(Uri.encodeQueryComponent).join(',');
-      //print(encodedData);
+      //logInfo(encodedData);
 
       var simpatdaUrl = Uri.parse(
           "http://simpatda.bontangkita.id/simpatda/api_mobile2/fetchSPTlaporan?json=$encodedData");
@@ -68,7 +69,7 @@ class LapDetailQrisController extends GetxController {
     //sumAmountInDatalist();
     isLoading = false;
     update();
-    print("check status lunas di simpatda");
+    logInfo("check status lunas di simpatda");
   }
 
   void sumAmountInDatalist() {
@@ -95,7 +96,7 @@ class LapDetailQrisController extends GetxController {
     if (selisih > 800000) {
       //jika sudah melewati masa aktif Auth yaitu 15 Menit
       //auth ulang
-      print("Auth Sudah tidak aktif, Auth Ulang");
+      logInfo("Auth Sudah tidak aktif, Auth Ulang");
       var headers = {
         'Content-Type': 'application/json',
       };
@@ -132,7 +133,7 @@ class LapDetailQrisController extends GetxController {
           var response =
               await http.post(url, headers: headers, body: jsonEncode(body));
           var data_QRIS = json.decode(response.body);
-          print(jsonEncode(data_QRIS));
+          logValue(jsonEncode(data_QRIS));
           if (data_QRIS['message'] == "success") {
             //jika berhasil GET REPORT STATUS PEMBAYARAN QRIS BPD SUDAH LUNAS
             responsePembayaran = json.decode(response.body);
@@ -157,22 +158,22 @@ class LapDetailQrisController extends GetxController {
                 var responsecallback = await http.post(url,
                     headers: headers, body: jsonEncode(body));
                 var data_callback = json.decode(responsecallback.body);
-                print(data_callback['message']);
+                logValue(data_callback['message']);
                 Get.back();
                 if (data_callback['message'] == "success") {
-                  print("success hit callback");
+                  logInfo("success hit callback");
 
                   EasyLoading.showSuccess('Berhasil hit callback');
                 }
                 //End Proses Hit Callack
               },
             );
-            print("${data_QRIS}");
+            logValue("${data_QRIS}");
             isLoadingPembayaran = false;
             update();
-            print("Pembayaran QRIS Lunas 1");
+            logInfo("Pembayaran QRIS Lunas 1");
           } else {
-            print("${data_QRIS}");
+            logValue("${data_QRIS}");
             //jika GET REPORT STATUS PEMBAYARAN QRIS BPD BELUM LUNAS
             if (data_QRIS['code'] == 500) {
               getDefaultDialog().onFixWithoutIcon(
@@ -181,24 +182,24 @@ class LapDetailQrisController extends GetxController {
               getDefaultDialog().onFixWithoutIcon(
                   title: "${"QRIS belum dibayarkan"}",
                   desc: "${"QRIS ini belum dibayarkan oleh WP"}");
-              print("QRIS Tidak ada");
+              logInfo("QRIS Tidak ada");
             }
 
             update();
           }
         } else {
-          print("Gagal Perbaharui Token ke API bapenda ETAM");
+          logInfo("Gagal Perbaharui Token ke API bapenda ETAM");
           isLoadingPembayaran = false;
           update();
         }
       } else {
-        print("Gagal Auth API Bankaltimtara");
+        logError("Gagal Auth API Bankaltimtara");
         update();
       }
     } else {
-      print("Auth Masih Aktif, Auth Ulang");
+      logInfo("Auth Masih Aktif, Auth Ulang");
       //memproses check status pembayaran QRIS
-      print("Get Report Status Pembayaran Bankaltim");
+      logInfo("Get Report Status Pembayaran Bankaltim");
       //-------------------GET REPORT STATUS PEMBAYARAN QRIS------------------------------------
       var headers = {
         'Content-Type': 'application/json',
@@ -216,7 +217,7 @@ class LapDetailQrisController extends GetxController {
       if (data_QRIS['message'] == "success") {
         //jika berhasil GET REPORT STATUS PEMBAYARAN QRIS BPD
         //Cek status lunas di simpatda
-        print("${data_QRIS}");
+        logInfo("${data_QRIS}");
 
         isLoadingPembayaran = false;
         responsePembayaran = json.decode(response.body);
@@ -241,20 +242,20 @@ class LapDetailQrisController extends GetxController {
             var responsecallback =
                 await http.post(url, headers: headers, body: jsonEncode(body));
             var data_callback = json.decode(responsecallback.body);
-            print(data_callback['message']);
+            logInfo(data_callback['message']);
             Get.back();
             if (data_callback['message'] == "success") {
-              print("success hit callback");
+              logInfo("success hit callback");
               EasyLoading.showSuccess('Berhasil hit callback');
             }
             //End Proses Hit Callack
           },
         );
         update();
-        print("Pembayaran QRIS Lunas 2");
+        logInfo("Pembayaran QRIS Lunas 2");
       } else {
         //jika GET REPORT STATUS PEMBAYARAN QRIS BPD BELUM LUNAS
-        print("${data_QRIS}");
+        logInfo("${data_QRIS}");
         if (data_QRIS['code'] == 500) {
           getDefaultDialog().onFixWithoutIcon(
               title: "${"Auth QRIS Expired Token"}", desc: "${""}");
@@ -262,7 +263,7 @@ class LapDetailQrisController extends GetxController {
           getDefaultDialog().onFixWithoutIcon(
               title: "${"QRIS belum dibayarkan"}",
               desc: "${"QRIS ini belum dibayarkan oleh WP"}");
-          print("QRIS Tidak ada");
+          logInfo("QRIS Tidak ada");
         }
 
         update();

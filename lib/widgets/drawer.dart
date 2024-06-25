@@ -470,11 +470,11 @@ buildDrawer() {
                         ListTile(
                           title: ResponsiveHelper.isTablet()
                               ? Texts.captionXs(
-                                  'Laporan Transaksi VA',
+                                  'Lap. Transaksi VA',
                                   color: primaryColor,
                                 )
                               : Texts.caption(
-                                  'Laporan Transaksi VA',
+                                  'Lap. Transaksi VA',
                                   color: primaryColor,
                                 ),
                           onTap: () {
@@ -486,11 +486,11 @@ buildDrawer() {
                         ListTile(
                           title: ResponsiveHelper.isTablet()
                               ? Texts.captionXs(
-                                  'Laporan Transaksi QRIS',
+                                  'Lap. Transaksi QRIS',
                                   color: primaryColor,
                                 )
                               : Texts.caption(
-                                  'Laporan Transaksi QRIS',
+                                  'Lap. Transaksi QRIS',
                                   color: primaryColor,
                                 ),
                           onTap: () {
@@ -508,11 +508,11 @@ buildDrawer() {
                             ListTile(
                               title: ResponsiveHelper.isTablet()
                                   ? Texts.captionXs(
-                                      'Laporan Realisasi 1',
+                                      'Lap. Realisasi 1',
                                       color: primaryColor,
                                     )
                                   : Texts.caption(
-                                      'Laporan Realisasi 1',
+                                      'Lap. Realisasi 1',
                                       color: primaryColor,
                                     ),
                               onTap: () {
@@ -520,19 +520,7 @@ buildDrawer() {
                                     arguments: controller.authModel);
                               },
                             ),
-                            Positioned(
-                              right: 8.r,
-                              child: badges.Badge(
-                                badgeStyle: badges.BadgeStyle(
-                                    shape: badges.BadgeShape.square,
-                                    badgeColor: Colors.red,
-                                    borderRadius: BorderRadius.circular(5)),
-                                badgeContent: Text(' Baru ',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10.5.sp)),
-                              ),
-                            ),
+                             
                           ],
                         ),
                         Divider(height: 0.0),
@@ -541,11 +529,11 @@ buildDrawer() {
                             ListTile(
                               title: ResponsiveHelper.isTablet()
                                   ? Texts.captionXs(
-                                      'Laporan Realisasi 2',
+                                      'Lap. Realisasi 2',
                                       color: primaryColor,
                                     )
                                   : Texts.caption(
-                                      'Laporan Realisasi 2',
+                                      'Lap. Realisasi 2',
                                       color: primaryColor,
                                     ),
                               onTap: () {
@@ -553,19 +541,7 @@ buildDrawer() {
                                     arguments: controller.authModel);
                               },
                             ),
-                            Positioned(
-                              right: 8.r,
-                              child: badges.Badge(
-                                badgeStyle: badges.BadgeStyle(
-                                    shape: badges.BadgeShape.square,
-                                    badgeColor: Colors.red,
-                                    borderRadius: BorderRadius.circular(5)),
-                                badgeContent: Text(' Baru ',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10.5.sp)),
-                              ),
-                            ),
+                             
                           ],
                         ),
                         Divider(height: 0.0),
@@ -574,11 +550,11 @@ buildDrawer() {
                             ListTile(
                               title: ResponsiveHelper.isTablet()
                                   ? Texts.captionXs(
-                                      'Laporan Wajib Pajak',
+                                      'Lap. WP Termuktahir',
                                       color: primaryColor,
                                     )
                                   : Texts.caption(
-                                      'Laporan Wajib Pajak',
+                                      'Lap. WP Termuktahir',
                                       color: primaryColor,
                                     ),
                               onTap: () {
@@ -586,19 +562,28 @@ buildDrawer() {
                                     arguments: controller.authModel);
                               },
                             ),
-                            Positioned(
-                              right: 8.r,
-                              child: badges.Badge(
-                                badgeStyle: badges.BadgeStyle(
-                                    shape: badges.BadgeShape.square,
-                                    badgeColor: Colors.red,
-                                    borderRadius: BorderRadius.circular(5)),
-                                badgeContent: Text(' Baru ',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10.5.sp)),
-                              ),
+                             
+                          ],
+                        ),
+                        Divider(height: 0.0),
+                        Stack(
+                          children: [
+                            ListTile(
+                              title: ResponsiveHelper.isTablet()
+                                  ? Texts.captionXs(
+                                      'Lap. WP Blm Muktahir',
+                                      color: primaryColor,
+                                    )
+                                  : Texts.caption(
+                                      'Lap. WP Blm Muktahir',
+                                      color: primaryColor,
+                                    ),
+                              onTap: () {
+                                Get.toNamed(Routes.LAPORAN_DAFTARUSER_OLD,
+                                    arguments: controller.authModel);
+                              },
                             ),
+                             
                           ],
                         ),
                       ],

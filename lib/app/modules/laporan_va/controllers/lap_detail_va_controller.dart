@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/modules/laporan_va/models/model_laporan_va.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -50,16 +51,16 @@ class LapDetailVaController extends GetxController {
         "https://yongen-bisa.com/bapenda_app/api_ver2/vaqris/check_auth.php?kategori=va");
     var response_auth = await http.get(url_auth);
     List data_auth = json.decode(response_auth.body);
-    print(data_auth[0]["token"]);
+    logValue(data_auth[0]["token"]);
     DateTime waktu1 = DateTime.parse(data_auth[0]["created_at"]);
     DateTime waktu2 = DateTime.now();
-    print(
+    logValue(
         'selisih ${waktu2.millisecondsSinceEpoch - waktu1.millisecondsSinceEpoch}');
     var selisih = waktu2.millisecondsSinceEpoch - waktu1.millisecondsSinceEpoch;
     if (selisih > 86400000) {
       //jika sudah melewati masa aktif Auth yaitu 1 Jam
       //auth ulang
-      print("Auth Sudah tidak aktif, Auth Ulang");
+      logInfo("Auth Sudah tidak aktif, Auth Ulang");
       var headers = {
         'Content-Type': 'application/json',
       };
@@ -124,10 +125,10 @@ class LapDetailVaController extends GetxController {
             sumAmountInDatalist();
             isLoading = false;
             update();
-            print("check status lunas di simpatda");
+            logInfo("check status lunas di simpatda");
           }
         } else {
-          print("Gagal Perbaharui Token ke API bapenda ETAM");
+          logInfo("Gagal Perbaharui Token ke API bapenda ETAM");
           getDefaultDialog().onFix(
               title: "Tidak ada Transaksi di bulan ini",
               desc:
@@ -137,13 +138,13 @@ class LapDetailVaController extends GetxController {
           update();
         }
       } else {
-        print("Gagal Auth API Bankaltimtara");
+        logInfo("Gagal Auth API Bankaltimtara");
         isLoading = false;
         update();
       }
     } else {
       //memproses check status pembayaran QRIS
-      print("Get Report Status Pembayaran Bankaltim");
+      logInfo("Get Report Status Pembayaran Bankaltim");
       //-------------------GET REPORT STATUS PEMBAYARAN QRIS------------------------------------
       var headers = {
         'Content-Type': 'application/json',
@@ -153,7 +154,7 @@ class LapDetailVaController extends GetxController {
       var url = Uri.parse(
           "https://e-api.bankaltimtara.co.id:8083/api-pemda/va/paid/monthly/2024$valueBulan");
       var response = await http.get(url, headers: headers);
-      print(jsonEncode(response.body));
+      logValue(jsonEncode(response.body));
 
       var data_VA = json.decode(response.body);
       if (data_VA['message'] == "success") {
@@ -184,8 +185,8 @@ class LapDetailVaController extends GetxController {
         isLoading = false;
         update();
       } else {
-        print("Gagal get status pembayaran BPD");
-        print("${data_VA}");
+        logInfo("Gagal get status pembayaran BPD");
+        logInfo("${data_VA}");
         getDefaultDialog().onFix(
             title: "Tidak ada Transaksi di bulan ini",
             desc:

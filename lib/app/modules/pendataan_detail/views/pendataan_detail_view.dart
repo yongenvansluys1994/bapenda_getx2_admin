@@ -950,14 +950,12 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 10.h),
-                            controller.dataArgument.tanggalLunas != "0"
-                                ? detailTransaksi(controller: controller)
-                                : SizedBox(),
+                             
                             controller.dataArgument.status == "0" &&
                                     controller.authModel_no_hp == "admin"
                                 ? Column(
                                     children: [
+                                      SizedBox(height: 10.h),
                                       controller.dataArgument.jenispajak ==
                                               "HOTEL"
                                           ? Padding(
@@ -1065,7 +1063,12 @@ class PendataanDetailView extends GetView<PendataanDetailController> {
                                             "0"
                                     ? SizedBox()
                                     : SizedBox(),
-                            SizedBox(height: 10.h),
+                            controller.dataArgument.tanggalLunas != "0"
+                                ? detailTransaksi(controller: controller)
+                                : SizedBox(),
+                            controller.tgl_penetapan != "0"
+                                ? detailSKPD(controller: controller)
+                                : SizedBox(),
                             // riwayatVerifikasi(controller: controller),
                           ],
                         ),
@@ -1184,109 +1187,233 @@ class detailTransaksi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      constraints: BoxConstraints(
-        maxWidth: Get.width * 0.95,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.w),
-        border: Border.all(
-          color: Color(0xFFF1F4F8),
-          width: 2,
+    return Padding(
+     padding:  EdgeInsets.only(top: 10.h),
+      child: Container(
+        width: double.infinity,
+        constraints: BoxConstraints(
+          maxWidth: Get.width * 0.95,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 193, 193, 193),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(2, 2),
-          ),
-          const BoxShadow(
-              color: Colors.white,
-              offset: Offset(-2, -2),
-              blurRadius: 10,
-              spreadRadius: 1),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 60,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF1F4F8),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.w),
-            child: Text(
-              'Detail Pembayaran',
-              style: TextStyle(
-                fontFamily: 'Outfit',
-                color: Color.fromARGB(255, 71, 80, 90),
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Divider(
-            height: 15,
-            thickness: 2,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.w),
+          border: Border.all(
             color: Color(0xFFF1F4F8),
+            width: 2,
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 0,
-                  color: Color(0xFFE0E3E7),
-                  offset: Offset(0, 1),
-                )
-              ],
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 193, 193, 193),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: const Offset(2, 2),
             ),
-            child: Column(
+            const BoxShadow(
+                color: Colors.white,
+                offset: Offset(-2, -2),
+                blurRadius: 10,
+                spreadRadius: 1),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24, 5, 24, 4),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        'Metode Pembayaran : ${controller.metodePembayaran == "qris" ? "QRIS" : controller.metodePembayaran == "va" ? "Virtual Account" : "Teller atau Lainnya"}',
-                        style: TextStyle(
-                          fontFamily: 'Roboto Mono',
-                          color: Color.fromARGB(255, 71, 80, 90),
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                Container(
+                  width: 60,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF1F4F8),
+                    borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                controller.isLoadingPembayaran == true
-                    ? ShimmerWidget.Items1()
-                    : controller.metodePembayaran == "qris"
-                        ? dataQRIS(controller: controller)
-                        : controller.metodePembayaran == "va"
-                            ? dataVA(controller: controller)
-                            : dataLainnya(controller: controller)
               ],
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.w),
+              child: Text(
+                'Detail Pembayaran',
+                style: TextStyle(
+                  fontFamily: 'Outfit',
+                  color: Color.fromARGB(255, 71, 80, 90),
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Divider(
+              height: 15,
+              thickness: 2,
+              color: Color(0xFFF1F4F8),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 0,
+                    color: Color(0xFFE0E3E7),
+                    offset: Offset(0, 1),
+                  )
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(24, 5, 24, 4),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Metode Pembayaran : ${controller.metodePembayaran == "qris" ? "QRIS" : controller.metodePembayaran == "va" ? "Virtual Account" : "Teller atau Lainnya"}',
+                          style: TextStyle(
+                            fontFamily: 'Roboto Mono',
+                            color: Color.fromARGB(255, 71, 80, 90),
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  controller.isLoadingPembayaran == true
+                      ? ShimmerWidget.Items1()
+                      : controller.metodePembayaran == "qris"
+                          ? dataQRIS(controller: controller)
+                          : controller.metodePembayaran == "va"
+                              ? dataVA(controller: controller)
+                              : dataLainnya(controller: controller)
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class detailSKPD extends StatelessWidget {
+  final PendataanDetailController controller;
+
+  detailSKPD({required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:  EdgeInsets.only(top: 10.h),
+      child: Container(
+        width: double.infinity,
+        constraints: BoxConstraints(
+          maxWidth: Get.width * 0.95,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.w),
+          border: Border.all(
+            color: Color(0xFFF1F4F8),
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 193, 193, 193),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: const Offset(2, 2),
+            ),
+            const BoxShadow(
+                color: Colors.white,
+                offset: Offset(-2, -2),
+                blurRadius: 10,
+                spreadRadius: 1),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 60,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF1F4F8),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.w),
+              child: Text(
+                'Detail SKPD',
+                style: TextStyle(
+                  fontFamily: 'Outfit',
+                  color: Color.fromARGB(255, 71, 80, 90),
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Divider(
+              height: 15,
+              thickness: 2,
+              color: Color(0xFFF1F4F8),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 0,
+                    color: Color(0xFFE0E3E7),
+                    offset: Offset(0, 1),
+                  )
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 4),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                              'Tanggal SKPD : ${controller.tgl_penetapan}',
+                              style: TextStyle(
+                                fontFamily: 'Roboto Mono',
+                                color: Color.fromARGB(255, 71, 80, 90),
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              Text(
+                              'Batas Bayar : ${controller.batas_bayar}',
+                              style: TextStyle(
+                                fontFamily: 'Roboto Mono',
+                                color: Color.fromARGB(255, 71, 80, 90),
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                      ],
+                    ),
+                  ),
+                  
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

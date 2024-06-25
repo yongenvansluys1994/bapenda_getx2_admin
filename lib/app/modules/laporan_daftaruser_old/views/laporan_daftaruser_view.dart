@@ -14,18 +14,18 @@ import 'package:intl/intl.dart';
 
 import '../controllers/laporan_daftaruser_controller.dart';
 
-class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
-  const LaporanDaftaruserView({Key? key}) : super(key: key);
+class LaporanDaftaruserViewOld extends GetView<LaporanDaftaruserControllerOld> {
+  const LaporanDaftaruserViewOld({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: "Data WP Termuktahir", leading: true, isLogin: true),
+          title: "Data WP Belum Muktahir", leading: true, isLogin: true),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            GetBuilder<LaporanDaftaruserController>(
-                init: LaporanDaftaruserController(Get.find<Api>()),
+            GetBuilder<LaporanDaftaruserControllerOld>(
+                init: LaporanDaftaruserControllerOld(Get.find<Api>()),
                 builder: (controller) {
                   return Container(
                     decoration: BoxDecoration(
@@ -271,8 +271,8 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                                       ),
                                     ),
                                     SizedBox(width: 5.w),
-                                    GetBuilder<LaporanDaftaruserController>(
-                                        init: LaporanDaftaruserController(
+                                    GetBuilder<LaporanDaftaruserControllerOld>(
+                                        init: LaporanDaftaruserControllerOld(
                                             Get.find<Api>()),
                                         builder: (controller) {
                                           return controller.displayResult ==
@@ -320,9 +320,8 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                   );
                 }),
             Divider(),
-            Text("Warna hijau adalah data yang diperbaharui"),
-            GetBuilder<LaporanDaftaruserController>(
-                init: LaporanDaftaruserController(Get.find<Api>()),
+            GetBuilder<LaporanDaftaruserControllerOld>(
+                init: LaporanDaftaruserControllerOld(Get.find<Api>()),
                 builder: (controller) {
                   if (controller.isLoading) {
                     return ShimmerWidget.Items1();
@@ -415,10 +414,7 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                           DataCell(Container(
                             height: Get.height * 0.05,
                             constraints: BoxConstraints(maxWidth: 200),
-                            color: (dataItem.nohpUsaha != ' ' &&
-                                    dataItem.nohpUsaha.isNotEmpty)
-                                ? Colors.green[300]
-                                : null,
+                            
                             child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text("${dataItem.nohpUsaha}",
@@ -428,11 +424,7 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                           )),
                           DataCell(Container(
                             height: Get.height * 0.05,
-                            color: (dataItem.emailUsaha != '-' &&
-                                    dataItem.emailUsaha != ' ' &&
-                                    dataItem.emailUsaha.isNotEmpty)
-                                ? Colors.green[300]
-                                : null,
+                             
                             constraints: BoxConstraints(maxWidth: 200),
                             child: Align(
                                 alignment: Alignment.centerLeft,
@@ -455,11 +447,7 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                           DataCell(Container(
                             width: Get.width * 0.35,
                             height: Get.height * 0.05,
-                            color: (dataItem.pekerjaanPemilik != 'Pemilik' &&
-                                    dataItem.pekerjaanPemilik != ' ' &&
-                                    dataItem.pekerjaanPemilik.isNotEmpty)
-                                ? Colors.green[300]
-                                : null,
+                             
                             constraints: BoxConstraints(maxWidth: 200),
                             child: Align(
                                 alignment: Alignment.centerLeft,
@@ -471,10 +459,7 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                           DataCell(Container(
                             width: Get.width * 0.35,
                             height: Get.height * 0.05,
-                            color: (dataItem.nohpPemilik != ' ' &&
-                                    dataItem.nohpPemilik.isNotEmpty)
-                                ? Colors.green[300]
-                                : null,
+                             
                             constraints: BoxConstraints(maxWidth: 200),
                             child: Align(
                                 alignment: Alignment.centerLeft,
@@ -486,11 +471,7 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                           DataCell(Container(
                             width: Get.width * 0.35,
                             height: Get.height * 0.05,
-                            color: (dataItem.emailUsaha != '-' &&
-                                    dataItem.emailPemilik != ' ' &&
-                                    dataItem.emailPemilik.isNotEmpty)
-                                ? Colors.green[300]
-                                : null,
+                             
                             constraints: BoxConstraints(maxWidth: 200),
                             child: Align(
                                 alignment: Alignment.centerLeft,
@@ -500,12 +481,9 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                                     maxLines: 3)),
                           )),
                           DataCell(Container(
-                            width: Get.width * 0.5,
+                             
                             height: Get.height * 0.05,
-                            color: (dataItem.koordinat != ' ' &&
-                                    dataItem.koordinat.isNotEmpty)
-                                ? Colors.green[300]
-                                : null,
+                             
                             constraints: BoxConstraints(maxWidth: 200),
                             child: Align(
                                 alignment: Alignment.centerLeft,
@@ -515,9 +493,9 @@ class LaporanDaftaruserView extends GetView<LaporanDaftaruserController> {
                                     maxLines: 3)),
                           )),
                           DataCell(Container(
-                            width: Get.width * 0.5,
+                           
                             height: Get.height * 0.05,
-                            color: Colors.green[300],
+                             
                             constraints: BoxConstraints(maxWidth: 200),
                             child: Align(
                                 alignment: Alignment.centerLeft,

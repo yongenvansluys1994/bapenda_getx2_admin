@@ -1,37 +1,61 @@
 import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
-import 'package:bapenda_getx2_admin/app/core/pdf/pdf_Laporan1.dart';
-import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model.dart';
-import 'package:bapenda_getx2_admin/core/pdf/pdf_helper.dart';
-import 'package:bapenda_getx2_admin/widgets/logger.dart';
+import 'package:bapenda_getx2_admin/app/core/pdf/pdf_Lapdaftaruser.dart';
+import 'package:bapenda_getx2_admin/app/core/pdf/pdf_Lapdaftaruser_old.dart';
+import 'package:bapenda_getx2_admin/app/core/pdf/pdf_helper.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser/models/model_lapdaftaruser.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class Laporan1Controller extends GetxController {
+class LaporanDaftaruserControllerOld extends GetxController {
   Api api;
-  Laporan1Controller(this.api);
+  LaporanDaftaruserControllerOld(this.api);
   DateTime? selectedDate;
   DateTime? selectedDate_akhir;
   var FinalDate;
   var FinalDate_akhir;
   String? valueJenisPajak;
   bool displayResult = false;
-  RxList<ModelLaporan1> datalist = <ModelLaporan1>[].obs;
+  RxList<ModelLapDaftarUser> datalist = <ModelLapDaftarUser>[].obs;
   bool isLoading = false;
+  bool isEmpty = false;
 
   @override
   void onInit() {
     super.onInit();
   }
 
-  String truncateText(String text, int maxLength) {
-    if (text.length <= maxLength) {
-      return text;
+  void populateDatalist() async {
+    displayResult = false;
+    isLoading = true;
+    update();
+    datalist.clear();
+    //EasyLoading.show();
+    final data_mentah = await api.getLapDaftarUserOld(
+        masa_awal: selectedDate,
+        masa_akhir: selectedDate_akhir,
+        jenispajak: valueJenisPajak);
+    print(jsonEncode(data_mentah));
+    if (data_mentah == null) {
+      isEmpty = true;
+      isLoading = false;
+      update();
+    } else if (data_mentah.isEmpty) {
+      isEmpty = true;
+      isLoading = false;
+      update();
     } else {
-      return text.substring(0, maxLength) + "...";
+      datalist.addAll(data_mentah);
+      //print(jsonEncode(data_mentah));
+      isEmpty = false;
+      isLoading = false;
+      displayResult = true;
+      update();
     }
+    //EasyLoading.dismiss();
+    update();
   }
 
   void date_picker_awal(BuildContext context) {
@@ -76,35 +100,9 @@ class Laporan1Controller extends GetxController {
     update();
   }
 
-  // Function to manually add values to the datalist
-  void populateDatalist() async {
-    isLoading = true;
-    update();
-    datalist.clear();
-    //EasyLoading.show();
-    final data_mentah = await api.getLaporan1(
-        masa_awal: selectedDate, masa_akhir: selectedDate_akhir);
-    //print(data_mentah);
-    if (data_mentah == null) {
-      isLoading = true;
-      update();
-    } else if (data_mentah.isEmpty) {
-      isLoading = true;
-      update();
-    } else {
-      datalist.addAll(data_mentah);
-      logValue(jsonEncode(data_mentah));
-      isLoading = false;
-      displayResult = true;
-      update();
-    }
-    //EasyLoading.dismiss();
-    update();
-  }
-
   Future cetakLHP() async {
-    final pdfFile =
-        await PdfLaporan1.generate(datalist, selectedDate, selectedDate_akhir);
+    final pdfFile = await PdfLapWPBelummuktahir.generate(
+        datalist, selectedDate, selectedDate_akhir);
     PdfHelper.openFile(pdfFile);
     update();
   }

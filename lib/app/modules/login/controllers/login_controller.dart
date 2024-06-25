@@ -6,6 +6,7 @@ import 'package:bapenda_getx2_admin/app/modules/auth/service/auth_via_db_service
 import 'package:bapenda_getx2_admin/app/modules/auth/service/employee_service.dart';
 import 'package:bapenda_getx2_admin/app/modules/login/services/login_services.dart';
 import 'package:bapenda_getx2_admin/utils/app_const.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 
 import 'package:carousel_slider/carousel_controller.dart';
 
@@ -179,11 +180,11 @@ class LoginController extends GetxController with AuthCacheService {
           EasyLoading.dismiss();
           // User authentication failed
           // Handle the error message, e.g., display an error message to the user
-          print("Authentication failed: ${result['message']}");
+          logError("Authentication failed: ${result['message']}");
         }
       } catch (error) {
         // Handle any exceptions that may be thrown
-        print("An error occurred: $error");
+        logError("An error occurred: $error");
       }
       setFetchingState(false);
       //await saveRefreshToken(keycloakService.refreshToken);
@@ -221,11 +222,11 @@ class LoginController extends GetxController with AuthCacheService {
       'token': token,
     }).then(
       (value) async {
-        print("Sukses Perbaharui Token");
+        logInfo("Sukses Perbaharui Token");
       },
     ).catchError(
       (e) {
-        print("Gagal");
+        logError("Gagal");
       },
     ).then(
       (value) {
@@ -238,7 +239,7 @@ class LoginController extends GetxController with AuthCacheService {
     await FirebaseMessaging.instance.getToken().then((token) {
       tokenMsg = token!;
 
-      print(tokenMsg);
+      logInfo(tokenMsg);
 
       saveTokenMsg(token, nik, noHp, foto, nama);
     });

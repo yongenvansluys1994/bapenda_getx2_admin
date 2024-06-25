@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/auth/service/auth_cache_service.dart';
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_multiple.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -49,6 +50,8 @@ class JatuhTempoController extends GetxController with AuthCacheService {
     }
     if (niksJatuhTempo.isNotEmpty) {
       getTokenList3(niksJatuhTempo);
+    }else{
+      logInfo("Tidak ada Pelaporan Jatuh Tempo periode 7 Hari lagi");
     }
 
     //EasyLoading.dismiss();
@@ -100,8 +103,8 @@ class JatuhTempoController extends GetxController with AuthCacheService {
     // ];
 
     sendPushMessagesJatuhTempo(allTokens3, "jatuh_tempo");
-    print(jsonEncode("Notif jatuh tempo sudah terkirim"));
-    print(jsonEncode(allTokens3));
+    logInfo(jsonEncode("Notif jatuh tempo sudah terkirim"));
+    logValue(jsonEncode(allTokens3));
 
     await insertJatuhTempo(allTokens3);
   }
@@ -115,7 +118,7 @@ class JatuhTempoController extends GetxController with AuthCacheService {
   void dispose() {
     // Perform cleanup tasks when the controller is disposed
     super.dispose();
-    print('Controller disposed');
+    logWarning('Controller disposed');
   }
 
   @override
@@ -124,6 +127,6 @@ class JatuhTempoController extends GetxController with AuthCacheService {
     // Anda dapat membatalkan request yang sedang berlangsung di sini
 
     super.onClose();
-    print('Controller close');
+    logWarning('Controller close');
   }
 }

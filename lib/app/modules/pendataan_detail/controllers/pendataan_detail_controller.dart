@@ -7,6 +7,7 @@ import 'package:bapenda_getx2_admin/app/modules/pendataan_detail/models/model_re
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_single.dart';
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_topic.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,8 @@ class PendataanDetailController extends GetxController {
   int pendapatan = 0;
   String? bukti;
   String? tarif_persen;
+  String? tgl_penetapan;
+  String? batas_bayar;
   int pajak = 0;
   String? nik_admin;
   List data_dropdown = []; //edited line
@@ -163,6 +166,9 @@ class PendataanDetailController extends GetxController {
     bukti = data[0]["BUKTI"];
     tarif_persen = data[0]["TARIF_PERSEN"];
     pajak = int.parse(data[0]["PAJAK"]);
+    tgl_penetapan = data[0]["TGL_PENETAPAN"];
+    batas_bayar = data[0]["BATAS_BAYAR"];
+    logInfo("${data[0]["TGL_PENETAPAN"]}");
     EasyLoading.dismiss();
     update();
   }
@@ -199,7 +205,7 @@ class PendataanDetailController extends GetxController {
     final responseData = await response.stream.toBytes();
     final respStr = String.fromCharCodes(responseData);
     EasyLoading.dismiss();
-    print(respStr);
+    logInfo(respStr);
 
     if (response.statusCode == 200) {
       if (respStr == "Success") {

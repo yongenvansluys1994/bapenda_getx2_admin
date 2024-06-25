@@ -8,6 +8,7 @@ import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/views/histori
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:bapenda_getx2_admin/widgets/easythrottle.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
@@ -1171,7 +1172,7 @@ class _PendaftaranDetailViewState extends State<PendaftaranDetailView> {
                   },
                   onSelected: (value) {
                     if (value == 0) {
-                      print("My account menu is selected.");
+                      logInfo("My account menu is selected.");
                     } else if (value == 1) {}
                   }),
             ),

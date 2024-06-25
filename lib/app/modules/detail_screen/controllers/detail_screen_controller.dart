@@ -1,4 +1,5 @@
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:get/get.dart';
 
 class DetailScreenController extends GetxController {
@@ -7,7 +8,7 @@ class DetailScreenController extends GetxController {
   void onInit() {
     super.onInit();
     url_image = Get.arguments;
-    print('${URL_APP}/upload/${url_image}');
+    logInfo('${URL_APP}/upload/${url_image}');
   }
 
   @override

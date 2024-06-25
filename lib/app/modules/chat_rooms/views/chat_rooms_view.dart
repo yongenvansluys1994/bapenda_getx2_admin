@@ -19,7 +19,7 @@ class ChatRoomsView extends GetView<ChatRoomsController> {
     return Scaffold(
       appBar: CustomAppBar(title: "Chat Room", leading: true, isLogin: true),
       body: SingleChildScrollView(
-        reverse: true,
+        reverse: false,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

@@ -1,3 +1,5 @@
+import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser_old/bindings/laporan_daftaruser_binding.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser_old/views/laporan_daftaruser_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/aktivitas/bindings/aktivitas_binding.dart';
@@ -209,6 +211,11 @@ class AppPages {
       name: _Paths.LAPORAN_DAFTARUSER,
       page: () => const LaporanDaftaruserView(),
       binding: LaporanDaftaruserBinding(),
+    ),
+    GetPage(
+      name: _Paths.LAPORAN_DAFTARUSER_OLD,
+      page: () => const LaporanDaftaruserViewOld(),
+      binding: LaporanDaftaruserBindingOld(),
     ),
   ];
 }

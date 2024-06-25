@@ -35,6 +35,7 @@ abstract class Routes {
   static const LAPORAN_2 = _Paths.LAPORAN_2;
   static const NOTIF_JATUHTEMPO = _Paths.NOTIF_JATUHTEMPO;
   static const LAPORAN_DAFTARUSER = _Paths.LAPORAN_DAFTARUSER;
+  static const LAPORAN_DAFTARUSER_OLD = _Paths.LAPORAN_DAFTARUSER_OLD;
 }
 
 abstract class _Paths {
@@ -69,4 +70,5 @@ abstract class _Paths {
   static const LAPORAN_2 = '/laporan-2';
   static const NOTIF_JATUHTEMPO = '/notif-jatuhtempo';
   static const LAPORAN_DAFTARUSER = '/laporan-daftaruser';
+  static const LAPORAN_DAFTARUSER_OLD = '/laporan-daftaruser-old';
 }

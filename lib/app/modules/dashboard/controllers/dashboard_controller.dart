@@ -9,6 +9,7 @@ import 'dart:ui' as ui;
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_single.dart';
 import 'package:bapenda_getx2_admin/utils/app_const.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -81,7 +82,7 @@ class DashboardController extends GetxController with AuthCacheService {
         final controller = Get.find<JatuhTempoController>();
         controller.fetchJatuhTempo();
       } else {
-        print("Notif Jatuh Tempo sudah ada hari ini");
+        logInfo("Notif Jatuh Tempo sudah ada hari ini");
       }
     } catch (e) {}
   }
@@ -125,7 +126,7 @@ class DashboardController extends GetxController with AuthCacheService {
 
       List<dynamic> jsonData =
           (json.decode(jsonStr) as Map<String, dynamic>)["parkir"];
-      print(json.encode(jsonData));
+      logValue(json.encode(jsonData));
       for (var item in jsonData) {
         String month = item.keys.first;
         double sales = item.values.first.toDouble();
@@ -134,7 +135,7 @@ class DashboardController extends GetxController with AuthCacheService {
 
       List<dynamic> jsonData2 =
           (json.decode(jsonStr) as Map<String, dynamic>)["hotel"];
-      print(json.encode(jsonData2));
+      logValue(json.encode(jsonData2));
       for (var item in jsonData2) {
         String month = item.keys.first;
         double sales = item.values.first.toDouble();
@@ -143,7 +144,7 @@ class DashboardController extends GetxController with AuthCacheService {
 
       List<dynamic> jsonData3 =
           (json.decode(jsonStr) as Map<String, dynamic>)["hiburan"];
-      print(json.encode(jsonData3));
+      logValue(json.encode(jsonData3));
       for (var item in jsonData3) {
         String month = item.keys.first;
         double sales = item.values.first.toDouble();
@@ -152,7 +153,7 @@ class DashboardController extends GetxController with AuthCacheService {
 
       List<dynamic> jsonData4 =
           (json.decode(jsonStr) as Map<String, dynamic>)["restoran"];
-      print(json.encode(jsonData4));
+      logValue(json.encode(jsonData4));
       for (var item in jsonData4) {
         String month = item.keys.first;
         double sales = item.values.first.toDouble();
@@ -168,7 +169,7 @@ class DashboardController extends GetxController with AuthCacheService {
       // Update the UI after all operations are completed
       update();
     } catch (e) {
-      print("An error occurred: $e");
+      logError("An error occurred: $e");
       // Handle the error here, if needed
     }
   }
@@ -215,15 +216,15 @@ class DashboardController extends GetxController with AuthCacheService {
 
         // Update countMap with the fetched data
         countMap.assignAll(data);
-        print(jsonEncode(countMap));
+        logValue(jsonEncode(countMap));
         update();
       } else {
         // Handle error
-        print('Failed to load data: ${response.statusCode}');
+        logError('Failed to load data: ${response.statusCode}');
       }
     } catch (e) {
       // Handle exceptions
-      print('Exception occurred: $e');
+      logError('Exception occurred: $e');
     }
     update();
   }
@@ -264,7 +265,7 @@ class DashboardController extends GetxController with AuthCacheService {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null && !kIsWeb) {
-        print("Listen Pesan yang masuk${message.notification?.title}");
+        logInfo("Listen Pesan yang masuk${message.notification?.title}");
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,
           notification.title,
@@ -329,7 +330,7 @@ class DashboardController extends GetxController with AuthCacheService {
         grafik_fetch();
       }
       if (int.parse(DBVersion!) > currentversion) {
-        print("tampilkan dialog");
+        logInfo("tampilkan dialog");
         GetDialogDismissible(
             currentversion: currentversion, DBVersion: DBVersion);
         return; // Menghentikan eksekusi setelah menampilkan dialog
@@ -418,7 +419,7 @@ class DashboardController extends GetxController with AuthCacheService {
 
   void stopProcess() async {
     httpClient.close();
-    print("already close");
+    logWarning("already close");
     update();
   }
 
@@ -431,7 +432,7 @@ class DashboardController extends GetxController with AuthCacheService {
   void dispose() {
     // Perform cleanup tasks when the controller is disposed
     super.dispose();
-    print('Controller disposed');
+    logWarning('Controller disposed');
   }
 
   @override
@@ -440,6 +441,6 @@ class DashboardController extends GetxController with AuthCacheService {
     // Anda dapat membatalkan request yang sedang berlangsung di sini
 
     super.onClose();
-    print('Controller close');
+    logWarning('Controller close');
   }
 }

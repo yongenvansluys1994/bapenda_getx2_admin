@@ -147,6 +147,20 @@ class Api {
     }
   }
 
+  Future<List<ModelLapDaftarUser>?> getLapDaftarUserOld(
+      {DateTime? masa_awal, DateTime? masa_akhir, String? jenispajak}) async {
+    String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
+    String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
+    var response = await dio.get("/laporan/laporan_daftaruser_old.php?masa_awal=${masa_awalformat}&masa_akhir=${masa_akhirformat}&jenispajak=${jenispajak}");
+    if (response.statusCode == 200) {
+      List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
+
+      return data.map((e) => ModelLapDaftarUser.fromJson(e)).toList();
+    } else {
+      return null;
+    }
+  }
+
   Future<List<ModelLaporan2>?> getLaporan2(
       {DateTime? masa_awal, DateTime? masa_akhir}) async {
     String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
