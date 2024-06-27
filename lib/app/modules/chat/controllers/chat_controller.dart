@@ -51,54 +51,47 @@ class ChatController extends GetxController {
       update();
     } else {
       try {
-    // Memanggil sendChat dan menunggu hasilnya
-    var response = await sendChat({
-        'id_userwp': authModel.idUserwp,
-        'room_id': '${roomID}',
-        'text': '${textController.text}',
-        'type': 'lama',
-      });
+        // Memanggil sendChat dan menunggu hasilnya
+        var response = await sendChat({
+          'id_userwp': int.parse("${authModel.idUserwp}"),
+          'room_id': '${roomID}',
+          'text': '${textController.text}',
+          'type': 'lama',
+        });
 
-    // Memeriksa status respons
-    if (response.statusCode == 200) {
-      
-      dismissKeyboard();
-       textController.clear();
-      // Mengolah respons jika sukses
-      var responseData = response.data;
-      var decodedResponse = jsonDecode(responseData);
-      var data = decodedResponse['data'];
-       // Iterasi melalui setiap item di 'data' dan tambahkan ke datalist
-        for (var item in data) {
-          datalist.add(ModelChat.fromJson(item));
+        // Memeriksa status respons
+        if (response.statusCode == 200) {
+          dismissKeyboard();
+          // Mengolah respons jika sukses
+          var responseData = response.data;
+          var decodedResponse = jsonDecode(responseData);
+          var data = decodedResponse['data'];
+          // Iterasi melalui setiap item di 'data' dan tambahkan ke datalist
+          for (var item in data) {
+            datalist.add(ModelChat.fromJson(item));
+          }
+          // Mengurutkan datalist berdasarkan sent_at (terbaru di paling bawah)
+          datalist.sort((a, b) => b.sentAt.compareTo(a.sentAt));
+          // Update UI
+          update();
+          DocumentSnapshot snap = await FirebaseFirestore.instance
+              .collection("UserTokens")
+              .doc(nik_sender)
+              .get();
+          String token_target = snap['token'];
+          sendPushMessage(token_target, "${authModel.nama}",
+              "${textController.text}", "chat_masuk", jsonDecode(responseData));
+          textController.clear();
+          //logInfo("${jsonEncode(datalist)}");
+          // Lakukan sesuatu dengan responseData
+        } else {
+          // Mengolah respons jika gagal
+          logInfo("Failed to send message: ${response.statusMessage}");
         }
-        // Mengurutkan datalist berdasarkan sent_at (terbaru di paling bawah)
-        datalist.sort((a, b) => b.sentAt.compareTo(a.sentAt));
-        // Update UI
-        update();
-       DocumentSnapshot snap = await FirebaseFirestore.instance
-            .collection("UserTokens")
-            .doc(nik_sender)
-            .get();
-        String token_target = snap['token'];
-        sendPushMessage(
-            token_target,
-            "${authModel.nama}",
-            "${textController.text}",
-            "chat_masuk",
-            jsonDecode(responseData));
-            
-      
-      //logInfo("${jsonEncode(datalist)}");
-      // Lakukan sesuatu dengan responseData
-    } else {
-      // Mengolah respons jika gagal
-      logInfo("Failed to send message: ${response.statusMessage}");
-    }
-  } catch (e) {
-    // Menangani error
-    print("Error: $e");
-  }
+      } catch (e) {
+        // Menangani error
+        print("Error: $e");
+      }
 
       update();
     }
@@ -154,32 +147,26 @@ class ChatController extends GetxController {
     }
   }
 
-  Future<void> refreshDatalist(roomID) async {
-    final datauser = await getChat(roomID);
-
-    datalist.addAll(datauser!);
-
-    update();
-  }
-
   void listenFCM() async {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null && !kIsWeb) {
         if (message.data['desc'] == "chat_masuk") {
-           var decodedResponse = jsonDecode(message.data['json_value']);
-        
-        // Ambil data dari decodedResponse
-        var data = decodedResponse['data'];
-       // Iterasi melalui setiap item di 'data' dan tambahkan ke datalist
-        for (var item in data) {
-          datalist.add(ModelChat.fromJson(item));
-        }
-        // Mengurutkan datalist berdasarkan sent_at (terbaru di paling bawah)
-        datalist.sort((a, b) => b.sentAt.compareTo(a.sentAt));
-        // Update UI
-        update();
+          var decodedResponse = jsonDecode(message.data['json_value']);
+
+          // Ambil data dari decodedResponse
+          var data = decodedResponse['data'];
+          // Iterasi melalui setiap item di 'data' dan tambahkan ke datalist
+          for (var item in data) {
+            datalist.add(ModelChat.fromJson(item));
+          }
+          // Mengurutkan datalist berdasarkan sent_at (terbaru di paling bawah)
+          datalist.sort((a, b) => b.sentAt.compareTo(a.sentAt));
+
+          // Update UI
+          update();
+          //chatRoomCon.FetchData();
         }
 
         //Get.toNamed(Routes.LAPOR_PAJAK, arguments: authModel);

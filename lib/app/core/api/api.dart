@@ -64,9 +64,9 @@ Future<List<ModelChat>?> getChat(roomID) async {
   }
 }
 
-Future<Response> readChat(int id_userwp,roomID) {
+Future<Response> readChat(int id_userwp, roomID) {
   return dioChat.put(
-    "/chat/read_chat.php?id_userwp=185&room_id=8",
+    "/chat/read_chat.php?id_userwp=$id_userwp&room_id=$roomID",
   );
 }
 
@@ -183,7 +183,8 @@ class Api {
       {DateTime? masa_awal, DateTime? masa_akhir, String? jenispajak}) async {
     String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
     String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
-    var response = await dio.get("/laporan/laporan_daftaruser.php?masa_awal=${masa_awalformat}&masa_akhir=${masa_akhirformat}&jenispajak=${jenispajak}");
+    var response = await dio.get(
+        "/laporan/laporan_daftaruser.php?masa_awal=${masa_awalformat}&masa_akhir=${masa_akhirformat}&jenispajak=${jenispajak}");
     if (response.statusCode == 200) {
       List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
 
@@ -197,7 +198,8 @@ class Api {
       {DateTime? masa_awal, DateTime? masa_akhir, String? jenispajak}) async {
     String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
     String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
-    var response = await dio.get("/laporan/laporan_daftaruser_old.php?masa_awal=${masa_awalformat}&masa_akhir=${masa_akhirformat}&jenispajak=${jenispajak}");
+    var response = await dio.get(
+        "/laporan/laporan_daftaruser_old.php?masa_awal=${masa_awalformat}&masa_akhir=${masa_akhirformat}&jenispajak=${jenispajak}");
     if (response.statusCode == 200) {
       List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
 

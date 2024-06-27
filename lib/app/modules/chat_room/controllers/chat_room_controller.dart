@@ -31,6 +31,7 @@ class ChatRoomController extends GetxController {
       } else if (datauser.isEmpty) {
         isEmpty = true;
       } else {
+        datalist.clear();
         datalist.addAll(datauser);
         isEmpty = false;
       }

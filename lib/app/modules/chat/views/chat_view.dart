@@ -22,40 +22,45 @@ class ChatView extends GetView<ChatController> {
     return GestureDetector(
       onTap: () => dismissKeyboard(),
       child: Scaffold(
-        appBar: CustomAppBar(title: "${controller.sender_name}", leading: true, isLogin: true),
+        appBar: CustomAppBar(
+            title: "${controller.sender_name}", leading: true, isLogin: true),
         body: SingleChildScrollView(
           reverse: true,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GetBuilder<ChatController>(
-              init: ChatController(),
-              builder: (controller) {
-                if (controller.isFailed) {
-                  return ShimmerWidget.Items1();
-                }
+            child: SizedBox(
+              height: Get.height * 0.85, // Adjust the height as needed
+              child: GetBuilder<ChatController>(
+                init: ChatController(),
+                builder: (controller) {
+                  if (controller.isFailed) {
+                    return ShimmerWidget.Items1();
+                  }
 
-                if (controller.isEmpty) {
-                  return NoData(); //menampilkan lotties no data
-                }
+                  if (controller.isEmpty) {
+                    return NoData(); //menampilkan lotties no data
+                  }
 
-                if (controller.isLoading) {
-                  return ShimmerWidget.Items1();
-                }
-                return ListView.builder(
-                    physics: PageScrollPhysics(),
-                    shrinkWrap: true,
-                    reverse: true,
-                    itemCount: controller.datalist.length,
-                    itemBuilder: (context, index) {
-                      var datatitem = controller.datalist[index];
+                  if (controller.isLoading) {
+                    return ShimmerWidget.Items1();
+                  }
+                  return ListView.builder(
+                      physics: PageScrollPhysics(),
+                      shrinkWrap: true,
+                      reverse: true,
+                      itemCount: controller.datalist.length,
+                      itemBuilder: (context, index) {
+                        var datatitem = controller.datalist[index];
 
-                      if (datatitem.senderId == controller.authModel.idUserwp) {
-                        return ChatFrom(data_chat: datatitem);
-                      } else {
-                        return ChatTo(data_chat: datatitem);
-                      }
-                    });
-              },
+                        if (datatitem.senderId ==
+                            controller.authModel.idUserwp) {
+                          return ChatFrom(data_chat: datatitem);
+                        } else {
+                          return ChatTo(data_chat: datatitem);
+                        }
+                      });
+                },
+              ),
             ),
           ),
         ),
@@ -255,7 +260,7 @@ class ChatTo extends StatelessWidget {
                                   Texts.captionSm("${data_chat.senderName}",
                                       color: Colors.grey),
                                   Texts.subtitle2(
-                                      "${timeago.format(data_chat.sentAt)}",
+                                      "${timeago.format(data_chat.sentAt, locale: 'en_short')}",
                                       color: Colors.grey),
                                 ],
                               ),
@@ -269,23 +274,25 @@ class ChatTo extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Wrap(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 217, 233, 236),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    "${data_chat.messageText}",
-                                    style: TextStyle(
-                                      fontSize: 14, // Sesuaikan ukuran font sesuai kebutuhan
-                                      color: Colors.black,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 217, 233, 236),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text(
+                                      "${data_chat.messageText}",
+                                      style: TextStyle(
+                                        fontSize: 13
+                                            .sp, // Sesuaikan ukuran font sesuai kebutuhan
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -337,7 +344,7 @@ class ChatFrom extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Texts.subtitle2(
-                                      "${timeago.format(data_chat.sentAt)}",
+                                      "${timeago.format(data_chat.sentAt, locale: 'en_short')}",
                                       color: Colors.grey),
                                   Texts.captionSm("${data_chat.senderName}",
                                       color: Colors.grey),
@@ -353,19 +360,21 @@ class ChatFrom extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 233, 233, 233),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    "${data_chat.messageText}",
-                                    style: TextStyle(
-                                      fontSize: 14, // Sesuaikan ukuran font sesuai kebutuhan
-                                      color: Colors.black,
-                                    ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 233, 233, 233),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  "${data_chat.messageText}",
+                                  style: TextStyle(
+                                    fontSize: 13
+                                        .sp, // Sesuaikan ukuran font sesuai kebutuhan
+                                    color: Colors.black,
                                   ),
                                 ),
+                              ),
                             ],
                           ),
                         ),

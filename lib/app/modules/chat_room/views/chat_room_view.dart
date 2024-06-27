@@ -51,7 +51,8 @@ class ChatRoomView extends GetView<ChatRoomController> {
                               'room_id': '${dataitem.roomId}',
                               'id_sender': '${dataitem.idSender}',
                               'nik_sender': '${dataitem.nikSender}',
-                              'sender_name': '${dataitem.senderName}'
+                              'sender_name':
+                                  '${dataitem.isGroup == 'false' ? dataitem.senderName : dataitem.roomName}'
                             });
                       },
                       child: ListTile(
@@ -78,7 +79,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                             "${dataitem.isGroup == 'false' ? dataitem.senderName : dataitem.roomName}"),
                         subtitle: Texts.caption(
                             "${dataitem.lastMessageText}..", //${data_livechat['participantsInfo'][1]['countUnseenChat']}
-                            maxLines: 3,
+                            maxLines: 1,
                             color: shadowText),
                         trailing: Padding(
                           padding: EdgeInsets.symmetric(vertical: 6.r),
@@ -92,25 +93,96 @@ class ChatRoomView extends GetView<ChatRoomController> {
                                       ? kdisetujui
                                       : Blacksoft),
                               dataitem.hasUnread == 'TRUE'
-                                  ? Container(
-                                      width: 18.sp,
-                                      height: 18.sp,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFF39D2C0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 4,
-                                            color: Color(0x2B202529),
-                                            offset: Offset(0, 2),
-                                          )
+                                  ? SizedBox(
+                                      width: Get.width * 0.19,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          dataitem.type == null
+                                              ? SizedBox()
+                                              : Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 4),
+                                                  decoration: BoxDecoration(
+                                                    color: Color.fromARGB(
+                                                        255, 63, 248, 63),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                  ),
+                                                  child: Text(
+                                                    "${dataitem.type}",
+                                                    style: TextStyle(
+                                                      fontSize: 10
+                                                          .sp, // Sesuaikan ukuran font sesuai kebutuhan
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                          SizedBox(width: 4),
+                                          Container(
+                                            width: 18.sp,
+                                            height: 18.sp,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFF39D2C0),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 4,
+                                                  color: Color(0x2B202529),
+                                                  offset: Offset(0, 2),
+                                                )
+                                              ],
+                                              shape: BoxShape.circle,
+                                            ),
+                                            alignment: AlignmentDirectional(
+                                                0.00, 0.00),
+                                          ),
                                         ],
-                                        shape: BoxShape.circle,
                                       ),
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
                                     )
                                   : SizedBox(
-                                      height: 2.h,
+                                      width: Get.width * 0.19,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          dataitem.type == null
+                                              ? SizedBox()
+                                              : Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 4),
+                                                  decoration: BoxDecoration(
+                                                    color: Color.fromARGB(
+                                                        255, 63, 248, 63),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                  ),
+                                                  child: Text(
+                                                    "${dataitem.type}",
+                                                    style: TextStyle(
+                                                      fontSize: 10
+                                                          .sp, // Sesuaikan ukuran font sesuai kebutuhan
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                          SizedBox(width: 4),
+                                          Container(
+                                            width: 18.sp,
+                                            height: 18.sp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.transparent,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            alignment: AlignmentDirectional(
+                                                0.00, 0.00),
+                                          ),
+                                        ],
+                                      ),
                                     )
                             ],
                           ),
