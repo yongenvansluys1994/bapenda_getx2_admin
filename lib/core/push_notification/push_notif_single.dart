@@ -4,7 +4,7 @@ import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:http/http.dart' as http;
 
 void sendPushMessage(
-    String token, String title, String body, String desc) async {
+    String token, String title, String body, String desc, [jsonDecode]) async {
   try {
     await http.post(
       Uri.parse('https://fcm.googleapis.com/fcm/send'),
@@ -23,7 +23,8 @@ void sendPushMessage(
             'click_action': 'FLUTTER_NOTIFICATION_CLICK',
             'id': '1',
             'status': 'done',
-            'desc': desc
+            'desc': desc,
+            'json_value': jsonDecode
           },
           "to": token,
         },

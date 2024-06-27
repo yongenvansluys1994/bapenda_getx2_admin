@@ -1,13 +1,11 @@
-import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser_old/bindings/laporan_daftaruser_binding.dart';
-import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser_old/views/laporan_daftaruser_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/aktivitas/bindings/aktivitas_binding.dart';
 import '../modules/aktivitas/views/aktivitas_view.dart';
-import '../modules/chat_rooms/bindings/chat_rooms_binding.dart';
-import '../modules/chat_rooms/views/chat_rooms_view.dart';
-import '../modules/chats/bindings/chats_binding.dart';
-import '../modules/chats/views/chats_view.dart';
+import '../modules/chat/bindings/chat_binding.dart';
+import '../modules/chat/views/chat_view.dart';
+import '../modules/chat_room/bindings/chat_room_binding.dart';
+import '../modules/chat_room/views/chat_room_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard.dart';
 import '../modules/detail_screen/bindings/detail_screen_binding.dart';
@@ -18,6 +16,8 @@ import '../modules/laporan_2/bindings/laporan_2_binding.dart';
 import '../modules/laporan_2/views/laporan_2_view.dart';
 import '../modules/laporan_daftaruser/bindings/laporan_daftaruser_binding.dart';
 import '../modules/laporan_daftaruser/views/laporan_daftaruser_view.dart';
+import '../modules/laporan_daftaruser_old/bindings/laporan_daftaruser_binding.dart';
+import '../modules/laporan_daftaruser_old/views/laporan_daftaruser_view.dart';
 import '../modules/laporan_qris/bindings/lap_detail_qris_binding.dart';
 import '../modules/laporan_qris/bindings/laporan_qris_binding.dart';
 import '../modules/laporan_qris/views/lap_detail_qris_view.dart';
@@ -140,16 +140,6 @@ class AppPages {
       ],
     ),
     GetPage(
-      name: _Paths.CHAT_ROOMS,
-      page: () => const ChatRoomsView(),
-      binding: ChatRoomsBinding(),
-    ),
-    GetPage(
-      name: _Paths.CHATS,
-      page: () => const ChatsView(),
-      binding: ChatsBinding(),
-    ),
-    GetPage(
       name: _Paths.MAP_DETAIL,
       page: () => const MapDetailView(),
     ),
@@ -216,6 +206,16 @@ class AppPages {
       name: _Paths.LAPORAN_DAFTARUSER_OLD,
       page: () => const LaporanDaftaruserViewOld(),
       binding: LaporanDaftaruserBindingOld(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_ROOM,
+      page: () => const ChatRoomView(),
+      binding: ChatRoomBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () => const ChatView(),
+      binding: ChatBinding(),
     ),
   ];
 }

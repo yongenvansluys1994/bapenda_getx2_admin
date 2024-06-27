@@ -1,9 +1,11 @@
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:bapenda_getx2_admin/widgets/buttons.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 class getDefaultDialog {
@@ -407,6 +409,384 @@ void GetDialogDismissible(
           widget: Texts.button("Update"),
           borderSide: false,
           gradient: [Colors.cyan, Colors.greenAccent],
+        ),
+      ),
+    ],
+  );
+}
+
+void GetDialogContent(
+    ModelGetpelaporanUser item, int? totalPajak, int? denda_pajak) {
+  Get.defaultDialog(
+    title: "",
+    radius: 12.r,
+    titlePadding: EdgeInsets.zero,
+    content: Container(
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 230, 230, 230),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.w),
+                  topRight: Radius.circular(10.w)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "NAMA",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          maxLines: 2,
+                          "${item.namaUsaha}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 0.5.w),
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "NPWPD",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${item.npwpd}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            decoration:
+                BoxDecoration(color: Color.fromARGB(255, 248, 248, 248)),
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 230.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "ALAMAT",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${item.alamatUsaha}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 230, 230, 230),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "Jenis Pajak",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${item.nmRekening}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 0.5.w),
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "No. Kohir",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${item.nomorKohir}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 248, 248, 248),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.w),
+                  topRight: Radius.circular(10.w)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "Periode Awal",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${item.masaPajak2}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 0.5.w),
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "Periode Akhir",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${item.masaAkhir2}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 230, 230, 230),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "Jml Pajak",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(int.parse(item.pajak.toString()))}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 0.5.w),
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "Denda",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0).format(int.parse(denda_pajak.toString()))}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 248, 248, 248),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.w),
+                  topRight: Radius.circular(10.w)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "Batas Bayar",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${DateFormat('yyyy-MM-dd').format(item.batasBayar)}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 0.5.w),
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Container(
+                    width: 115.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Texts.captionXs2(
+                          "Tanggal Lunas",
+                          isBold: true,
+                          color: Color.fromARGB(255, 71, 80, 90),
+                        ),
+                        Texts.captionXs2(
+                          "${item.tanggalLunas}",
+                          color: Color.fromARGB(255, 59, 59, 59),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          item.tanggalLunas != "0"
+              ? Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 248, 248, 248),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.w),
+                        topRight: Radius.circular(10.w)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(4.w),
+                        child: Container(
+                          width: 115.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Texts.captionXs2(
+                                "Metode Pembayaran",
+                                isBold: true,
+                                color: Color.fromARGB(255, 71, 80, 90),
+                              ),
+                              Texts.captionXs2(
+                                "${item.metodeBayar == "QRIS" ? item.metodeBayar : item.metodeBayar == "VA" ? item.metodeBayar : "Teller atau lainnya"}",
+                                color: Color.fromARGB(255, 59, 59, 59),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 0.5.w),
+                      Padding(
+                        padding: EdgeInsets.all(4.w),
+                        child: Container(
+                          width: 115.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Texts.captionXs2(
+                                " ",
+                                isBold: true,
+                                color: Color.fromARGB(255, 71, 80, 90),
+                              ),
+                              Texts.captionXs2(
+                                " ",
+                                color: Color.fromARGB(255, 59, 59, 59),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : SizedBox()
+        ],
+      ),
+    ),
+    actions: [
+      SizedBox(
+        width: 80.w,
+        child: Buttons.gradientButton(
+          handler: () {
+            Get.back();
+          },
+          widget: Texts.button("Ok"),
+          borderSide: false,
+          gradient: [Colors.cyan, Colors.indigo],
         ),
       ),
     ],

@@ -22,6 +22,7 @@ class PendataanController extends GetxController {
     super.onInit();
     authModel = Get.arguments;
     fetch_all();
+    listenFCM();
     controllerScroll.addListener(() {
       if (controllerScroll.position.maxScrollExtent ==
           controllerScroll.offset) {

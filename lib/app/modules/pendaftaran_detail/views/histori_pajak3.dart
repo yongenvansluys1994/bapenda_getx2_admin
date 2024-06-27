@@ -1,5 +1,6 @@
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/controllers/pelaporan_history_controller.dart';
+import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
 import 'package:bapenda_getx2_admin/widgets/nodata.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
@@ -59,7 +60,7 @@ class HistoryPajak3 extends StatelessWidget {
               //end perhitungan denda
               return InkWell(
                 onTap: () {
-                  //GetDialogContent(item, totalPajak, denda_pajak);
+                  GetDialogContent(item, totalPajak, denda_pajak);
                 },
                 child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/modules/aktivitas/models/model_aktivitas.dart';
+import 'package:bapenda_getx2_admin/app/modules/chat/models/model_chat.dart';
+import 'package:bapenda_getx2_admin/app/modules/chat_room/models/model_ruangchat.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_2/models/laporan_2_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser/models/model_lapdaftaruser.dart';
@@ -30,6 +32,50 @@ final Dio dio3 = Dio(
     headers: {'Content-Type': 'application/json'},
   ),
 );
+
+final Dio dioChat = Dio(
+  BaseOptions(
+    baseUrl: baseUrlApi,
+    connectTimeout: Duration(seconds: 10),
+    receiveTimeout: Duration(seconds: 10),
+    headers: {'Content-Type': 'application/json'},
+  ),
+);
+
+Future<List<ModelRuangChat>?> getRuangChat(id_userwp) async {
+  var response = await dioChat.get("/chat/list_room.php?id_userwp=$id_userwp");
+  if (response.statusCode == 200) {
+    List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
+
+    return data.map((e) => ModelRuangChat.fromJson(e)).toList();
+  } else {
+    return null;
+  }
+}
+
+Future<List<ModelChat>?> getChat(roomID) async {
+  var response = await dioChat.get("/chat/isi_chat.php?room_id=$roomID");
+  if (response.statusCode == 200) {
+    List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
+
+    return data.map((e) => ModelChat.fromJson(e)).toList();
+  } else {
+    return null;
+  }
+}
+
+Future<Response> readChat(int id_userwp,roomID) {
+  return dioChat.put(
+    "/chat/read_chat.php?id_userwp=185&room_id=8",
+  );
+}
+
+Future<Response> sendChat(data) {
+  return dioChat.post(
+    "/chat/send_chat.php",
+    data: data,
+  );
+}
 
 Future<Response> insertJatuhTempo(List<Map<String, String>> data) {
   return dio3.post(

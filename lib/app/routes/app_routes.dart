@@ -10,14 +10,11 @@ abstract class Routes {
   static const DASHBOARD = _Paths.DASHBOARD;
   static const REGISTER_NPWPD = '/register-npwpd';
   static const REGISTER_BARU = '/register-baru';
-  static const CHAT = _Paths.CHAT;
   static const PENDAFTARAN = _Paths.PENDAFTARAN;
   static const PENDAFTARAN_DETAIL = _Paths.PENDAFTARAN_DETAIL;
   static const DETAIL_SCREEN = _Paths.DETAIL_SCREEN;
   static const PENDATAAN = _Paths.PENDATAAN;
   static const PENDATAAN_DETAIL = _Paths.PENDATAAN_DETAIL;
-  static const CHAT_ROOMS = _Paths.CHAT_ROOMS;
-  static const CHATS = _Paths.CHATS;
   static const MAP_DETAIL = _Paths.MAP_DETAIL;
   static const PPID = _Paths.PPID;
   static const PUSH_NOTIFICATION = _Paths.PUSH_NOTIFICATION;
@@ -36,6 +33,8 @@ abstract class Routes {
   static const NOTIF_JATUHTEMPO = _Paths.NOTIF_JATUHTEMPO;
   static const LAPORAN_DAFTARUSER = _Paths.LAPORAN_DAFTARUSER;
   static const LAPORAN_DAFTARUSER_OLD = _Paths.LAPORAN_DAFTARUSER_OLD;
+  static const CHAT_ROOM = _Paths.CHAT_ROOM;
+  static const CHAT = _Paths.CHAT;
 }
 
 abstract class _Paths {
@@ -47,14 +46,11 @@ abstract class _Paths {
   static const REGISTER_NPWPD = '/register-npwpd';
   static const REGISTER_BARU = '/register-baru';
 
-  static const CHAT = '/chat';
   static const PENDAFTARAN = '/pendaftaran';
   static const PENDAFTARAN_DETAIL = '/pendaftaran-detail';
   static const DETAIL_SCREEN = '/detail-screen';
   static const PENDATAAN = '/pendataan';
   static const PENDATAAN_DETAIL = '/pendataan-detail';
-  static const CHAT_ROOMS = '/chat-rooms';
-  static const CHATS = '/chats';
   static const MAP_DETAIL = '/map-detail';
   static const PPID = '/ppid';
   static const PUSH_NOTIFICATION = '/push-notification';
@@ -71,4 +67,6 @@ abstract class _Paths {
   static const NOTIF_JATUHTEMPO = '/notif-jatuhtempo';
   static const LAPORAN_DAFTARUSER = '/laporan-daftaruser';
   static const LAPORAN_DAFTARUSER_OLD = '/laporan-daftaruser-old';
+  static const CHAT_ROOM = '/chat-room';
+  static const CHAT = '/chat';
 }

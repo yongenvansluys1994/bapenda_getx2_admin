@@ -208,9 +208,9 @@ class customButtomBar extends StatelessWidget {
                 MaterialButton(
                   minWidth: ResponsiveHelper.isTablet() ? Get.width * 0.20 : Get.width * 0.20,
                   onPressed: () {
-                    Get.currentRoute == Routes.CHAT_ROOMS
+                    Get.currentRoute == Routes.CHAT_ROOM
                         ? null
-                        : Get.toNamed(Routes.CHAT_ROOMS,
+                        : Get.toNamed(Routes.CHAT_ROOM,
                             arguments: controller.authModel);
                   },
                   child: Column(
@@ -239,13 +239,13 @@ class customButtomBar extends StatelessWidget {
                             ? Icon(
                                 Icons.feed_outlined,
                                 size: Get.width * 0.05,
-                                color: Get.currentRoute == Routes.CHAT_ROOMS
+                                color: Get.currentRoute == Routes.CHAT_ROOM
                                     ? Colors.blue
                                     : Colors.grey,
                               )
                             : Icon(
                                 Icons.feed_outlined,
-                                color: Get.currentRoute == Routes.CHAT_ROOMS
+                                color: Get.currentRoute == Routes.CHAT_ROOM
                                     ? Colors.blue
                                     : Colors.grey,
                               ),
@@ -254,7 +254,7 @@ class customButtomBar extends StatelessWidget {
                         'Chat',
                         style: TextStyle(
                           fontSize: ResponsiveHelper.isTablet() ? 11.sp : null,
-                          color: Get.currentRoute == Routes.CHAT_ROOMS
+                          color: Get.currentRoute == Routes.CHAT_ROOM
                               ? Colors.blue
                               : Colors.grey,
                         ),
