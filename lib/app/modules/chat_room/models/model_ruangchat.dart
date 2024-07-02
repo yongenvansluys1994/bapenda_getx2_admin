@@ -14,6 +14,7 @@ class ModelRuangChat {
   dynamic roomName;
   String isGroup;
   String? type;
+  String? level;
   String hasUnread;
   String? senderName;
   String? foto;
@@ -27,6 +28,7 @@ class ModelRuangChat {
     required this.roomName,
     required this.isGroup,
     required this.type,
+    required this.level,
     required this.hasUnread,
     required this.senderName,
     required this.foto,
@@ -41,6 +43,7 @@ class ModelRuangChat {
         roomName: json["room_name"],
         isGroup: json["is_group"],
         type: json["type"],
+        level: json["level"],
         hasUnread: json["has_unread"],
         senderName: json["sender_name"],
         foto: json["foto"],
@@ -55,6 +58,7 @@ class ModelRuangChat {
         "room_name": roomName,
         "is_group": isGroup,
         "type": type,
+        "level": level,
         "has_unread": hasUnread,
         "sender_name": senderName,
         "foto": foto,

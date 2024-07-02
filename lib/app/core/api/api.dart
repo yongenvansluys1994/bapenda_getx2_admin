@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/modules/aktivitas/models/model_aktivitas.dart';
 import 'package:bapenda_getx2_admin/app/modules/chat/models/model_chat.dart';
+import 'package:bapenda_getx2_admin/app/modules/chat/models/model_checkroom.dart';
+import 'package:bapenda_getx2_admin/app/modules/chat_room/models/model_listuserchat.dart';
 import 'package:bapenda_getx2_admin/app/modules/chat_room/models/model_ruangchat.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_2/models/laporan_2_model.dart';
@@ -10,6 +12,7 @@ import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
 import 'package:bapenda_getx2_admin/app/modules/notif_jatuhtempo/models/model_riwayatjtempo.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:bapenda_getx2_admin/app/modules/push_notification/models/model_notifjtempo.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
@@ -53,6 +56,16 @@ Future<List<ModelRuangChat>?> getRuangChat(id_userwp) async {
   }
 }
 
+Future<List<ModelListUserChat>?> getListUserChat() async {
+  var response = await dioChat.get("/chat/list_user.php");
+  if (response.statusCode == 200) {
+    List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
+    return data.map((e) => ModelListUserChat.fromJson(e)).toList();
+  } else {
+    return null;
+  }
+}
+
 Future<List<ModelChat>?> getChat(roomID) async {
   var response = await dioChat.get("/chat/isi_chat.php?room_id=$roomID");
   if (response.statusCode == 200) {
@@ -75,6 +88,27 @@ Future<Response> sendChat(data) {
     "/chat/send_chat.php",
     data: data,
   );
+}
+
+Future<List<ModelCheckRoom>?> checkRoom(id_userwp) async {
+  var response = await dioChat.get("/chat/check_room.php?id_userwp=$id_userwp");
+  if (response.statusCode == 200) {
+    List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
+    return data.map((e) => ModelCheckRoom.fromJson(e)).toList();
+  } else {
+    return null;
+  }
+}
+
+Future<List<ModelCheckRoom>?> checkRoomAdmin(id_userwp, id_target) async {
+  var response = await dioChat.get(
+      "/chat/check_room_admin.php?id_userwp=$id_userwp&id_target=$id_target");
+  if (response.statusCode == 200) {
+    List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
+    return data.map((e) => ModelCheckRoom.fromJson(e)).toList();
+  } else {
+    return null;
+  }
 }
 
 Future<Response> insertJatuhTempo(List<Map<String, String>> data) {

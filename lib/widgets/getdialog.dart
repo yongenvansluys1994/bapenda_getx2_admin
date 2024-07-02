@@ -1,5 +1,9 @@
+import 'package:bapenda_getx2_admin/app/modules/chat_room/controllers/chat_room_controller.dart';
+import 'package:bapenda_getx2_admin/app/modules/chat_room/models/model_ruangchat.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
+import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:bapenda_getx2_admin/widgets/buttons.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -170,6 +174,124 @@ class getDefaultDialog {
     );
   }
 
+  void onFixNewChat({
+    required String title,
+    required String kategori,
+    //required RxList<ModelRuangChat> datalist,
+    required ChatRoomController controller,
+  }) async {
+    final filteredList = controller.datalist_user.toList();
+
+    await Get.defaultDialog(
+      title: "",
+      radius: 12.r,
+      titlePadding: EdgeInsets.zero,
+      content: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 0.r, horizontal: 10.r),
+            child: Text(
+              "${title}",
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.sp),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
+            height: (Get.height * 0.1) *
+                (filteredList.length >= 3
+                    ? 6
+                    : filteredList.length), // Change as per your requirement
+            width: Get.width * 1,
+            child: ListView.builder(
+              itemCount: filteredList.length,
+              itemBuilder: (context, index) {
+                var datatitem = filteredList[index];
+                String titlekategori;
+
+                return Ink(
+                  height: Get.height * 0.070,
+                  // decoration: BoxDecoration(
+                  //   gradient: LinearGradient(colors: <Color>[
+                  //     Color.fromARGB(255, 235, 237, 244),
+                  //     Color.fromARGB(255, 188, 230, 236)
+                  //   ]),
+                  //   borderRadius: BorderRadius.circular(8.w),
+                  //   boxShadow: [
+                  //     BoxShadow(
+                  //         color: Colors.black12,
+                  //         blurRadius: 4,
+                  //         offset: Offset(3, 3),
+                  //         spreadRadius: 1),
+                  //     BoxShadow(
+                  //         color: Colors.white,
+                  //         blurRadius: 4,
+                  //         offset: Offset(-2, -2),
+                  //         spreadRadius: 1),
+                  //   ],
+                  // ),
+                  child: InkWell(
+                    splashColor: lightBlueColor,
+                    child: ListTile(
+                      tileColor: (index % 2 == 0)
+                          ? Colors.blueGrey[50]
+                          : Colors.grey[100],
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: Image.asset(
+                          'assets/icon/${datatitem.foto}',
+                          height: 35.h,
+                          width: 35.h,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      title: Text(
+                        '${datatitem.nama}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 13.sp),
+                        maxLines: 1,
+                      ),
+                    ),
+                    onTap: () {
+                      Get.toNamed(Routes.CHAT,
+                          arguments: controller.authModel,
+                          parameters: {
+                            'room_id': '',
+                            'target_id': '${datatitem.idUserwp}',
+                            'target_nik': '${datatitem.nik}',
+                            'sender_name': '${datatitem.nama}',
+                          });
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        SizedBox(
+          width: 80.w,
+          child: Buttons.gradientButton(
+            handler: () {
+              Get.back(); // This closes the dialog
+            },
+            widget: Texts.button("Ok"),
+            borderSide: false,
+            gradient: [Colors.cyan, Colors.indigo],
+          ),
+        ),
+      ],
+    );
+
+    //print(jsonEncode(idList));
+    // After the dialog is closed
+    controller.actionbutton = true;
+    controller.update();
+    //logInfo('${controller.actionbutton}');
+    print('Dialog closed, update all notifikasi status to 1');
+    // You can perform additional actions here after the dialog is closed
+  }
+
   void onFixWithHandler({
     required String title,
     required String desc,
@@ -264,7 +386,7 @@ class getDefaultDialog {
     required String desc,
   }) {
     Get.defaultDialog(
-      title: "",
+        title: "",
         backgroundColor: Colors.transparent,
         titlePadding: EdgeInsets.zero,
         content: Stack(

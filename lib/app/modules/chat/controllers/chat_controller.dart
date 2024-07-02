@@ -4,6 +4,7 @@ import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/chat/models/model_chat.dart';
 import 'package:bapenda_getx2_admin/app/modules/chat_room/controllers/chat_room_controller.dart';
 import 'package:bapenda_getx2_admin/app/modules/dashboard/models/auth_model_model.dart';
+import 'package:bapenda_getx2_admin/core/push_notification/push_notif_multiple.dart';
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_single.dart';
 import 'package:bapenda_getx2_admin/widgets/dismiss_keyboard.dart';
 import 'package:bapenda_getx2_admin/widgets/logger.dart';
@@ -24,24 +25,41 @@ class ChatController extends GetxController {
   RxList<ModelChat> datalist = <ModelChat>[].obs;
   TextEditingController textController = TextEditingController();
   String? roomID;
-  String? id_sender;
-  String? nik_sender;
+  String? target_id;
+  String? target_nik;
   String? sender_name;
+  bool isFirstChat = false;
+  List<Map<String, String>> token_sender = [];
   final ChatRoomController chatRoomCon = Get.find();
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     listenFCM();
     authModel = Get.arguments;
     roomID = Get.parameters['room_id'];
-    id_sender = Get.parameters['id_sender'];
-    nik_sender = Get.parameters['nik_sender'];
+    target_id = Get.parameters['target_id'];
+    target_nik = Get.parameters['target_nik'];
     sender_name = Get.parameters['sender_name'];
-    FetchData(roomID);
-    readChat(int.parse("${authModel.idUserwp}"), roomID).then((value) {
-      chatRoomCon.FetchData();
-    });
+    final resultCheckRoom = await checkRoomAdmin(
+        int.parse("${authModel.idUserwp}"),
+        int.parse(
+            "${target_id}")); //check room untuk mendapatkan token member group
+    if (resultCheckRoom!.isNotEmpty) {
+      isFirstChat = false;
+      List<String> allToken = resultCheckRoom[0].allToken;
+      for (String token in allToken) {
+        token_sender.add({"token": token}); //token untuk push notifikasi
+      }
+      FetchData(roomID);
+      readChat(int.parse("${authModel.idUserwp}"), roomID).then((value) {
+        chatRoomCon.FetchData();
+      });
+      update();
+    } else {
+      isFirstChat = true;
+      logInfo("tidak ada room chat");
+    }
   }
 
   Future send_Chat() async {
@@ -54,9 +72,12 @@ class ChatController extends GetxController {
         // Memanggil sendChat dan menunggu hasilnya
         var response = await sendChat({
           'id_userwp': int.parse("${authModel.idUserwp}"),
+          'target_id_userwp': int.parse("${target_id}"),
           'room_id': '${roomID}',
           'text': '${textController.text}',
           'type': 'lama',
+          'type_room': null,
+          'chat_room': 'admin',
         });
 
         // Memeriksa status respons
@@ -73,13 +94,10 @@ class ChatController extends GetxController {
           // Mengurutkan datalist berdasarkan sent_at (terbaru di paling bawah)
           datalist.sort((a, b) => b.sentAt.compareTo(a.sentAt));
           // Update UI
+          isFirstChat = false;
           update();
-          DocumentSnapshot snap = await FirebaseFirestore.instance
-              .collection("UserTokens")
-              .doc(nik_sender)
-              .get();
-          String token_target = snap['token'];
-          sendPushMessage(token_target, "${authModel.nama}",
+
+          sendPushMessagesChat(token_sender, "${authModel.nama}",
               "${textController.text}", "chat_masuk", jsonDecode(responseData));
           textController.clear();
           //logInfo("${jsonEncode(datalist)}");
@@ -103,12 +121,52 @@ class ChatController extends GetxController {
           message: "Pesan tidak boleh kosong", kategori: "error", duration: 1);
       update();
     } else {
-      sendChat({
-        'id_userwp': '${authModel.idUserwp}',
-        'id_sender': '${id_sender}',
-        'text': '${textController.text}',
-        'type': 'baru',
-      });
+      try {
+        // Memanggil sendChat dan menunggu hasilnya
+        var response = await sendChat({
+          'id_userwp': int.parse("${authModel.idUserwp}"),
+          'target_id_userwp': int.parse("${target_id}"),
+          'room_id': '',
+          'text': '${textController.text}',
+          'type': 'baru',
+          'type_room': null,
+          'chat_room': 'admin',
+        });
+
+        // Memeriksa status respons
+        if (response.statusCode == 200) {
+          dismissKeyboard();
+          // Mengolah respons jika sukses
+          var responseData = response.data;
+          var decodedResponse = jsonDecode(responseData);
+          var data = decodedResponse['data'];
+          if (isFirstChat) {
+            var token = decodedResponse['token'];
+            token_sender.add({"token": token[0]['token_target']});
+          }
+          // Iterasi melalui setiap item di 'data' dan tambahkan ke datalist
+          for (var item in data) {
+            datalist.add(ModelChat.fromJson(item));
+          }
+          // Mengurutkan datalist berdasarkan sent_at (terbaru di paling bawah)
+          datalist.sort((a, b) => b.sentAt.compareTo(a.sentAt));
+          // Update UI
+          isFirstChat = false;
+          update();
+
+          sendPushMessagesChat(token_sender, "${authModel.nama}",
+              "${textController.text}", "chat_masuk", jsonDecode(responseData));
+          textController.clear();
+          //logInfo("${jsonEncode(datalist)}");
+          // Lakukan sesuatu dengan responseData
+        } else {
+          // Mengolah respons jika gagal
+          logInfo("Failed to send message: ${response.statusMessage}");
+        }
+      } catch (e) {
+        // Menangani error
+        print("Error: $e");
+      }
 
       update();
     }

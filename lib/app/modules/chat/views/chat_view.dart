@@ -24,42 +24,53 @@ class ChatView extends GetView<ChatController> {
       child: Scaffold(
         appBar: CustomAppBar(
             title: "${controller.sender_name}", leading: true, isLogin: true),
-        body: SingleChildScrollView(
-          reverse: true,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: Get.height * 0.85, // Adjust the height as needed
-              child: GetBuilder<ChatController>(
-                init: ChatController(),
-                builder: (controller) {
-                  if (controller.isFailed) {
-                    return ShimmerWidget.Items1();
-                  }
+        body: Container(
+          width: Get.width * 1,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                  'assets/images/bg-parkirapp.jpg'), // Path to your image asset
+              opacity: 0.4,
+              fit: BoxFit.cover, // Adjust this based on your requirements
+            ),
+          ),
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: Get.height * 0.85, // Adjust the height as needed
+                child: GetBuilder<ChatController>(
+                  init: ChatController(),
+                  builder: (controller) {
+                    if (controller.isFailed) {
+                      return ShimmerWidget.Items1();
+                    }
 
-                  if (controller.isEmpty) {
-                    return NoData(); //menampilkan lotties no data
-                  }
+                    if (controller.isEmpty) {
+                      return NoData(); //menampilkan lotties no data
+                    }
 
-                  if (controller.isLoading) {
-                    return ShimmerWidget.Items1();
-                  }
-                  return ListView.builder(
-                      physics: PageScrollPhysics(),
-                      shrinkWrap: true,
-                      reverse: true,
-                      itemCount: controller.datalist.length,
-                      itemBuilder: (context, index) {
-                        var datatitem = controller.datalist[index];
+                    if (controller.isLoading) {
+                      return ShimmerWidget.Items1();
+                    }
+                    return ListView.builder(
+                        physics: PageScrollPhysics(),
+                        shrinkWrap: true,
+                        reverse: true,
+                        itemCount: controller.datalist.length,
+                        itemBuilder: (context, index) {
+                          var datatitem = controller.datalist[index];
 
-                        if (datatitem.senderId ==
-                            controller.authModel.idUserwp) {
-                          return ChatFrom(data_chat: datatitem);
-                        } else {
-                          return ChatTo(data_chat: datatitem);
-                        }
-                      });
-                },
+                          if (datatitem.senderId ==
+                              controller.authModel.idUserwp) {
+                            return ChatFrom(data_chat: datatitem);
+                          } else {
+                            return ChatTo(data_chat: datatitem);
+                          }
+                        });
+                  },
+                ),
               ),
             ),
           ),
@@ -110,7 +121,11 @@ class ChatView extends GetView<ChatController> {
                                 onPressed: () {
                                   easyThrottle(
                                     handler: () {
-                                      controller.send_Chat();
+                                      if (controller.isFirstChat) {
+                                        controller.send_NewChat();
+                                      } else {
+                                        controller.send_Chat();
+                                      }
                                     },
                                   );
                                 },
@@ -258,7 +273,7 @@ class ChatTo extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Texts.captionSm("${data_chat.senderName}",
-                                      color: Colors.grey),
+                                      color: Colors.black87),
                                   Texts.subtitle2(
                                       "${timeago.format(data_chat.sentAt, locale: 'en_short')}",
                                       color: Colors.grey),
@@ -279,7 +294,7 @@ class ChatTo extends StatelessWidget {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 8, vertical: 4),
                                     decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 217, 233, 236),
+                                      color: Color.fromARGB(255, 184, 228, 236),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Text(
@@ -347,7 +362,7 @@ class ChatFrom extends StatelessWidget {
                                       "${timeago.format(data_chat.sentAt, locale: 'en_short')}",
                                       color: Colors.grey),
                                   Texts.captionSm("${data_chat.senderName}",
-                                      color: Colors.grey),
+                                      color: Colors.black87),
                                 ],
                               ),
                             ],
@@ -363,7 +378,7 @@ class ChatFrom extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 233, 233, 233),
+                                  color: Color.fromARGB(255, 219, 219, 219),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
