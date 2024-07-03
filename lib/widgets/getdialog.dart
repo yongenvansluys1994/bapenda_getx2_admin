@@ -1,9 +1,7 @@
 import 'package:bapenda_getx2_admin/app/modules/chat_room/controllers/chat_room_controller.dart';
-import 'package:bapenda_getx2_admin/app/modules/chat_room/models/model_ruangchat.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:bapenda_getx2_admin/widgets/buttons.dart';
-import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -206,7 +204,7 @@ class getDefaultDialog {
               itemCount: filteredList.length,
               itemBuilder: (context, index) {
                 var datatitem = filteredList[index];
-                String titlekategori;
+                //String titlekategori;
 
                 return Ink(
                   height: Get.height * 0.070,
@@ -250,8 +248,10 @@ class getDefaultDialog {
                             fontWeight: FontWeight.w600, fontSize: 13.sp),
                         maxLines: 1,
                       ),
+                      subtitle: Texts.caption('${datatitem.nama == "" ? '' : datatitem.namaUsaha}'),
                     ),
                     onTap: () {
+                      Get.back();
                       Get.toNamed(Routes.CHAT,
                           arguments: controller.authModel,
                           parameters: {

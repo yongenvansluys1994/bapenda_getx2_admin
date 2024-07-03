@@ -9,10 +9,8 @@ import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model
 import 'package:bapenda_getx2_admin/app/modules/laporan_2/models/laporan_2_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser/models/model_lapdaftaruser.dart';
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
-import 'package:bapenda_getx2_admin/app/modules/notif_jatuhtempo/models/model_riwayatjtempo.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:bapenda_getx2_admin/app/modules/push_notification/models/model_notifjtempo.dart';
-import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
@@ -38,7 +36,7 @@ final Dio dio3 = Dio(
 
 final Dio dioChat = Dio(
   BaseOptions(
-    baseUrl: baseUrlApi,
+    baseUrl: URL_APPSIMPATDA,
     connectTimeout: Duration(seconds: 10),
     receiveTimeout: Duration(seconds: 10),
     headers: {'Content-Type': 'application/json'},
@@ -127,6 +125,10 @@ Future<Response> insertNotifTolak(data) {
 
 Future<Response> cekJatuhTempo() {
   return dio3.get("/notifikasi/cek_jatuhtempo.php");
+}
+
+Future<Response> cekhasUnreadChat(String? idUserwp) {
+  return dioChat.get("/chat/has_unread.php?id_userwp=$idUserwp");
 }
 
 class Api {

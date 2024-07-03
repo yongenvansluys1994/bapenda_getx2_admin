@@ -22,6 +22,7 @@ class ModelRuangChat {
   String? nikSender;
   DateTime sentAt;
   String lastMessageText;
+  String? namaUsaha;
 
   ModelRuangChat({
     required this.roomId,
@@ -36,6 +37,7 @@ class ModelRuangChat {
     required this.nikSender,
     required this.sentAt,
     required this.lastMessageText,
+    required this.namaUsaha,
   });
 
   factory ModelRuangChat.fromJson(Map<String, dynamic> json) => ModelRuangChat(
@@ -51,6 +53,7 @@ class ModelRuangChat {
         nikSender: json["nik_sender"],
         sentAt: DateTime.parse(json["sent_at"]),
         lastMessageText: json["last_message_text"],
+        namaUsaha: json["nama_usaha"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,5 +69,6 @@ class ModelRuangChat {
         "nik_sender": nikSender,
         "sent_at": sentAt.toIso8601String(),
         "last_message_text": lastMessageText,
+        "nama_usaha": namaUsaha,
       };
 }

@@ -5,16 +5,13 @@ import 'package:bapenda_getx2_admin/app/modules/chat/models/model_chat.dart';
 import 'package:bapenda_getx2_admin/app/modules/chat_room/controllers/chat_room_controller.dart';
 import 'package:bapenda_getx2_admin/app/modules/dashboard/models/auth_model_model.dart';
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_multiple.dart';
-import 'package:bapenda_getx2_admin/core/push_notification/push_notif_single.dart';
 import 'package:bapenda_getx2_admin/widgets/dismiss_keyboard.dart';
 import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:bapenda_getx2_admin/widgets/snackbar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
@@ -143,7 +140,10 @@ class ChatController extends GetxController {
           if (isFirstChat) {
             var token = decodedResponse['token'];
             token_sender.add({"token": token[0]['token_target']});
+            roomID = data[0]['room_id'];
           }
+          
+
           // Iterasi melalui setiap item di 'data' dan tambahkan ke datalist
           for (var item in data) {
             datalist.add(ModelChat.fromJson(item));
@@ -153,7 +153,8 @@ class ChatController extends GetxController {
           // Update UI
           isFirstChat = false;
           update();
-
+          chatRoomCon.FetchData();
+          chatRoomCon.update();
           sendPushMessagesChat(token_sender, "${authModel.nama}",
               "${textController.text}", "chat_masuk", jsonDecode(responseData));
           textController.clear();

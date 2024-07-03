@@ -1,5 +1,6 @@
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:bapenda_getx2_admin/widgets/custom_appbar.dart';
+import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:bapenda_getx2_admin/widgets/nodata.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
@@ -53,6 +54,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                     itemCount: controller.datalist.length,
                     itemBuilder: (context, index) {
                       var dataitem = controller.datalist[index];
+                      logInfo("${dataitem.type}");
 
                       return Card(
                         child: Ink(
@@ -82,8 +84,18 @@ class ChatRoomView extends GetView<ChatRoomController> {
                                   ),
                                 ),
                               ),
-                              title: Texts.caption(
-                                  "${dataitem.isGroup == 'false' ? dataitem.senderName : dataitem.roomName}"),
+                              title: Container(
+                                height: Get.height * 0.04,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Texts.captionSm(
+                                        "${dataitem.isGroup == 'false' ? dataitem.senderName : dataitem.roomName}",isBold: true),
+                                        Texts.captionSm(
+                                        "${dataitem.isGroup == 'false' ? (dataitem.namaUsaha == '' ? '-' : dataitem.namaUsaha) : dataitem.roomName}"),
+                                  ],
+                                ),
+                              ),
                               subtitle: Texts.caption(
                                   "${dataitem.lastMessageText}..",
                                   maxLines: 1,
@@ -107,7 +119,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                dataitem.type == null
+                                                dataitem.type == ""
                                                     ? SizedBox()
                                                     : Container(
                                                         padding: EdgeInsets
@@ -116,8 +128,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                                                                 vertical: 4),
                                                         decoration:
                                                             BoxDecoration(
-                                                          color: Color.fromARGB(
-                                                              255, 63, 248, 63),
+                                                          color: Color.fromARGB(255, 186, 243, 186),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(4),
@@ -159,7 +170,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                dataitem.type == null
+                                                dataitem.type == ""
                                                     ? SizedBox()
                                                     : Container(
                                                         padding: EdgeInsets
@@ -168,8 +179,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                                                                 vertical: 4),
                                                         decoration:
                                                             BoxDecoration(
-                                                          color: Color.fromARGB(
-                                                              255, 63, 248, 63),
+                                                          color: Color.fromARGB(255, 148, 238, 148),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(4),

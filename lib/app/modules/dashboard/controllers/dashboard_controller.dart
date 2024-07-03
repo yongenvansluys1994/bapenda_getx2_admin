@@ -32,7 +32,7 @@ class DashboardController extends GetxController with AuthCacheService {
   RxString value_admindaftar = "0".obs;
   RxInt value_adminpelaporan = 0.obs;
   Set<Marker> markers = <Marker>{};
-  bool readBy = false;
+  String unread_chat_count = "0";
   int wp_daftar = 0;
   int wp_bdaftar = 0;
   var countMap = {}.obs;
@@ -67,8 +67,7 @@ class DashboardController extends GetxController with AuthCacheService {
     loadFCM();
     listenFCM();
     grafik_vaqris();
-
-    CountUnseenChat();
+    hasUnreadChat();
     //row_admindaftar();
     //row_adminpelaporan();
     update();
@@ -87,35 +86,14 @@ class DashboardController extends GetxController with AuthCacheService {
     } catch (e) {}
   }
 
-  void CountUnseenChat() {
-    FirebaseFirestore.instance
-        .collection('rooms')
-        .where('participants', arrayContains: authModel.nik)
-        .snapshots()
-        .listen((QuerySnapshot roomQuerySnapshot) {
-      roomQuerySnapshot.docs.forEach((roomDoc) {
-        // Accessing data for each room document
-        //String roomId = roomDoc.id;
-
-        // Check if 'readBy' is a List and contains authModel.nik
-        if (roomDoc['readBy'] is List &&
-            roomDoc['readBy'].contains(authModel.nik.toString())) {
-          readBy = true;
-          update();
-        } else {
-          readBy = false;
-          update();
-        }
-
-        // Use the readBy variable as needed
-        // ...
-
-        // Update your UI or state
-        countUnseenChat.value = roomQuerySnapshot.docs.length;
-        update();
-      });
-    });
+  void hasUnreadChat() async {
+    var response = await httpClient
+        .get(Uri.parse("${URL_APPSIMPATDA}/chat/has_unread.php?id_userwp=${authModel.idUserwp}"));
+    List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
+    unread_chat_count = data[0]["unread_chat_count"];
+    update();
   }
+
 
   Future<void> grafik_fetch() async {
     try {

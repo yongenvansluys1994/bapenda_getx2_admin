@@ -217,12 +217,12 @@ class customButtomBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       badges.Badge(
-                        showBadge: controller.readBy == true ? true : false,
+                        showBadge: controller.unread_chat_count != "0" ? true : false,
                         position:
                             badges.BadgePosition.topEnd(top: -13, end: -10),
                         badgeContent: Text(
-                          '1',
-                          style: TextStyle(color: Colors.red, fontSize: 15.sp),
+                          '${controller.unread_chat_count}',
+                          style: TextStyle(color: Colors.white, fontSize: 15.sp),
                         ),
                         badgeAnimation: badges.BadgeAnimation.rotation(
                           animationDuration: Duration(seconds: 1),

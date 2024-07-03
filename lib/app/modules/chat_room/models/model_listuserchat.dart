@@ -16,13 +16,15 @@ class ModelListUserChat {
   String nik;
   String foto;
   String token;
+  String namaUsaha;
 
   ModelListUserChat({
     required this.idUserwp,
     required this.nama,
     required this.foto,
     required this.nik,
-    required this.token,
+    required this.token, 
+    required this.namaUsaha,
   });
 
   factory ModelListUserChat.fromJson(Map<String, dynamic> json) =>
@@ -31,7 +33,8 @@ class ModelListUserChat {
         nama: json["nama"],
         nik: json["nik"],
         foto: json["foto"],
-        token: json["token"],
+        token: json["token"], 
+        namaUsaha: json["nama_usaha"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -40,5 +43,6 @@ class ModelListUserChat {
         "nik": nik,
         "foto": foto,
         "token": token,
+        "nama_usaha": namaUsaha,
       };
 }

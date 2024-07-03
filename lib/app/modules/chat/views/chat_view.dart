@@ -39,7 +39,7 @@ class ChatView extends GetView<ChatController> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                height: Get.height * 0.85, // Adjust the height as needed
+                height: Get.height * 0.834, // Adjust the height as needed
                 child: GetBuilder<ChatController>(
                   init: ChatController(),
                   builder: (controller) {
@@ -220,7 +220,7 @@ class ChatTo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ChatController>();
+    // final controller = Get.find<ChatController>();
     return GetBuilder<ChatController>(
         init: ChatController(),
         builder: (controller) {
@@ -333,7 +333,7 @@ class ChatFrom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ChatController controller = Get.find();
+    //final ChatController controller = Get.find();
     return GetBuilder<ChatController>(
         init: ChatController(),
         builder: (controller) {

@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:bapenda_getx2_admin/app/modules/notif_jatuhtempo/models/model_riwayatjtempo.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:get/get.dart';
 
 class NotifJatuhtempoController extends GetxController {
