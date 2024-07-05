@@ -16,9 +16,9 @@ import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
 
 //const baseUrlApi = 'https://yongen-bisa.com/bapenda_app/api';
-const baseUrlApi = 'https://yongen-bisa.com/bapenda_app/api_ver2';
-const URL_APP = "https://yongen-bisa.com/bapenda_app";
-const URL_APP_API = "https://yongen-bisa.com/bapenda_app/api_ver2";
+const baseUrlApi = 'http://simpatda.bontangkita.id/api_ver2';
+const URL_APP = "http://simpatda.bontangkita.id";
+const URL_APP_API = "http://simpatda.bontangkita.id/api_ver2";
 const URL_SIMPATDA = "http://simpatda.bontangkita.id/simpatda";
 const URL_APPSIMPATDA = "http://simpatda.bontangkita.id/api_ver2";
 const String ApiFCM =
@@ -134,7 +134,7 @@ Future<Response> cekhasUnreadChat(String? idUserwp) {
 class Api {
   final Dio dio = Dio(
     BaseOptions(
-      baseUrl: baseUrlApi,
+      baseUrl: URL_APPSIMPATDA,
       connectTimeout: Duration(seconds: 10),
       receiveTimeout: Duration(seconds: 10),
       headers: {'Content-Type': 'application/json'},

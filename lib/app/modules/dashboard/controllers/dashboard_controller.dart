@@ -87,6 +87,7 @@ class DashboardController extends GetxController with AuthCacheService {
   }
 
   void hasUnreadChat() async {
+    unread_chat_count = "0";
     var response = await httpClient
         .get(Uri.parse("${URL_APPSIMPATDA}/chat/has_unread.php?id_userwp=${authModel.idUserwp}"));
     List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
@@ -243,6 +244,10 @@ class DashboardController extends GetxController with AuthCacheService {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null && !kIsWeb) {
+        if (message.data['desc'] == "chat_masuk") {
+          hasUnreadChat();
+          update();
+        }
         logInfo("Listen Pesan yang masuk${message.notification?.title}");
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,

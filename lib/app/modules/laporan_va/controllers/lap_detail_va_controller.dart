@@ -48,7 +48,7 @@ class LapDetailVaController extends GetxController {
   Future FetchLaporan() async {
     isLoading = true;
     var url_auth = Uri.parse(
-        "https://yongen-bisa.com/bapenda_app/api_ver2/vaqris/check_auth.php?kategori=va");
+        "http://simpatda.bontangkita.id/api_ver2/vaqris/check_auth.php?kategori=va");
     var response_auth = await http.get(url_auth);
     List data_auth = json.decode(response_auth.body);
     logValue(data_auth[0]["token"]);
@@ -75,7 +75,7 @@ class LapDetailVaController extends GetxController {
         //jika berhasil auth dengan API bankaltimtara
         ket_loading = "Sedang Proses Auth";
         var url_update = Uri.parse(
-            "https://yongen-bisa.com/bapenda_app/api_ver2/vaqris/update.php?kategori=va");
+            "http://simpatda.bontangkita.id/api_ver2/vaqris/update.php?kategori=va");
         var response = await http.post(url_update, body: {
           "username": "btgpdl23",
           "password": "ByrPjkBtg#23!",

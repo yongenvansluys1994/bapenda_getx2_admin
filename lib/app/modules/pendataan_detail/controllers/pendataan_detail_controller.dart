@@ -512,7 +512,7 @@ class PendataanDetailController extends GetxController {
   }
 
   void OpenFile(url_bukti) async {
-    var url_fix = "https://yongen-bisa.com/bapenda_app/upload/$url_bukti";
+    var url_fix = "http://simpatda.bontangkita.id/upload/$url_bukti";
     await launch(url_fix, forceSafariVC: false);
     update();
   }
