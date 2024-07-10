@@ -31,7 +31,7 @@ class LapDetailQrisController extends GetxController {
     };
 
     var url = Uri.parse(
-        "http://simpatda.bontangkita.id/api_ver2/vaqris/laporan_qris.php");
+        "https://yongen-bisa.com/bapenda_app/api_ver2/vaqris/laporan_qris.php");
     var response = await http.get(url, headers: headers);
 
     ket_loading = "Tunggu sebentar lagi";
