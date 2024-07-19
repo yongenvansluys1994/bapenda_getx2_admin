@@ -1,3 +1,5 @@
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran/views/OpenMap_npwpdbaru.dart';
+import 'package:bapenda_getx2_admin/app/modules/pendaftaran/views/OpenMap_tambahnpwpd.dart';
 import 'package:get/get.dart';
 
 import '../modules/aktivitas/bindings/aktivitas_binding.dart';
@@ -55,6 +57,10 @@ import '../modules/register/register_npwpd/bindings/register_npwpd_binding.dart'
 import '../modules/register/register_npwpd/views/register_npwpd_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/tambah_npwpd/bindings/tambah_npwpd_binding.dart';
+import '../modules/tambah_npwpd/views/tambah_npwpd_view.dart';
+import '../modules/tambah_npwpdbaru/bindings/tambah_npwpdbaru_binding.dart';
+import '../modules/tambah_npwpdbaru/views/tambah_npwpdbaru_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -102,6 +108,16 @@ class AppPages {
           page: () => const PendaftaranSearchView(),
           binding: PendaftaranSearchBinding(),
           transition: Transition.noTransition,
+        ),
+        GetPage(
+          name: _Paths.OPENMAP_NPWPDBARU,
+          page: () => OpenMapNpwpdBaru(),
+          binding: TambahNpwpdbaruBinding(),
+        ),
+        GetPage(
+          name: _Paths.OPENMAP_NPWPD,
+          page: () => OpenMapTambahNpwpd(),
+          binding: TambahNpwpdBinding(),
         ),
       ],
     ),
@@ -217,5 +233,16 @@ class AppPages {
       page: () => const ChatView(),
       binding: ChatBinding(),
     ),
+    GetPage(
+      name: _Paths.TAMBAH_NPWPD,
+      page: () => const TambahNpwpdView(),
+      binding: TambahNpwpdBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_NPWPDBARU,
+      page: () => const TambahNpwpdbaruView(),
+      binding: TambahNpwpdbaruBinding(),
+    ),
+    
   ];
 }

@@ -35,6 +35,10 @@ abstract class Routes {
   static const LAPORAN_DAFTARUSER_OLD = _Paths.LAPORAN_DAFTARUSER_OLD;
   static const CHAT_ROOM = _Paths.CHAT_ROOM;
   static const CHAT = _Paths.CHAT;
+  static const TAMBAH_NPWPD = _Paths.TAMBAH_NPWPD;
+  static const TAMBAH_NPWPDBARU = _Paths.TAMBAH_NPWPDBARU;
+  static const OPENMAP_NPWPD = _Paths.PENDAFTARAN + _Paths.OPENMAP_NPWPD;
+  static const OPENMAP_NPWPDBARU = _Paths.PENDAFTARAN + _Paths.OPENMAP_NPWPDBARU;
 }
 
 abstract class _Paths {
@@ -69,4 +73,8 @@ abstract class _Paths {
   static const LAPORAN_DAFTARUSER_OLD = '/laporan-daftaruser-old';
   static const CHAT_ROOM = '/chat-room';
   static const CHAT = '/chat';
+  static const TAMBAH_NPWPD = '/tambah-npwpd';
+  static const TAMBAH_NPWPDBARU = '/tambah-npwpdbaru';
+  static const OPENMAP_NPWPDBARU = '/openmap_npwpdbaru';
+  static const OPENMAP_NPWPD = '/openmap_npwpd';
 }

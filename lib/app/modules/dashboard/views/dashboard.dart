@@ -2,6 +2,7 @@ import 'package:bapenda_getx2_admin/app/modules/dashboard/models/grafik1.dart';
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 
 import 'package:bapenda_getx2_admin/widgets/custtombottombar.dart';
+import 'package:bapenda_getx2_admin/widgets/pilih_pendaftaran.dart';
 import 'package:bapenda_getx2_admin/widgets/utils/helper/responsive_helper.dart';
 
 import 'package:flutter/material.dart';
@@ -454,7 +455,9 @@ class Dashboard extends GetView<DashboardController> {
                   shape: BoxShape.circle,
                   gradient: LinearGradient(colors: gradientColor)),
             ),
-            onPressed: () {},
+            onPressed: () {
+              PilihPendaftaran(context, controller.authModel);
+            },
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,

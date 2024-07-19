@@ -529,11 +529,32 @@ buildDrawer() {
                             ListTile(
                               title: ResponsiveHelper.isTablet()
                                   ? Texts.captionXs(
-                                      'Lap. Realisasi 2',
+                                      'Lap. Pembayaran Bapenda Etam',
                                       color: primaryColor,
                                     )
                                   : Texts.caption(
-                                      'Lap. Realisasi 2',
+                                      'Lap. Pembayaran Bapenda Etam',
+                                      color: primaryColor,
+                                    ),
+                              onTap: () {
+                                Get.toNamed(Routes.LAPORAN_2,
+                                    arguments: controller.authModel);
+                              },
+                            ),
+                             
+                          ],
+                        ),
+                        Divider(height: 0.0),
+                        Stack(
+                          children: [
+                            ListTile(
+                              title: ResponsiveHelper.isTablet()
+                                  ? Texts.captionXs(
+                                      'Lap. Pembayaran All',
+                                      color: primaryColor,
+                                    )
+                                  : Texts.caption(
+                                      'Lap. Pembayaran All',
                                       color: primaryColor,
                                     ),
                               onTap: () {
