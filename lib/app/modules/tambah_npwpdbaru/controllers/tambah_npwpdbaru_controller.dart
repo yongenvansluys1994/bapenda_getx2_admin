@@ -14,7 +14,7 @@ import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.
 import 'package:http/http.dart' as http;
 
 class TambahNpwpdbaruController extends GetxController {
-   bool isLoading = false;
+  bool isLoading = false;
   late AuthModel authModel;
   double? lat;
   double? long;
@@ -24,7 +24,7 @@ class TambahNpwpdbaruController extends GetxController {
   var hasAkun = ''.obs;
   bool checkNIK = false;
 
-   TextEditingController nama = TextEditingController();
+  TextEditingController nama = TextEditingController();
   TextEditingController nik = TextEditingController();
   TextEditingController no_hp = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -206,16 +206,16 @@ class TambahNpwpdbaruController extends GetxController {
   }
 
   void PickedLocation(PickedData pickedData) async {
-  EasyLoading.show(status: "Sedang mengambil titik koordinat");
-  lat = null;
-  update();
-  await Future.delayed(Duration(seconds: 1));
-  lat = pickedData.latLong.latitude;
-  long = pickedData.latLong.longitude;
-  update();
-  EasyLoading.dismiss();
-  Get.back();
-}
+    EasyLoading.show(status: "Sedang mengambil titik koordinat");
+    lat = null;
+    update();
+    await Future.delayed(Duration(seconds: 1));
+    lat = pickedData.latLong.latitude;
+    long = pickedData.latLong.longitude;
+    update();
+    EasyLoading.dismiss();
+    Get.back();
+  }
 
   void SimpanData() {
     getDefaultDialog().onConfirm(
@@ -236,9 +236,11 @@ class TambahNpwpdbaruController extends GetxController {
     var request = http.MultipartRequest(
         "POST", Uri.parse("${URL_APP_API}/upload_image/daftarwp_admin.php"));
     request.fields['has_akun'] = hasAkun.value;
-    if (hasAkun.value == '1') { // sudah punya akun maka ambil NIK nya saja
+    if (hasAkun.value == '1') {
+      // sudah punya akun maka ambil NIK nya saja
       request.fields['nik'] = "";
-    } else if(hasAkun.value == '2'){ // belum punya akun maka registrasi akun
+    } else if (hasAkun.value == '2') {
+      // belum punya akun maka registrasi akun
       request.fields['nama'] = nama.text;
       request.fields['nik'] = nik.text;
       request.fields['no_hp'] = no_hp.text;
