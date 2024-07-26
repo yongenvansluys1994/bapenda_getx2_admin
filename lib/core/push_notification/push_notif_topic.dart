@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 late AndroidNotificationChannel channel;
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-void sendPushMessage_topic(String token, String title, String body) async {
+void sendPushMessage_topic(String token, String title, String body, String desc) async {
   try {
     await http.post(
       Uri.parse('https://fcm.googleapis.com/fcm/send'),

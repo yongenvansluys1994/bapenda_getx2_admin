@@ -1,6 +1,7 @@
 import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:bapenda_getx2_admin/widgets/custtombottombar.dart';
 import 'package:bapenda_getx2_admin/widgets/nodata.dart';
+import 'package:bapenda_getx2_admin/widgets/pilih_pendaftaran.dart';
 import 'package:bapenda_getx2_admin/widgets/shimmer.dart';
 import 'package:bapenda_getx2_admin/widgets/texts.dart';
 import 'package:bapenda_getx2_admin/widgets/theme/app_theme.dart';
@@ -268,7 +269,7 @@ class PendaftaranView extends GetView<PendaftaranController> {
               shape: BoxShape.circle,
               gradient: LinearGradient(colors: gradientColor)),
         ),
-        onPressed: () {},
+        onPressed: () {PilihPendaftaran(context);},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: customButtomBar(),

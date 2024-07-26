@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
 import 'package:bapenda_getx2_admin/app/modules/dashboard/models/auth_model_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/register/register_baru/models/modelcheck.dart';
+import 'package:bapenda_getx2_admin/app/routes/app_pages.dart';
 import 'package:bapenda_getx2_admin/core/push_notification/push_notif_topic.dart';
 import 'package:bapenda_getx2_admin/widgets/getdialog.dart';
 import 'package:bapenda_getx2_admin/widgets/logger.dart';
@@ -19,13 +20,13 @@ import 'package:http/http.dart' as http;
 
 class TambahNpwpdController extends GetxController {
   bool isLoading = false;
-  late AuthModel authModel;
   double? lat;
   double? long;
   int activeStepIndex = 0;
   XFile? imageFileKTP = null;
   XFile? imageFileNPWP = null;
   var hasAkun = ''.obs;
+  bool checkNIKstatus = false;
 
   TextEditingController nama = TextEditingController();
   TextEditingController nik = TextEditingController();
@@ -207,7 +208,6 @@ class TambahNpwpdController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    authModel = Get.arguments;
   }
 
   void setHasAkun(String gender) {
@@ -292,7 +292,7 @@ class TambahNpwpdController extends GetxController {
         "POST", Uri.parse("${URL_APP_API}/upload_image/daftarwpnpwpd_admin.php"));
     request.fields['has_akun'] = hasAkun.value;
     if (hasAkun.value == '1') { // sudah punya akun maka ambil NIK nya saja
-      request.fields['nik'] = "";
+      request.fields['nik'] = nik.text;;
     } else if(hasAkun.value == '2'){ // belum punya akun maka registrasi akun
       request.fields['nama'] = nama.text;
       request.fields['nik'] = nik.text;
@@ -340,10 +340,9 @@ class TambahNpwpdController extends GetxController {
     //print(response.statusCode);
     if (response.statusCode == 200) {
       if (respStr == "Berhasil") {
-        Get.back(); //keluar dari from pendaftaran
-        Get.back(); //keluar dari dialog pilihan
-        print("sukses");
         EasyLoading.dismiss();
+        Get.back(); //keluar dari from pendaftaran
+        print("sukses");
         RawSnackbar_top(
             message: "Berhasil Menyimpan Data",
             kategori: "success",
@@ -351,8 +350,8 @@ class TambahNpwpdController extends GetxController {
         sendPushMessage_topic(
             "operatorpejabat",
             "Pendaftaran Wajib Pajak baru!",
-            "Validasi Data ini pada menu Pendaftaran.");
-         
+            "Validasi Data ini pada menu Pendaftaran.",
+            "pendaftaran_masuk");
         update();
       } else if (respStr == "SudahAda") {
         EasyLoading.dismiss();
@@ -368,6 +367,41 @@ class TambahNpwpdController extends GetxController {
       RawSnackbar_top(
           message: "Gagal Menyimpan Data", kategori: "error", duration: 2);
       update();
+    }
+  }
+
+  void checkNIK() async {
+    if (nik.text == "") {
+      RawSnackbar_top(
+          message: "NIK Tidak boleh kosong", kategori: "error", duration: 2);
+      update();
+    } else {
+      EasyLoading.show(status: "Mencari Data...");
+      try {
+      final response = await checkNIKproses(nik.text);
+      final responseData = response.data;
+      if (responseData['status'] == 'tidak_ada') {
+        RawSnackbar_top(
+            message: "Mohon Maaf, NPWPD yang anda cari tidak ditemukan.",
+            kategori: "error",
+            duration: 2);
+             checkNIKstatus = false;
+        update();
+      } else {
+        nik.text = responseData['data']['nik'];
+        RawSnackbar_bottom(
+              message: "Data NPWPD ditemukan ",
+              kategori: "success",
+              duration: 2,
+              data: responseData['data']['nama']);
+              checkNIKstatus = true;
+        update();
+      }
+    } catch (e) {}
+      EasyLoading.dismiss();
+       
+      update();
+      return null;
     }
   }
 

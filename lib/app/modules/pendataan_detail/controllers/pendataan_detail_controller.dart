@@ -224,7 +224,7 @@ class PendataanDetailController extends GetxController {
         sendPushMessage_topic(
             "operatorsimpatda",
             "Pelaporan Pajak An ${nama_usaha}",
-            "Terdapat pelaporan Pajak Baru, silakan membuka Simpatda untuk melakukan penetapan");
+            "Terdapat pelaporan Pajak Baru, silakan membuka Simpatda untuk melakukan penetapan","");
         getDefaultDialog().onFix(
             title: "Berhasil Menyimpan Data", desc: " ", kategori: "success");
         pendataanController.refreshData();

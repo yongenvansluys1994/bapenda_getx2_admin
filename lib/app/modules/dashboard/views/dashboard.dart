@@ -456,7 +456,7 @@ class Dashboard extends GetView<DashboardController> {
                   gradient: LinearGradient(colors: gradientColor)),
             ),
             onPressed: () {
-              PilihPendaftaran(context, controller.authModel);
+              PilihPendaftaran(context);
             },
           ),
           floatingActionButtonLocation:

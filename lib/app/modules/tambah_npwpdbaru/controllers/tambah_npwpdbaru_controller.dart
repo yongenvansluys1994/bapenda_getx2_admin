@@ -15,14 +15,13 @@ import 'package:http/http.dart' as http;
 
 class TambahNpwpdbaruController extends GetxController {
   bool isLoading = false;
-  late AuthModel authModel;
   double? lat;
   double? long;
   int activeStepIndex = 0;
   XFile? imageFileKTP = null;
   XFile? imageFileNPWP = null;
   var hasAkun = ''.obs;
-  bool checkNIK = false;
+  bool checkNIKstatus = false;
 
   TextEditingController nama = TextEditingController();
   TextEditingController nik = TextEditingController();
@@ -197,7 +196,6 @@ class TambahNpwpdbaruController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    authModel = Get.arguments;
   }
 
   void setHasAkun(String gender) {
@@ -238,7 +236,7 @@ class TambahNpwpdbaruController extends GetxController {
     request.fields['has_akun'] = hasAkun.value;
     if (hasAkun.value == '1') {
       // sudah punya akun maka ambil NIK nya saja
-      request.fields['nik'] = "";
+      request.fields['nik'] = nik.text;
     } else if (hasAkun.value == '2') {
       // belum punya akun maka registrasi akun
       request.fields['nama'] = nama.text;
@@ -282,22 +280,56 @@ class TambahNpwpdbaruController extends GetxController {
     var response = await request.send();
     //print(response.statusCode);
     if (response.statusCode == 200) {
-      Get.back(); //keluar dari from pendaftaran
-      Get.back(); //keluar dari dialog pilihan
-      print("sukses");
       EasyLoading.dismiss();
+      Get.back(); //keluar dari from pendaftaran
+      print("sukses");
       RawSnackbar_top(
           message: "Berhasil Menyimpan Data", kategori: "success", duration: 3);
       sendPushMessage_topic(
           "operatorpejabat",
           "Pendaftaran Wajib Pajak baru masuk!",
-          "Validasi Data ini pada menu Pendaftaran.");
+          "Validasi Data ini pada menu Pendaftaran.","pendaftaran_masuk");
       update();
     } else {
       EasyLoading.dismiss();
       RawSnackbar_top(
           message: "Gagal Menyimpan Data", kategori: "error", duration: 2);
       update();
+    }
+  }
+
+  void checkNIK() async {
+    if (nik.text == "") {
+      RawSnackbar_top(
+          message: "NIK Tidak boleh kosong", kategori: "error", duration: 2);
+      update();
+    } else {
+      EasyLoading.show(status: "Mencari Data...");
+      try {
+      final response = await checkNIKproses(nik.text);
+      final responseData = response.data;
+      if (responseData['status'] == 'tidak_ada') {
+        RawSnackbar_top(
+            message: "Mohon Maaf, NPWPD yang anda cari tidak ditemukan.",
+            kategori: "error",
+            duration: 2);
+             checkNIKstatus = false;
+        update();
+      } else {
+        nik.text = responseData['data']['nik'];
+        RawSnackbar_bottom(
+              message: "Data NPWPD ditemukan ",
+              kategori: "success",
+              duration: 2,
+              data: responseData['data']['nama']);
+              checkNIKstatus = true;
+        update();
+      }
+    } catch (e) {}
+      EasyLoading.dismiss();
+       
+      update();
+      return null;
     }
   }
 

@@ -94,13 +94,49 @@ class _TambahNpwpdViewState extends State<TambahNpwpdView> {
             SizedBox(height: 20),
             Obx(() {
               if (controller.hasAkun.value == '1') {
-                return Container(
-                  padding: EdgeInsets.all(16.0),
-                  color: Colors.blue,
-                  child: Text(
-                    'Ini adalah container untuk Laki-laki',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                return Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(width: Get.width * 0.58,child: TextFields.defaultTextField2(
+                                    title: "Masukkan NIK Akun Terdaftar",
+                                    controller: controller.nik,
+                                    isLoading: controller.isLoading,
+                                    textInputAction: TextInputAction.next,
+                                    textInputType: TextInputType.number,
+                                    prefixIcon: Icons.contact_emergency,
+                                    borderColor: primaryColor,
+                                    validator: true,
+                                  ),),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20.r),
+                          child: Container(width: Get.width * 0.15,child: SizedBox(
+                                        width: 45.w, // <-- Your width
+                                        height: 50.h, // <-- Your height
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                                  primary: controller.checkNIKstatus ? Colors.green[300] : Colors.blue,
+                                                ),
+                                          onPressed: () {
+                                            controller.checkNIK();
+                                          },
+                                          child: controller.checkNIKstatus ? Icon(Icons.check_box,size: 30.r,) : Text(
+                                            "Cek \nNIK",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 10.5.sp,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),),),
+                        ),
+                         
+                      ],
+                    ),
+                    Texts.caption(
+                      "*Pastikan sudah Klik Cek NIK sebelum lanjut ke Formulir selanjutnya",
+                      maxLines: 2,
+                      color: const Color.fromARGB(197, 0, 0, 0)),
+                  ],
                 );
               } else if (controller.hasAkun.value == '2') {
                 return Form(
@@ -1563,6 +1599,13 @@ class _TambahNpwpdViewState extends State<TambahNpwpdView> {
                               width: 140,
                               child: ElevatedButton(
                                   onPressed: () {
+                                    if(controller.hasAkun == '1' && controller.checkNIKstatus == false){
+                                      RawSnackbar_top(
+                                          message:
+                                              "Anda harus melakukan Check NIK terlebih dahulu",
+                                          kategori: "warning",
+                                          duration: 2);
+                                    }
                                     if (controller.npwpd == "" ||
                                         controller.nik.text == "" ||
                                         controller.ValueJenisPajak == null ||

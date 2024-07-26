@@ -25,6 +25,15 @@ const String ApiFCM =
     "AAAAB69wS5U:APA91bGHHGdo_FzlMJlzO0rc4SUPIMt10OZLqzT60DwVdIU_SSmYkDVu5LRofJR3u9_AS8_ptJ-S5dHIB-7BYWoOTrHUY-pe04UKfLDuAH1ezeY7ohWZalRdShAfJOchSVR9wDuusnnj";
 const tokenApi = "edee9b7c-b723-4990-a674-dfd6da7efdd1";
 
+final Dio dio1 = Dio(
+  BaseOptions(
+    baseUrl: baseUrlApi,
+    connectTimeout: Duration(seconds: 10),
+    receiveTimeout: Duration(seconds: 10),
+    headers: {'Content-Type': 'application/json'},
+  ),
+);
+
 final Dio dio3 = Dio(
   BaseOptions(
     baseUrl: URL_APPSIMPATDA,
@@ -129,6 +138,10 @@ Future<Response> cekJatuhTempo() {
 
 Future<Response> cekhasUnreadChat(String? idUserwp) {
   return dioChat.get("/chat/has_unread.php?id_userwp=$idUserwp");
+}
+
+Future<Response> checkNIKproses(String? nik) {
+  return dio1.get("/upload_image/check_nik.php?nik=$nik");
 }
 
 class Api {

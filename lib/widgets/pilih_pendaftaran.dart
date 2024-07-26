@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-PilihPendaftaran(BuildContext context, authModel) {
+PilihPendaftaran(BuildContext context) {
     Alert(
             context: context,
             content: Container(
@@ -41,8 +41,7 @@ PilihPendaftaran(BuildContext context, authModel) {
                               borderRadius: BorderRadius.circular(12.0),
                               onTap: () {
                                 Get.back();
-                                Get.toNamed(Routes.TAMBAH_NPWPD,
-                                    arguments: authModel);
+                                Get.toNamed(Routes.TAMBAH_NPWPD);
                               },
                               splashColor: primaryColor,
                               splashFactory: InkSplash.splashFactory,
@@ -88,8 +87,7 @@ PilihPendaftaran(BuildContext context, authModel) {
                               borderRadius: BorderRadius.circular(12.0),
                               onTap: () {
                                 Get.back();
-                                Get.toNamed(Routes.TAMBAH_NPWPDBARU,
-                                    arguments: authModel);
+                                Get.toNamed(Routes.TAMBAH_NPWPDBARU);
                               },
                               splashColor: primaryColor,
                               splashFactory: InkSplash.splashFactory,
