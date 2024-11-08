@@ -1,3 +1,9 @@
+import 'package:bapenda_getx2_admin/app/modules/laporan_bayaroffline/bindings/laporan_bayaroffline_binding.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_bayaroffline/views/laporan_bayaroffline_view.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_bayaronline/bindings/laporan_bayaronline_binding.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_bayaronline/views/laporan_bayaronline_view.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_spt_be/bindings/laporan_sptbe_binding.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_spt_be/views/laporan_sptbe_view.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran/views/OpenMap_npwpdbaru.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran/views/OpenMap_tambahnpwpd.dart';
 import 'package:get/get.dart';
@@ -200,6 +206,11 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LAPORAN_1,
+      page: () => const LaporanSPTBEView(),
+      binding: LaporanSPTBEBinding(),
+    ),
+    GetPage(
+      name: _Paths.LAPORAN_1,
       page: () => const Laporan1View(),
       binding: Laporan1Binding(),
     ),
@@ -207,6 +218,16 @@ class AppPages {
       name: _Paths.LAPORAN_2,
       page: () => const Laporan2View(),
       binding: Laporan2Binding(),
+    ),
+    GetPage(
+      name: _Paths.LAPORAN_BAYARONLINE,
+      page: () => const LaporanBayarOnlineView(),
+      binding: LaporanBayarOnlineBinding(),
+    ),
+    GetPage(
+      name: _Paths.LAPORAN_BAYAROFFLINE,
+      page: () => const LaporanBayarOfflineView(),
+      binding: LaporanBayarOfflineBinding(),
     ),
     GetPage(
       name: _Paths.NOTIF_JATUHTEMPO,
@@ -243,6 +264,5 @@ class AppPages {
       page: () => const TambahNpwpdbaruView(),
       binding: TambahNpwpdbaruBinding(),
     ),
-    
   ];
 }

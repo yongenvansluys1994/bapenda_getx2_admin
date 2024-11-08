@@ -28,8 +28,11 @@ abstract class Routes {
   static const PENDAFTARAN_SEARCH =
       _Paths.PENDAFTARAN + _Paths.PENDAFTARAN_SEARCH;
   static const PENDATAAN_SEARCH = _Paths.PENDATAAN + _Paths.PENDATAAN_SEARCH;
+  static const LAPORAN_SPTBE = _Paths.LAPORAN_SPTBE;
   static const LAPORAN_1 = _Paths.LAPORAN_1;
   static const LAPORAN_2 = _Paths.LAPORAN_2;
+  static const LAPORAN_BAYARONLINE = _Paths.LAPORAN_BAYARONLINE;
+  static const LAPORAN_BAYAROFFLINE = _Paths.LAPORAN_BAYAROFFLINE;
   static const NOTIF_JATUHTEMPO = _Paths.NOTIF_JATUHTEMPO;
   static const LAPORAN_DAFTARUSER = _Paths.LAPORAN_DAFTARUSER;
   static const LAPORAN_DAFTARUSER_OLD = _Paths.LAPORAN_DAFTARUSER_OLD;
@@ -38,7 +41,8 @@ abstract class Routes {
   static const TAMBAH_NPWPD = _Paths.TAMBAH_NPWPD;
   static const TAMBAH_NPWPDBARU = _Paths.TAMBAH_NPWPDBARU;
   static const OPENMAP_NPWPD = _Paths.PENDAFTARAN + _Paths.OPENMAP_NPWPD;
-  static const OPENMAP_NPWPDBARU = _Paths.PENDAFTARAN + _Paths.OPENMAP_NPWPDBARU;
+  static const OPENMAP_NPWPDBARU =
+      _Paths.PENDAFTARAN + _Paths.OPENMAP_NPWPDBARU;
 }
 
 abstract class _Paths {
@@ -66,8 +70,11 @@ abstract class _Paths {
   static const PENDATAAN_DETAIL_PPJ = '/pendataan-detail-ppj';
   static const PENDAFTARAN_SEARCH = '/pendaftaran-search';
   static const PENDATAAN_SEARCH = '/pendataan-search';
+  static const LAPORAN_SPTBE = '/laporan-sptbe';
   static const LAPORAN_1 = '/laporan-1';
   static const LAPORAN_2 = '/laporan-2';
+  static const LAPORAN_BAYARONLINE = '/laporan-bayaronline';
+  static const LAPORAN_BAYAROFFLINE = '/laporan-bayaroffline';
   static const NOTIF_JATUHTEMPO = '/notif-jatuhtempo';
   static const LAPORAN_DAFTARUSER = '/laporan-daftaruser';
   static const LAPORAN_DAFTARUSER_OLD = '/laporan-daftaruser-old';

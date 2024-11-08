@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class PdfLaporan2 {
+class PdfLaporanOnline {
   static Future<File> generate(RxList<ModelLaporan2> laporan,
       DateTime? selectedDate, DateTime? selectedDate_akhir) async {
     final pdf = pw.Document();

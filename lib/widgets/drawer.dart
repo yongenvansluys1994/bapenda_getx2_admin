@@ -508,6 +508,26 @@ buildDrawer() {
                             ListTile(
                               title: ResponsiveHelper.isTablet()
                                   ? Texts.captionXs(
+                                      'Lap. Pelaporan via BE',
+                                      color: primaryColor,
+                                    )
+                                  : Texts.caption(
+                                      'Lap. Pelaporan via BE',
+                                      color: primaryColor,
+                                    ),
+                              onTap: () {
+                                Get.toNamed(Routes.LAPORAN_1,
+                                    arguments: controller.authModel);
+                              },
+                            ),
+                          ],
+                        ),
+                        Divider(height: 0.0),
+                        Stack(
+                          children: [
+                            ListTile(
+                              title: ResponsiveHelper.isTablet()
+                                  ? Texts.captionXs(
                                       'Lap. Realisasi 1',
                                       color: primaryColor,
                                     )
@@ -520,7 +540,6 @@ buildDrawer() {
                                     arguments: controller.authModel);
                               },
                             ),
-                             
                           ],
                         ),
                         Divider(height: 0.0),
@@ -529,19 +548,37 @@ buildDrawer() {
                             ListTile(
                               title: ResponsiveHelper.isTablet()
                                   ? Texts.captionXs(
-                                      'Lap. Pembayaran Bapenda Etam',
+                                      'Lap. Pembayaran BE/Online',
                                       color: primaryColor,
                                     )
                                   : Texts.caption(
-                                      'Lap. Pembayaran Bapenda Etam',
+                                      'Lap. Pembayaran BE/Online',
                                       color: primaryColor,
                                     ),
                               onTap: () {
-                                Get.toNamed(Routes.LAPORAN_2,
+                                Get.toNamed(Routes.LAPORAN_BAYARONLINE,
                                     arguments: controller.authModel);
                               },
                             ),
-                             
+                          ],
+                        ),
+                        Stack(
+                          children: [
+                            ListTile(
+                              title: ResponsiveHelper.isTablet()
+                                  ? Texts.captionXs(
+                                      'Lap. Pembayaran Offline/Teller',
+                                      color: primaryColor,
+                                    )
+                                  : Texts.caption(
+                                      'Lap. Pembayaran Offline/Teller',
+                                      color: primaryColor,
+                                    ),
+                              onTap: () {
+                                Get.toNamed(Routes.LAPORAN_BAYAROFFLINE,
+                                    arguments: controller.authModel);
+                              },
+                            ),
                           ],
                         ),
                         Divider(height: 0.0),
@@ -562,7 +599,6 @@ buildDrawer() {
                                     arguments: controller.authModel);
                               },
                             ),
-                             
                           ],
                         ),
                         Divider(height: 0.0),
@@ -583,7 +619,6 @@ buildDrawer() {
                                     arguments: controller.authModel);
                               },
                             ),
-                             
                           ],
                         ),
                         Divider(height: 0.0),
@@ -604,7 +639,6 @@ buildDrawer() {
                                     arguments: controller.authModel);
                               },
                             ),
-                             
                           ],
                         ),
                       ],

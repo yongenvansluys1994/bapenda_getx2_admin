@@ -88,13 +88,12 @@ class DashboardController extends GetxController with AuthCacheService {
 
   void hasUnreadChat() async {
     unread_chat_count = "0";
-    var response = await httpClient
-        .get(Uri.parse("${URL_APPSIMPATDA}/chat/has_unread.php?id_userwp=${authModel.idUserwp}"));
+    var response = await httpClient.get(Uri.parse(
+        "${URL_APPSIMPATDA}/chat/has_unread.php?id_userwp=${authModel.idUserwp}"));
     List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
     unread_chat_count = data[0]["unread_chat_count"];
     update();
   }
-
 
   Future<void> grafik_fetch() async {
     try {
@@ -323,7 +322,7 @@ class DashboardController extends GetxController with AuthCacheService {
 
     // Lanjutkan dengan logika lain jika diperlukan
     if (Get.arguments == "login" || Get.arguments == "autologin") {
-      showBanner();
+      //showBanner();
       fetchMarkers();
     }
   }

@@ -142,7 +142,6 @@ class ChatController extends GetxController {
             token_sender.add({"token": token[0]['token_target']});
             roomID = data[0]['room_id'];
           }
-          
 
           // Iterasi melalui setiap item di 'data' dan tambahkan ke datalist
           for (var item in data) {
@@ -214,21 +213,27 @@ class ChatController extends GetxController {
         if (message.data['desc'] == "chat_masuk") {
           var decodedResponse = jsonDecode(message.data['json_value']);
 
-          // Ambil data dari decodedResponse
-          var data = decodedResponse['data'];
-          // Iterasi melalui setiap item di 'data' dan tambahkan ke datalist
-          for (var item in data) {
-            datalist.add(ModelChat.fromJson(item));
+          // Check if 'data' exists in decodedResponse and is not null
+          if (decodedResponse.containsKey('data') &&
+              decodedResponse['data'] != null) {
+            var data = decodedResponse['data'];
+            if (data is List) {
+              for (var item in data) {
+                datalist.add(ModelChat.fromJson(item));
+              }
+              datalist.sort((a, b) => b.sentAt.compareTo(a.sentAt));
+
+              // Update UI
+              update();
+              //chatRoomCon.FetchData();
+            } else {
+              print(
+                  "Expected 'data' to be a list, but got: ${data.runtimeType}");
+            }
+          } else {
+            print("No 'data' field in json_value or 'data' is null.");
           }
-          // Mengurutkan datalist berdasarkan sent_at (terbaru di paling bawah)
-          datalist.sort((a, b) => b.sentAt.compareTo(a.sentAt));
-
-          // Update UI
-          update();
-          //chatRoomCon.FetchData();
         }
-
-        //Get.toNamed(Routes.LAPOR_PAJAK, arguments: authModel);
       }
     });
   }

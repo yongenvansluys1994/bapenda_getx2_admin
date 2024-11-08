@@ -213,6 +213,21 @@ class Api {
     }
   }
 
+  Future<List<ModelLaporan1>?> getLaporanSPTBE(
+      {DateTime? masa_awal, DateTime? masa_akhir}) async {
+    String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
+    String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
+    var response = await dio2.get(
+        "/laporan_SPTBE/edee9b7c-b723-4990-a674-dfd6da7efdd1/$masa_awalformat/$masa_akhirformat");
+    if (response.statusCode == 200) {
+      List data = json.decode(response.data);
+
+      return data.map((e) => ModelLaporan1.fromJson(e)).toList();
+    } else {
+      return null;
+    }
+  }
+
   Future<List<ModelLaporan1>?> getLaporan1(
       {DateTime? masa_awal, DateTime? masa_akhir}) async {
     String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
@@ -253,6 +268,36 @@ class Api {
       List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
 
       return data.map((e) => ModelLapDaftarUser.fromJson(e)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<ModelLaporan2>?> getLaporanBayarOnline(
+      {DateTime? masa_awal, DateTime? masa_akhir}) async {
+    String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
+    String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
+    var response = await dio2.get(
+        "/laporan_bayaronline/edee9b7c-b723-4990-a674-dfd6da7efdd1/$masa_awalformat/$masa_akhirformat");
+    if (response.statusCode == 200) {
+      List data = json.decode(response.data);
+
+      return data.map((e) => ModelLaporan2.fromJson(e)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<ModelLaporan2>?> getLaporanBayarOffline(
+      {DateTime? masa_awal, DateTime? masa_akhir}) async {
+    String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
+    String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
+    var response = await dio2.get(
+        "/laporan_bayaroffline/edee9b7c-b723-4990-a674-dfd6da7efdd1/$masa_awalformat/$masa_akhirformat");
+    if (response.statusCode == 200) {
+      List data = json.decode(response.data);
+
+      return data.map((e) => ModelLaporan2.fromJson(e)).toList();
     } else {
       return null;
     }
