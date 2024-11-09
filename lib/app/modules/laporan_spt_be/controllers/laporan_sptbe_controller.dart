@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:bapenda_getx2_admin/app/core/api/api.dart';
-import 'package:bapenda_getx2_admin/app/core/pdf/pdf_Laporan1.dart';
-import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model.dart';
+import 'package:bapenda_getx2_admin/app/core/pdf/pdf_LaporanSPTBE.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_spt_be/models/laporan_sptbe_model.dart';
 import 'package:bapenda_getx2_admin/core/pdf/pdf_helper.dart';
 import 'package:bapenda_getx2_admin/widgets/logger.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class LaporanSPTBEController extends GetxController {
   var FinalDate_akhir;
   String? valueJenisPajak;
   bool displayResult = false;
-  RxList<ModelLaporan1> datalist = <ModelLaporan1>[].obs;
+  RxList<ModelSptbe> datalist = <ModelSptbe>[].obs;
   bool isLoading = false;
 
   @override
@@ -82,7 +82,7 @@ class LaporanSPTBEController extends GetxController {
     update();
     datalist.clear();
     //EasyLoading.show();
-    final data_mentah = await api.getLaporan1(
+    final data_mentah = await api.getLaporanSPTBE(
         masa_awal: selectedDate, masa_akhir: selectedDate_akhir);
     //print(data_mentah);
     if (data_mentah == null) {
@@ -103,8 +103,8 @@ class LaporanSPTBEController extends GetxController {
   }
 
   Future cetakLHP() async {
-    final pdfFile =
-        await PdfLaporan1.generate(datalist, selectedDate, selectedDate_akhir);
+    final pdfFile = await PdfLaporanSPTBE.generate(
+        datalist, selectedDate, selectedDate_akhir);
     PdfHelper.openFile(pdfFile);
     update();
   }

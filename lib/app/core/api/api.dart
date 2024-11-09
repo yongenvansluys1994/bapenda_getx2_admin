@@ -8,6 +8,7 @@ import 'package:bapenda_getx2_admin/app/modules/chat_room/models/model_ruangchat
 import 'package:bapenda_getx2_admin/app/modules/laporan_1/models/laporan_1_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_2/models/laporan_2_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/laporan_daftaruser/models/model_lapdaftaruser.dart';
+import 'package:bapenda_getx2_admin/app/modules/laporan_spt_be/models/laporan_sptbe_model.dart';
 import 'package:bapenda_getx2_admin/app/modules/myprofil/models/model_ads.dart';
 import 'package:bapenda_getx2_admin/app/modules/pendaftaran_detail/models/model_getpelaporanuser.dart';
 import 'package:bapenda_getx2_admin/app/modules/push_notification/models/model_notifjtempo.dart';
@@ -213,16 +214,16 @@ class Api {
     }
   }
 
-  Future<List<ModelLaporan1>?> getLaporanSPTBE(
+  Future<List<ModelSptbe>?> getLaporanSPTBE(
       {DateTime? masa_awal, DateTime? masa_akhir}) async {
     String masa_awalformat = DateFormat('yyyy-MM-dd').format(masa_awal!);
     String masa_akhirformat = DateFormat('yyyy-MM-dd').format(masa_akhir!);
-    var response = await dio2.get(
-        "/laporan_SPTBE/edee9b7c-b723-4990-a674-dfd6da7efdd1/$masa_awalformat/$masa_akhirformat");
+    var response = await dio1.get(
+        "/laporan/laporan_sptbe.php?masa_awal=$masa_awalformat&masa_akhir=$masa_akhirformat");
     if (response.statusCode == 200) {
-      List data = json.decode(response.data);
+      List data = (json.decode(response.data) as Map<String, dynamic>)["data"];
 
-      return data.map((e) => ModelLaporan1.fromJson(e)).toList();
+      return data.map((e) => ModelSptbe.fromJson(e)).toList();
     } else {
       return null;
     }
