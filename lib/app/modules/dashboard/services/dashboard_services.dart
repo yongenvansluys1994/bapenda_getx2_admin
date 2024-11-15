@@ -21,7 +21,7 @@ class GetAccess {
     try {
       // Load the service account JSON file
       final serviceAccountJson = await rootBundle.loadString(
-        'assets/bapendagetx-firebase-adminsdk-b0ms3-bff19178c8.json',
+        'assets/bapendagetx-firebase-adminsdk.json',
       );
 
       final accountCredentials = ServiceAccountCredentials.fromJson(
